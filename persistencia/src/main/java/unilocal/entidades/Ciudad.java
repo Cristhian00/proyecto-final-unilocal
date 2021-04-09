@@ -1,0 +1,5 @@
+package unilocal.entidades;
+
+public enum Ciudad {
+    ARMENIA, MONTENEGRO, CIRCASIA, SALENTO, FILANDIA, QUIMBAYA, CALARCA, BUENA_VISTA, CORDOBA, PIJAO, GENOVA, LA_TEBAIDA
+}
