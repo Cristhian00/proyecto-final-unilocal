@@ -1,9 +1,7 @@
 package unilocal.entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,10 +10,21 @@ public class Comentario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "comentario", nullable = false)
     private String comentario;
+
+    @Column(name = "caliicacion", nullable = false, precision = 1, scale = 1)
+    @Positive
     private double calificacion;
+
+    @Column(name = "respuesta", nullable = false)
     private String respuesta;
+
+    @Temporal(TemporalType.TIME)
+    @Column(name = "fecha_comentario", nullable = false)
     private Date fechaComentario;
 
     public Comentario(){

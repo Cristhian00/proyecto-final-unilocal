@@ -10,19 +10,43 @@ public class Lugar implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "nombre", length = 100, nullable = false, unique = true)
     private String nombre;
+
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
+
     @Enumerated(EnumType.STRING)
+    @JoinColumn(name = "tipo", nullable = false)
     private TipoLugar tipo;
+
     @Enumerated(EnumType.STRING)
+    @JoinColumn(name = "ciudad", nullable = false)
     private Ciudad ciudad;
+
+    @Column(name = "fecha_creacion", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date fechaCreacion;
+
+    @Column(name = "fecha_aprobacion", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date fechaAprobacion;
+
+    @Column(name = "latitud", nullable = false)
     private float latitud;
+
+    @Column(name = "longitud", nullable = false)
     private float longitud;
-    private boolean isAprobado;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado", nullable = false)
+    private EstadoAprobacion estado;
+
     @ElementCollection
+    @JoinColumn(name = "telefono")
     private Map<String, String> telefono;
 
     public Lugar(){
@@ -101,12 +125,12 @@ public class Lugar implements Serializable {
         this.longitud = longitud;
     }
 
-    public boolean isAprobado() {
-        return isAprobado;
+    public EstadoAprobacion getEstado() {
+        return estado;
     }
 
-    public void setAprobado(boolean aprobado) {
-        isAprobado = aprobado;
+    public void setEstado(EstadoAprobacion estado) {
+        this.estado = estado;
     }
 
     public Map<String, String> getTelefono() {
