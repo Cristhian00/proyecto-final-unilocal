@@ -89,4 +89,15 @@ public abstract class Persona implements Serializable {
     public int hashCode() {
         return cedula != null ? cedula.hashCode() : 0;
     }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "cedula='" + cedula + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
+                ", nickname='" + nickname + '\'' +
+                '}';
+    }
 }

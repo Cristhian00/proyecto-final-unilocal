@@ -29,9 +29,8 @@ public class Usuario extends Persona implements Serializable {
         super();
     }
 
-    public Usuario(String cedula, String nombre, String email, String contrasenia, String nickname, Map<String, String> telefono) {
+    public Usuario(String cedula, String nombre, String email, String contrasenia, String nickname) {
         super(cedula, nombre, email, contrasenia, nickname);
-        this.telefono = telefono;
     }
 
     public Map<String, String> getTelefono() {
