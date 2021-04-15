@@ -1,19 +1,38 @@
 package unilocal.entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
-public abstract class Persona {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
+public abstract class Persona implements Serializable {
 
+    @Id
+    @Column(name = "cedula", length = 12, nullable = false)
     private String cedula;
+
+    @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
+
+    @Column(name = "email", length = 60, nullable = false, unique = true)
     private String email;
+
+    @Column(name = "contrasenia", length = 100, nullable = false)
     private String contrasenia;
+
+    @Column(name = "nickname", length = 50, nullable = false, unique = true)
     private String nickname;
 
     public Persona(){
         super();
+    }
+
+    public Persona(String cedula, String nombre, String email, String contrasenia, String nickname) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.email = email;
+        this.contrasenia = contrasenia;
+        this.nickname = nickname;
     }
 
     public String getCedula() {

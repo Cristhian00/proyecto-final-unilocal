@@ -3,6 +3,7 @@ package unilocal.entidades;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -49,9 +50,20 @@ public class Lugar implements Serializable {
     @JoinColumn(name = "telefono")
     private Map<String, String> telefono;
 
-    public Lugar(){
-        super();
-    }
+    @ManyToMany
+    private List<Horario> horarios;
+
+    @ManyToOne
+    private Moderador moderador;
+
+    @ManyToOne
+    private Usuario usuarioLugar;
+
+    @ManyToMany(mappedBy = "lugaresFavoritos")
+    private List<Usuario> usuariosFavoritos;
+
+    @OneToMany(mappedBy = "lugarComentario")
+    private List<Comentario> comentarios;
 
     public int getId() {
         return id;
