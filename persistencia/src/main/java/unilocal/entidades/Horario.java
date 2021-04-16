@@ -12,7 +12,8 @@ public class Horario implements Serializable {
     @Column(name = "codigo")
     private int codigo;
 
-    @Column(name = "dia", nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "dia", nullable = false)
     private DiaSemana dia;
 
     @Column(name = "hora_apertura", length = 10, nullable = false)
@@ -79,5 +80,15 @@ public class Horario implements Serializable {
     @Override
     public int hashCode() {
         return codigo;
+    }
+
+    @Override
+    public String toString() {
+        return "Horario{" +
+                "codigo=" + codigo +
+                ", dia=" + dia +
+                ", horaApertura='" + horaApertura + '\'' +
+                ", horaCierre='" + horaCierre +
+                '}';
     }
 }

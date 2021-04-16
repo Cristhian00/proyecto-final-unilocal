@@ -16,14 +16,14 @@ public class Comentario implements Serializable {
     @Column(name = "comentario", nullable = false)
     private String comentario;
 
-    @Column(name = "caliicacion", nullable = false, precision = 1, scale = 1)
+    @Column(name = "calificacion", nullable = false, precision = 1, scale = 1)
     @Positive
     private double calificacion;
 
-    @Column(name = "respuesta", nullable = false)
+    @Column(name = "respuesta")
     private String respuesta;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_comentario", nullable = false)
     private Date fechaComentario;
 
@@ -35,6 +35,12 @@ public class Comentario implements Serializable {
 
     public Comentario(){
         super();
+    }
+
+    public Comentario(String comentario, @Positive double calificacion, Date fechaComentario) {
+        this.comentario = comentario;
+        this.calificacion = calificacion;
+        this.fechaComentario = fechaComentario;
     }
 
     public int getId() {
@@ -77,6 +83,22 @@ public class Comentario implements Serializable {
         this.fechaComentario = fechaComentario;
     }
 
+    public Usuario getUsuarioComentario() {
+        return usuarioComentario;
+    }
+
+    public void setUsuarioComentario(Usuario usuarioComentario) {
+        this.usuarioComentario = usuarioComentario;
+    }
+
+    public Lugar getLugarComentario() {
+        return lugarComentario;
+    }
+
+    public void setLugarComentario(Lugar lugarComentario) {
+        this.lugarComentario = lugarComentario;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,5 +112,16 @@ public class Comentario implements Serializable {
     @Override
     public int hashCode() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Comentario{" +
+                "id=" + id +
+                ", comentario='" + comentario + '\'' +
+                ", calificacion=" + calificacion +
+                ", respuesta='" + respuesta + '\'' +
+                ", fechaComentario=" + fechaComentario +
+                '}';
     }
 }

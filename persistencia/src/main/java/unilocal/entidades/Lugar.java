@@ -32,15 +32,15 @@ public class Lugar implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaCreacion;
 
-    @Column(name = "fecha_aprobacion", nullable = false)
+    @Column(name = "fecha_aprobacion")
     @Temporal(TemporalType.DATE)
     private Date fechaAprobacion;
 
     @Column(name = "latitud", nullable = false)
-    private float latitud;
+    private double latitud;
 
     @Column(name = "longitud", nullable = false)
-    private float longitud;
+    private double longitud;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false)
@@ -64,6 +64,22 @@ public class Lugar implements Serializable {
 
     @OneToMany(mappedBy = "lugarComentario")
     private List<Comentario> comentarios;
+
+    public Lugar(){
+        super();
+    }
+
+    public Lugar(String nombre, String descripcion, TipoLugar tipo, Ciudad ciudad,
+                 Date fechaCreacion, double latitud, double longitud, EstadoAprobacion estado) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+        this.ciudad = ciudad;
+        this.fechaCreacion = fechaCreacion;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.estado = estado;
+    }
 
     public int getId() {
         return id;
@@ -125,7 +141,7 @@ public class Lugar implements Serializable {
         return latitud;
     }
 
-    public void setLatitud(float latitud) {
+    public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
 
@@ -133,7 +149,7 @@ public class Lugar implements Serializable {
         return longitud;
     }
 
-    public void setLongitud(float longitud) {
+    public void setLongitud(double longitud) {
         this.longitud = longitud;
     }
 
@@ -153,6 +169,46 @@ public class Lugar implements Serializable {
         this.telefono = telefono;
     }
 
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
+    }
+
+    public Moderador getModerador() {
+        return moderador;
+    }
+
+    public void setModerador(Moderador moderador) {
+        this.moderador = moderador;
+    }
+
+    public Usuario getUsuarioLugar() {
+        return usuarioLugar;
+    }
+
+    public void setUsuarioLugar(Usuario usuarioLugar) {
+        this.usuarioLugar = usuarioLugar;
+    }
+
+    public List<Usuario> getUsuariosFavoritos() {
+        return usuariosFavoritos;
+    }
+
+    public void setUsuariosFavoritos(List<Usuario> usuariosFavoritos) {
+        this.usuariosFavoritos = usuariosFavoritos;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -166,5 +222,21 @@ public class Lugar implements Serializable {
     @Override
     public int hashCode() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Lugar{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", tipo=" + tipo +
+                ", ciudad=" + ciudad +
+                ", fechaCreacion=" + fechaCreacion +
+                ", fechaAprobacion=" + fechaAprobacion +
+                ", latitud=" + latitud +
+                ", longitud=" + longitud +
+                ", estado=" + estado +
+                '}';
     }
 }
