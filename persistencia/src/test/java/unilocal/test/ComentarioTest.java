@@ -64,12 +64,12 @@ public class ComentarioTest {
 
             Comentario comenNuevo = new Comentario("Un excelente hotel",4.5,fecha);
             Comentario comenGuardado = comentarioRepo.save(comenNuevo);
-            comenGuardado.setComentario("Pesimo servicio");
+            comenGuardado.setMensaje("Pesimo servicio");
             comentarioRepo.save(comenGuardado);
 
             Comentario comenBuscado = comentarioRepo.findById(1).orElse(null);
 
-            Assertions.assertEquals("Pesimo servicio",comenBuscado.getComentario());
+            Assertions.assertEquals("Pesimo servicio",comenBuscado.getMensaje());
 
         } catch (Exception e) {
             e.printStackTrace();
