@@ -12,6 +12,11 @@ import unilocal.repositorios.LugarRepo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+/**
+ * Test que se encarga de mostrar las pruebas unitarias del
+ * lugar, como lo es agregar, eliminar, actualizar y leer
+ * @author Tatiana Arboleda, Diego Mauricio Valencia y Cristhian Ortiz
+ */
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -19,6 +24,12 @@ public class LugarTest {
 
     @Autowired
     private LugarRepo lugarRepo;
+    /**
+     * Test encargado de comprobar el registro de un lugar
+     * con los datos necesarios como el nombre, la decripción, el tipo de lugar, la ciudad, la fecha de creacion
+     * la longitud, la latitud y el estado de la aprobación para proceder
+     * a guardarlo al repositorio correspondiente
+     */
 
     @Test
     public void regitrarLugarTest() {
@@ -36,6 +47,10 @@ public class LugarTest {
             e.printStackTrace();
         }
     }
+    /**
+     * Test encargado de comprobar la eliminación de un lugar
+     * mediante la busqueda del mismo por el número de registro
+     */
 
     @Test
     public void eliminarLugarTest() {
@@ -57,6 +72,11 @@ public class LugarTest {
             e.printStackTrace();
         }
     }
+    /**
+     * Test encargado de comprobar la actualización de datos de un lugar
+     * en este caso la actualización del nombre, buscando el
+     * lugar mediante numero de registro
+     */
 
     @Test
     public void modificarLugarTest() {
@@ -79,7 +99,11 @@ public class LugarTest {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Test encargado de mostrar que los lugares están registrados
+     * trayendo a todos los que están registrados en el repositorio y agregándolos
+     * a una lista para luego imprimirla
+     */
     @Test
     @Sql("classpath:lugares.sql")
     public void listarLugares() {

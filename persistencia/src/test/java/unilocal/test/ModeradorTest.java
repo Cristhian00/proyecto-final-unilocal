@@ -10,6 +10,11 @@ import unilocal.entidades.Moderador;
 import unilocal.repositorios.ModeradorRepo;
 
 import java.util.List;
+/**
+ * Test que se encarga de mostrar las pruebas unitarias del
+ * moderador, como lo es agregar, eliminar, actualizar y leer
+ * @author Tatiana Arboleda, Diego Mauricio Valencia y Cristhian Ortiz
+ */
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -17,6 +22,11 @@ public class ModeradorTest {
 
     @Autowired
     private ModeradorRepo moderadorRepo;
+    /**
+     * Test encargado de comprobar el registro de un Moderador
+     * con los datos necesarios como la cédula, nombre, correo, contraseña
+     * y nickname del mismo para proceder a guardarlo al repositorio correspondiente
+     */
 
     @Test
     public void registrarModeradorTest(){
@@ -28,6 +38,10 @@ public class ModeradorTest {
 
         Assertions.assertNotNull(modeGuardado);
     }
+    /**
+     * Test encargado de comprobar la eliminación de un moderador
+     * mediante la busqueda del mismo por el número de cédula
+     */
 
     @Test
     public void eliminarModeradorTest(){
@@ -41,6 +55,11 @@ public class ModeradorTest {
         Moderador modeBorrado = moderadorRepo.findById("1111").orElse(null);
         Assertions.assertNull(modeBorrado);
     }
+    /**
+     * Test encargado de comprobar la actualización de datos de un moderador
+     * en este caso la actualización del correo electrónico, buscando el
+     * moderador mediante la cédula
+     */
 
     @Test
     public void modificarModeradorTest(){
@@ -55,7 +74,11 @@ public class ModeradorTest {
         Moderador modeBuscado = moderadorRepo.findById("1111").orElse(null);
         Assertions.assertEquals("diieegoo@gmail.com", modeBuscado.getEmail());
     }
-
+    /**
+     * Test encargado de mostrar que los moderadores que están registrados
+     * trayendo a todos los que están registrados en el repositorio y agregándolos
+     * a una lista para luego imprimirla
+     */
     @Test
     @Sql("classpath:moderadores.sql")
     public void listarModeradores(){

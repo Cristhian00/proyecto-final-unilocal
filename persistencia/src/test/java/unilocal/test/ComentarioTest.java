@@ -13,13 +13,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Test que se encarga de mostrar las pruebas unitarias del
+ * comentario, como lo es agregar, eliminar, actualizar y leer
+ * @author Tatiana Arboleda, Diego Mauricio Valencia y Cristhian Ortiz
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ComentarioTest {
 
     @Autowired
     private ComentarioRepo comentarioRepo;
-
+    /**
+     * Test encargado de comprobar el registro de un comentario
+     * con los datos necesarios como la fecha y el mensaje
+     * del comentario para proceder a guardarlo en el repositorio correspondiente
+     */
     @Test
     public void registrarComentarioTest(){
 
@@ -35,7 +44,10 @@ public class ComentarioTest {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Test encargado de comprobar la eliminación de un comentario
+     * mediante la busqueda del mismo por el número de registro del comentario
+     */
     @Test
     public void eliminarComentarioTest(){
         try{
@@ -54,7 +66,11 @@ public class ComentarioTest {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Test encargado de comprobar la actualización de datos de un comentario
+     * en este caso la actualización del mensaje, buscando el
+     * comentario mediante el numero de registro del comentario
+     */
     @Test
     public void modificarComentarioTest(){
 
@@ -75,7 +91,11 @@ public class ComentarioTest {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Test encargado de mostrar que los comentarios están registrados
+     * trayendo a todos los que están registrados en el repositorio y agregándolos
+     * a una lista para luego imprimirla
+     */
     @Test
     @Sql("classpath:comentarios.sql")
     public void listarComentariosTest(){

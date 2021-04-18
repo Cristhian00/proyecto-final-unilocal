@@ -11,6 +11,11 @@ import unilocal.entidades.Horario;
 import unilocal.repositorios.HorarioRepo;
 
 import java.util.List;
+/**
+ * Test que se encarga de mostrar las pruebas unitarias del
+ * horario que maneja un lugar, como lo es agregar, eliminar, actualizar y leer
+ * @author Tatiana Arboleda, Diego Mauricio Valencia y Cristhian Ortiz
+ */
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -18,6 +23,12 @@ public class HorarioTest {
 
     @Autowired
     private HorarioRepo horarioRepo;
+
+    /**
+     * Test encargado de comprobar el registro de un horario
+     * con los datos necesarios como el dia de la semana, la hora de apertura
+     * y la hora de cierre del lugar para proceder a guardarlo al repositorio correspondiente
+     */
 
     @Test
     public void registrarHorarioTest(){
@@ -28,6 +39,10 @@ public class HorarioTest {
 
         Assertions.assertNotNull(horarioGuardado);
     }
+    /**
+     * Test encargado de comprobar la eliminación de un horario
+     * mediante la busqueda del mismo por el número de registro del horario
+     */
 
     @Test
     public void eliminarHorarioTest(){
@@ -41,9 +56,14 @@ public class HorarioTest {
 
         Assertions.assertNull(horarioBorrado);
     }
+    /**
+     * Test encargado de comprobar la actualización de datos de un horario
+     * en este caso la actualización de la hora de apertura, buscando el
+     * horario mediante el registro del mismo
+     */
 
     @Test
-    public void modificarUsuarioTest(){
+    public void modificarHorarioTest(){
 
         Horario horarioNuevo = new Horario(DiaSemana.LUNES, "14:00", "22:00");
 
@@ -55,10 +75,14 @@ public class HorarioTest {
 
         Assertions.assertEquals("13:00", horarioBuscado.getHoraApertura());
     }
-
+    /**
+     * Test encargado de mostrar que los horarios están registrados
+     * trayendo a todos los que están registrados en el repositorio y agregándolos
+     * a una lista para luego imprimirla
+     */
     @Test
     @Sql("classpath:horarios.sql")
-    public void listarUsuarios(){
+    public void listarHorarios(){
 
         /*
         Horario horarioNuevo1 = new Horario(DiaSemana.LUNES, "14:00", "22:00");

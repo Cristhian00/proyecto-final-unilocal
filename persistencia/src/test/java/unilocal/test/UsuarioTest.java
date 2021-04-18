@@ -17,7 +17,11 @@ public class UsuarioTest {
 
     @Autowired
     private UsuarioRepo usuarioRepo;
-
+    /**
+     * Test encargado de comprobar el registro de un usuario
+     * con los datos necesarios como la cédula, nombre, correo, contraseña
+     * y nickname del usuario para proceder a guardarlo al repositorio correspondiente
+     */
     @Test
     public void registrarUsuarioTest(){
 
@@ -28,6 +32,10 @@ public class UsuarioTest {
 
         Assertions.assertNotNull(usuGuardado);
     }
+    /**
+     * Test encargado de comprobar la eliminación de un usuario
+     * mediante la busqueda del mismo por el número de cédula
+     */
 
     @Test
     public void eliminarUsuarioTest(){
@@ -42,6 +50,11 @@ public class UsuarioTest {
 
         Assertions.assertNull(usuBorrado);
     }
+    /**
+     * Test encargado de comprobar la actualización de datos de un usuario
+     * en este caso la actualización del correo electrónico, buscando el
+     * usuario mediante la cédula
+     */
 
     @Test
     public void modificarUsuarioTest(){
@@ -57,7 +70,11 @@ public class UsuarioTest {
 
         Assertions.assertEquals("cristhian@gmail.com", usuBuscado.getEmail());
     }
-
+    /**
+     * Test encargado de mostrar que los usuarios que están registrados
+     * trayendo a todos los que están registrados en el repositorio y agregándolos
+     * a una lista para luego imprimirla
+     */
     @Test
     @Sql("classpath:usuarios.sql")
     public void listarUsuarios(){

@@ -12,6 +12,11 @@ import unilocal.repositorios.AdministradorRepo;
 
 import java.util.List;
 
+/**
+ * Test que se encarga de mostrar las pruebas unitarias del
+ * administrador, como lo es agregar, eliminar, actualizar y leer
+ * @author Tatiana Arboleda, Diego Mauricio Valencia y Cristhian Ortiz
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AdministradorTest {
@@ -19,6 +24,11 @@ public class AdministradorTest {
     @Autowired
     private AdministradorRepo administradorRepo;
 
+    /**
+     * Test encargado de comprobar el registro de un Administrador
+     * con los datos necesarios como la cédula, nombre, correo, contraseña
+     * y nickname del admin para proceder a guardarlo al repositorio correspondiente
+     */
     @Test
     public void registrarAdministradorTest(){
 
@@ -29,7 +39,10 @@ public class AdministradorTest {
 
         Assertions.assertNotNull(admiGuardado);
     }
-
+    /**
+     * Test encargado de comprobar la eliminación de un Administrador
+     * mediante la busqueda del mismo por el número de cédula
+     */
     @Test
     public void eliminarAdministradorTest(){
 
@@ -42,7 +55,11 @@ public class AdministradorTest {
         Administrador admiBorrado = administradorRepo.findById("2222").orElse(null);
         Assertions.assertNull(admiBorrado);
     }
-
+    /**
+     * Test encargado de comprobar la actualización de datos de un Administrador
+     * en este caso la actualización del correo electrónico, buscando el
+     * administrador mediante la cédula
+     */
     @Test
     public void actualizarAdministradorTest(){
 
@@ -56,7 +73,11 @@ public class AdministradorTest {
         Administrador admiBuscado = administradorRepo.findById("2222").orElse(null);
         Assertions.assertEquals("tata@gmail.com", admiBuscado.getEmail());
     }
-
+    /**
+     * Test encargado de mostrar que los administradores están registrados
+     * trayendo a todos los que están registrados en el repositorio y agregándolos
+     * a una lista para luego imprimirla
+     */
     @Test
     @Sql("classpath:administradores.sql")
     public void listarAdministradores(){
