@@ -28,6 +28,8 @@ public class Usuario extends Persona implements Serializable {
 
     //Lugares que ha seleccionado como favoritos el usuario
     @ManyToMany
+    @JoinTable(name = "favorito", joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_lugar"))
     private List<Lugar> lugaresFavoritos;
 
     //Comentarios que ha realizado el usuario
