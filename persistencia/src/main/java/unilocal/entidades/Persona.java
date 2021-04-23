@@ -156,18 +156,4 @@ public abstract class Persona implements Serializable {
         return cedula != null ? cedula.hashCode() : 0;
     }
 
-    /**
-     * Método que muestra los datos que tiene la persona
-     * @return una cadena con los datos de la persona
-     */
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "cedula='" + cedula + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                ", contrasenia='" + contrasenia + '\'' +
-                ", nickname='" + nickname + '\'' +
-                '}';
-    }
 }

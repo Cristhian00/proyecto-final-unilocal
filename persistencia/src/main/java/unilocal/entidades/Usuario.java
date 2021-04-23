@@ -14,16 +14,15 @@ public class Usuario extends Persona implements Serializable {
 
     //Números telefonicos que tiene el usuario
     @ElementCollection
-    @JoinColumn(name = "telefono")
+    @JoinTable(name = "usuario_telefono")
     private Map<String, String> telefono;
 
     //Ciudad en la cuál reside el usuario
-    @Enumerated(EnumType.STRING)
-    @JoinColumn(name = "ciudad", nullable = false)
-    private Ciudad ciudad;
+    @ManyToOne
+    private Ciudad ciudadUsuario;
 
     //Lugares que ha registrado el usuario
-    @OneToMany(mappedBy = "usuarioLugar")
+    @OneToMany(mappedBy = "usuarioCreador")
     private List<Lugar> lugares;
 
     //Lugares que ha seleccionado como favoritos el usuario
@@ -50,9 +49,12 @@ public class Usuario extends Persona implements Serializable {
      * @param email, correo electronico del usuario
      * @param contrasenia, contraseña con la que el usuario iniciara sesión
      * @param nickname, nombre de usuario con el que iniciara sesión el usuario
+     * @param ciudadUsuario
      */
-    public Usuario(String cedula, String nombre, String email, String contrasenia, String nickname) {
+    public Usuario(String cedula, String nombre, String email, String contrasenia,
+                   String nickname, Ciudad ciudadUsuario) {
         super(cedula, nombre, email, contrasenia, nickname);
+        this.ciudadUsuario = ciudadUsuario;
     }
 
     /**
@@ -76,7 +78,7 @@ public class Usuario extends Persona implements Serializable {
      * @return ciudad de residencia
      */
     public Ciudad getCiudad() {
-        return ciudad;
+        return ciudadUsuario;
     }
 
     /**
@@ -84,7 +86,7 @@ public class Usuario extends Persona implements Serializable {
      * @param ciudad, ciudad nueva de residencia
      */
     public void setCiudad(Ciudad ciudad) {
-        this.ciudad = ciudad;
+        this.ciudadUsuario = ciudad;
     }
 
     /**
@@ -133,5 +135,17 @@ public class Usuario extends Persona implements Serializable {
      */
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "cedula='" + this.getCedula() + '\'' +
+                ", nombre='" + this.getNombre() + '\'' +
+                ", email='" + this.getEmail() + '\'' +
+                ", contrasenia='" + this.getContrasenia() + '\'' +
+                ", nickname='" + this.getNickname() + '\'' +
+                ", ciudadUsuario=" + this.getCiudad().getNombre() + '\'' +
+                '}';
     }
 }

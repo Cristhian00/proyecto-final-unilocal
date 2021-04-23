@@ -96,6 +96,8 @@ public class HorarioTest {
         */
 
         List<Horario> lista = horarioRepo.findAll();
-        System.out.println(lista);
+        for (Horario h: lista){
+            System.out.println(h);
+        }
     }
 }

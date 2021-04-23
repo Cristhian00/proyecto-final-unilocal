@@ -37,8 +37,9 @@ public class Moderador extends Persona implements Serializable {
      * @param contrasenia, contraseña con la que iniciara sesión
      * @param nickname, nombre de usuario con el que iniciara sesión
      */
-    public Moderador(String cedula, String nombre, String email, String contrasenia, String nickname) {
+    public Moderador(String cedula, String nombre, String email, String contrasenia, String nickname, Administrador administrador) {
         super(cedula, nombre, email, contrasenia, nickname);
+        this.administrador = administrador;
     }
 
     /**
@@ -71,5 +72,17 @@ public class Moderador extends Persona implements Serializable {
      */
     public void setAdministrador(Administrador administrador) {
         this.administrador = administrador;
+    }
+
+    @Override
+    public String toString() {
+        return "Moderador{" +
+                "cedula='" + this.getCedula() + '\'' +
+                ", nombre='" + this.getNombre() + '\'' +
+                ", email='" + this.getEmail() + '\'' +
+                ", contrasenia='" + this.getContrasenia() + '\'' +
+                ", nickname='" + this.getNickname() + '\'' +
+                ", administrador=" + administrador.getNombre() + '\'' +
+                '}';
     }
 }

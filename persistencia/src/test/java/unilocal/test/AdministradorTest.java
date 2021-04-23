@@ -32,7 +32,7 @@ public class AdministradorTest {
     @Test
     public void registrarAdministradorTest(){
 
-        Administrador admiNuevo = new Administrador("2222", "Tatiana Arboleda", "tatiana@hotmail.com",
+        Administrador admiNuevo = new Administrador("1", "Tatiana Arboleda", "tatiana@hotmail.com",
                 "admin", "tata");
 
         Administrador admiGuardado = administradorRepo.save(admiNuevo);
@@ -46,13 +46,13 @@ public class AdministradorTest {
     @Test
     public void eliminarAdministradorTest(){
 
-        Administrador admiNuevo = new Administrador("2222", "Tatiana Arboleda", "tatiana@hotmail.com",
+        Administrador admiNuevo = new Administrador("1", "Tatiana Arboleda", "tatiana@hotmail.com",
                 "admin", "tata");
 
         administradorRepo.save(admiNuevo);
         administradorRepo.delete(admiNuevo);
 
-        Administrador admiBorrado = administradorRepo.findById("2222").orElse(null);
+        Administrador admiBorrado = administradorRepo.findById("1").orElse(null);
         Assertions.assertNull(admiBorrado);
     }
     /**
@@ -63,14 +63,14 @@ public class AdministradorTest {
     @Test
     public void actualizarAdministradorTest(){
 
-        Administrador admiNuevo = new Administrador("2222", "Tatiana Arboleda", "tatiana@hotmail.com",
+        Administrador admiNuevo = new Administrador("1", "Tatiana Arboleda", "tatiana@hotmail.com",
                 "admin", "tata");
 
         Administrador admiGuardado = administradorRepo.save(admiNuevo);
         admiGuardado.setEmail("tata@gmail.com");
         administradorRepo.save(admiGuardado);
 
-        Administrador admiBuscado = administradorRepo.findById("2222").orElse(null);
+        Administrador admiBuscado = administradorRepo.findById("1").orElse(null);
         Assertions.assertEquals("tata@gmail.com", admiBuscado.getEmail());
     }
     /**
@@ -83,20 +83,22 @@ public class AdministradorTest {
     public void listarAdministradores(){
 
         /*
-        Administrador admiNuevo1 = new Administrador("7777", "Tatiana Arboleda", "tatiana1@hotmail.com",
+        Administrador admiNuevo1 = new Administrador("1", "Tatiana Arboleda", "tatiana1@hotmail.com",
                 "admin", "tata1");
         administradorRepo.save(admiNuevo1);
 
-        Administrador admiNuevo2 = new Administrador("8888", "Tatiana Arboleda", "tatiana2@hotmail.com",
+        Administrador admiNuevo2 = new Administrador("2", "Tatiana Arboleda", "tatiana2@hotmail.com",
                 "admin", "tata2");
         administradorRepo.save(admiNuevo2);
 
-        Administrador admiNuevo3 = new Administrador("9999", "Tatiana Arboleda", "tatiana3@hotmail.com",
+        Administrador admiNuevo3 = new Administrador("3", "Tatiana Arboleda", "tatiana3@hotmail.com",
                 "admin", "tata3");
         administradorRepo.save(admiNuevo3);
          */
 
         List<Administrador> lista = administradorRepo.findAll();
-        System.out.println(lista);
+        for (Administrador a: lista){
+            System.out.println(a);
+        }
     }
 }

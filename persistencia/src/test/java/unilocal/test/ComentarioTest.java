@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
-import unilocal.entidades.Comentario;
-import unilocal.repositorios.ComentarioRepo;
+import unilocal.entidades.*;
+import unilocal.repositorios.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +24,14 @@ public class ComentarioTest {
 
     @Autowired
     private ComentarioRepo comentarioRepo;
+    @Autowired
+    private UsuarioRepo usuarioRepo;
+    @Autowired
+    private LugarRepo lugarRepo;
+    @Autowired
+    private DepartamentoRepo departamentoRepo;
+    @Autowired
+    private CiudadRepo ciudadRepo;
     /**
      * Test encargado de comprobar el registro de un comentario
      * con los datos necesarios como la fecha y el mensaje
@@ -32,11 +40,25 @@ public class ComentarioTest {
     @Test
     public void registrarComentarioTest(){
 
+        Departamento departamento = new Departamento("Quindio","Colombia");
+        departamentoRepo.save(departamento);
+        Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
+        ciudadRepo.save(ciudadNueva);
+
+        Usuario usuNuevo = new Usuario("111", "Cristhian Ortiz", "cristhian@hotmail.com",
+                "admin", "cris", ciudadNueva);
+        usuarioRepo.save(usuNuevo);
+
         try{
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
 
-            Comentario comenNuevo = new Comentario("Un excelente hotel",4.5,fecha);
+            Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", TipoLugar.HOTEL,
+                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE,
+                    usuNuevo);
+            lugarRepo.save(lugarNuevo);
+
+            Comentario comenNuevo = new Comentario("Un excelente hotel",4.5,fecha, usuNuevo, lugarNuevo);
             Comentario comenGuardado = comentarioRepo.save(comenNuevo);
             Assertions.assertNotNull(comenGuardado);
 
@@ -50,11 +72,26 @@ public class ComentarioTest {
      */
     @Test
     public void eliminarComentarioTest(){
+
+        Departamento departamento = new Departamento("Quindio","Colombia");
+        departamentoRepo.save(departamento);
+        Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
+        ciudadRepo.save(ciudadNueva);
+
+        Usuario usuNuevo = new Usuario("111", "Cristhian Ortiz", "cristhian@hotmail.com",
+                "admin", "cris", ciudadNueva);
+        usuarioRepo.save(usuNuevo);
+
         try{
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
 
-            Comentario comenNuevo = new Comentario("Un excelente hotel",4.5,fecha);
+            Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", TipoLugar.HOTEL,
+                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE,
+                    usuNuevo);
+            lugarRepo.save(lugarNuevo);
+
+            Comentario comenNuevo = new Comentario("Un excelente hotel",4.5,fecha, usuNuevo, lugarNuevo);
             comentarioRepo.save(comenNuevo);
             comentarioRepo.delete(comenNuevo);
 
@@ -74,11 +111,25 @@ public class ComentarioTest {
     @Test
     public void modificarComentarioTest(){
 
+        Departamento departamento = new Departamento("Quindio","Colombia");
+        departamentoRepo.save(departamento);
+        Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
+        ciudadRepo.save(ciudadNueva);
+
+        Usuario usuNuevo = new Usuario("111", "Cristhian Ortiz", "cristhian@hotmail.com",
+                "admin", "cris", ciudadNueva);
+        usuarioRepo.save(usuNuevo);
+
         try{
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
 
-            Comentario comenNuevo = new Comentario("Un excelente hotel",4.5,fecha);
+            Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", TipoLugar.HOTEL,
+                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE,
+                    usuNuevo);
+            lugarRepo.save(lugarNuevo);
+
+            Comentario comenNuevo = new Comentario("Un excelente hotel",4.5,fecha, usuNuevo, lugarNuevo);
             Comentario comenGuardado = comentarioRepo.save(comenNuevo);
             comenGuardado.setMensaje("Pesimo servicio");
             comentarioRepo.save(comenGuardado);
@@ -117,6 +168,8 @@ public class ComentarioTest {
         }
          */
         List<Comentario> lista = comentarioRepo.findAll();
-        System.out.println(lista);
+        for (Comentario c: lista){
+            System.out.println(c);
+        }
     }
 }

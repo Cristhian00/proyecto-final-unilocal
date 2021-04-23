@@ -7,11 +7,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 import unilocal.entidades.*;
-import unilocal.repositorios.LugarRepo;
+import unilocal.repositorios.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
 /**
  * Test que se encarga de mostrar las pruebas unitarias del
  * lugar, como lo es agregar, eliminar, actualizar y leer
@@ -24,22 +24,58 @@ public class LugarTest {
 
     @Autowired
     private LugarRepo lugarRepo;
+
+    @Autowired
+    private UsuarioRepo usuarioRepo;
+    @Autowired
+    private HorarioRepo horarioRepo;
+    @Autowired
+    private CiudadRepo ciudadRepo;
+    @Autowired
+    private DepartamentoRepo departamentoRepo;
+
     /**
      * Test encargado de comprobar el registro de un lugar
      * con los datos necesarios como el nombre, la decripción, el tipo de lugar, la ciudad, la fecha de creacion
      * la longitud, la latitud y el estado de la aprobación para proceder
      * a guardarlo al repositorio correspondiente
      */
-
     @Test
     public void regitrarLugarTest() {
+
+        Map<String, String> telefonos = new HashMap<String, String>();
+        telefonos.put("3136778765", "Celular");
+        telefonos.put("7536969", "telefono");
+
+        Departamento departamento = new Departamento("Quindio","Colombia");
+        departamentoRepo.save(departamento);
+        Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
+        ciudadRepo.save(ciudadNueva);
+
+        Horario horario1 = new Horario(DiaSemana.LUNES, "14:00", "22:00");
+        Horario horario2 = new Horario(DiaSemana.SABADO, "14:00", "22:00");
+        Horario horario3 = new Horario(DiaSemana.DOMINGO, "14:00", "22:00");
+        Horario horario4 = new Horario(DiaSemana.FESTIVO, "14:00", "22:00");
+        horarioRepo.save(horario1);
+        horarioRepo.save(horario2);
+        horarioRepo.save(horario3);
+        horarioRepo.save(horario4);
+        List<Horario> horarios = new ArrayList<>();
+        horarios.add(horario1);
+        horarios.add(horario2);
+        horarios.add(horario3);
+        horarios.add(horario4);
+
+        Usuario usuNuevo = new Usuario("111", "Cristhian Ortiz", "cristhian@hotmail.com",
+                "admin", "cris", ciudadNueva);
+        usuarioRepo.save(usuNuevo);
 
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
             Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", TipoLugar.HOTEL,
-                    Ciudad.ARMENIA, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE);
-
+                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE, usuNuevo);
+            lugarNuevo.setTelefono(telefonos);
             Lugar lugarGuardado = lugarRepo.save(lugarNuevo);
             Assertions.assertNotNull(lugarGuardado);
 
@@ -55,12 +91,39 @@ public class LugarTest {
     @Test
     public void eliminarLugarTest() {
 
+        Map<String, String> telefonos = new HashMap<String, String>();
+        telefonos.put("3136778765", "Celular");
+        telefonos.put("7536969", "telefono");
+
+        Departamento departamento = new Departamento("Quindio","Colombia");
+        departamentoRepo.save(departamento);
+        Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
+        ciudadRepo.save(ciudadNueva);
+
+        Horario horario1 = new Horario(DiaSemana.LUNES, "14:00", "22:00");
+        Horario horario2 = new Horario(DiaSemana.SABADO, "14:00", "22:00");
+        Horario horario3 = new Horario(DiaSemana.DOMINGO, "14:00", "22:00");
+        Horario horario4 = new Horario(DiaSemana.FESTIVO, "14:00", "22:00");
+        horarioRepo.save(horario1);
+        horarioRepo.save(horario2);
+        horarioRepo.save(horario3);
+        horarioRepo.save(horario4);
+        List<Horario> horarios = new ArrayList<>();
+        horarios.add(horario1);
+        horarios.add(horario2);
+        horarios.add(horario3);
+        horarios.add(horario4);
+
+        Usuario usuNuevo = new Usuario("111", "Cristhian Ortiz", "cristhian@hotmail.com",
+                "admin", "cris", ciudadNueva);
+        usuarioRepo.save(usuNuevo);
+
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
             Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", TipoLugar.HOTEL,
-                    Ciudad.ARMENIA, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE);
-
+                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE, usuNuevo);
+            lugarNuevo.setTelefono(telefonos);
             lugarRepo.save(lugarNuevo);
             lugarRepo.delete(lugarNuevo);
 
@@ -81,19 +144,46 @@ public class LugarTest {
     @Test
     public void modificarLugarTest() {
 
+        Map<String, String> telefonos = new HashMap<String, String>();
+        telefonos.put("3136778765", "Celular");
+        telefonos.put("7536969", "telefono");
+
+        Departamento departamento = new Departamento("Quindio","Colombia");
+        departamentoRepo.save(departamento);
+        Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
+        ciudadRepo.save(ciudadNueva);
+
+        Horario horario1 = new Horario(DiaSemana.LUNES, "14:00", "22:00");
+        Horario horario2 = new Horario(DiaSemana.SABADO, "14:00", "22:00");
+        Horario horario3 = new Horario(DiaSemana.DOMINGO, "14:00", "22:00");
+        Horario horario4 = new Horario(DiaSemana.FESTIVO, "14:00", "22:00");
+        horarioRepo.save(horario1);
+        horarioRepo.save(horario2);
+        horarioRepo.save(horario3);
+        horarioRepo.save(horario4);
+        List<Horario> horarios = new ArrayList<>();
+        horarios.add(horario1);
+        horarios.add(horario2);
+        horarios.add(horario3);
+        horarios.add(horario4);
+
+        Usuario usuNuevo = new Usuario("111", "Cristhian Ortiz", "cristhian@hotmail.com",
+                "admin", "cris", ciudadNueva);
+        usuarioRepo.save(usuNuevo);
+
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
             Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", TipoLugar.HOTEL,
-                    Ciudad.ARMENIA, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE);
-
+                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE, usuNuevo);
+            lugarNuevo.setTelefono(telefonos);
             Lugar lugarGuardado = lugarRepo.save(lugarNuevo);
             lugarGuardado.setNombre("Hotel Armenia");
             lugarRepo.save(lugarNuevo);
 
             Lugar lugarBuscado = lugarRepo.findById(1).orElse(null);
 
-            Assertions.assertEquals("1234", lugarBuscado.getUsuarioLugar().getCedula());
+            Assertions.assertEquals("1234", lugarBuscado.getUsuarioCreador().getCedula());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -133,7 +223,9 @@ public class LugarTest {
          */
 
         List<Lugar> lista = lugarRepo.findAll();
-        System.out.println(lista);
+        for(Lugar l: lista){
+            System.out.println(l);
+        }
     }
 
 }

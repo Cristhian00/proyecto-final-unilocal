@@ -51,4 +51,16 @@ public class Administrador extends Persona implements Serializable {
     public void setModeradores(List<Moderador> moderadores) {
         this.moderadores = moderadores;
     }
+
+    @Override
+    public String toString() {
+
+        return "Administrador{" +
+                "cedula='" + this.getCedula() + '\'' +
+                ", nombre='" + this.getNombre() + '\'' +
+                ", email='" + this.getEmail() + '\'' +
+                ", contrasenia='" + this.getContrasenia() + '\'' +
+                ", nickname='" + this.getNickname() + '\'' +
+                '}';
+    }
 }

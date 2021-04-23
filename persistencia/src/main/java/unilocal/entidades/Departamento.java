@@ -5,32 +5,29 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Ciudad implements Serializable {
+public class Departamento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "nombre", nullable = false)
+    @Column(name = "nombre", nullable = false, unique = true)
     private String nombre;
 
-    @ManyToOne
-    private Departamento departamento;
+    @Column(name = "pais", nullable = false)
+    private String pais;
 
-    @OneToMany(mappedBy = "ciudadUsuario")
-    private List<Usuario> usuarios;
+    @OneToMany(mappedBy = "departamento")
+    private List<Ciudad> ciudades;
 
-    @OneToMany(mappedBy = "ciudadLugar")
-    private List<Lugar> lugares;
-
-    public Ciudad (){
+    public Departamento (){
         super();
     }
 
-    public Ciudad(String nombre, Departamento departamento) {
+    public Departamento(String nombre, String pais) {
         this.nombre = nombre;
-        this.departamento = departamento;
+        this.pais = pais;
     }
 
     public int getId() {
@@ -49,12 +46,20 @@ public class Ciudad implements Serializable {
         this.nombre = nombre;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
+    public String getPais() {
+        return pais;
     }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public List<Ciudad> getCiudades() {
+        return ciudades;
+    }
+
+    public void setCiudades(List<Ciudad> ciudades) {
+        this.ciudades = ciudades;
     }
 
     @Override
@@ -62,9 +67,9 @@ public class Ciudad implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Ciudad ciudad = (Ciudad) o;
+        Departamento that = (Departamento) o;
 
-        return id == ciudad.id;
+        return id == that.id;
     }
 
     @Override
@@ -74,11 +79,10 @@ public class Ciudad implements Serializable {
 
     @Override
     public String toString() {
-        return "Ciudad{" +
+        return "Departamento{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", departamento=" + departamento.getNombre() + '\'' +
-                ", pais=" + departamento.getPais() +
+                ", pais='" + pais +
                 '}';
     }
 }

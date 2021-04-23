@@ -57,10 +57,12 @@ public class Comentario implements Serializable {
      * @param calificacion, puntuación dada en el comentario
      * @param fechaComentario, fecha en la que se realizo el comentario
      */
-    public Comentario(String mensaje, @Positive double calificacion, Date fechaComentario) {
+    public Comentario(String mensaje, @Positive double calificacion, Date fechaComentario, Usuario usuarioComentario, Lugar lugarComentario) {
         this.mensaje = mensaje;
         this.calificacion = calificacion;
         this.fechaComentario = fechaComentario;
+        this.usuarioComentario = usuarioComentario;
+        this.lugarComentario = lugarComentario;
     }
 
     /**

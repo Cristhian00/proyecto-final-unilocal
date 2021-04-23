@@ -33,9 +33,8 @@ public class Lugar implements Serializable {
     private TipoLugar tipo;
 
     //Ciudad en la cuál esta el lugar
-    @Enumerated(EnumType.STRING)
-    @JoinColumn(name = "ciudad", nullable = false)
-    private Ciudad ciudad;
+    @ManyToOne
+    private Ciudad ciudadLugar;
 
     //Fecha de creación del luagr en la plataforma
     @Column(name = "fecha_creacion", nullable = false)
@@ -75,7 +74,7 @@ public class Lugar implements Serializable {
 
     //Usuario que registro el lugar
     @ManyToOne
-    private Usuario usuarioLugar;
+    private Usuario usuarioCreador;
 
     //Usuarios que han seleccionado al lugar como favorito
     @ManyToMany(mappedBy = "lugaresFavoritos")
@@ -84,6 +83,9 @@ public class Lugar implements Serializable {
     //Comentarios que se le han realizado al lugar
     @OneToMany(mappedBy = "lugarComentario")
     private List<Comentario> comentarios;
+
+    @OneToMany(mappedBy = "lugar")
+    private List<Imagen> imagenes;
 
     /**
      * Constructor vacio del lugar
@@ -97,22 +99,25 @@ public class Lugar implements Serializable {
      * @param nombre, nombre que tendrá el lugar
      * @param descripcion, una descripción del lugar
      * @param tipo, el tipo de sitio que es el lugar
-     * @param ciudad, en la cuál esta ubicado el lugar
+     * @param ciudadLugar, en la cuál esta ubicado el lugar
      * @param fechaCreacion, fecha de registro del lugar
      * @param latitud, latitud de la ubicación del lugar
      * @param longitud, longitud de la ubicación del lugar
      * @param estado, estado en el que se encuentra el lugar
+     * @param usuarioCreador
      */
-    public Lugar(String nombre, String descripcion, TipoLugar tipo, Ciudad ciudad,
-                 Date fechaCreacion, double latitud, double longitud, EstadoAprobacion estado) {
+    public Lugar(String nombre, String descripcion, TipoLugar tipo, Ciudad ciudadLugar,
+                 Date fechaCreacion, double latitud, double longitud,
+                 EstadoAprobacion estado, Usuario usuarioCreador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tipo = tipo;
-        this.ciudad = ciudad;
+        this.ciudadLugar = ciudadLugar;
         this.fechaCreacion = fechaCreacion;
         this.latitud = latitud;
         this.longitud = longitud;
         this.estado = estado;
+        this.usuarioCreador = usuarioCreador;
     }
 
     /**
@@ -184,7 +189,7 @@ public class Lugar implements Serializable {
      * @return la ciudad de ubicación del lugar
      */
     public Ciudad getCiudad() {
-        return ciudad;
+        return ciudadLugar;
     }
 
     /**
@@ -192,7 +197,7 @@ public class Lugar implements Serializable {
      * @param ciudad, nueva ciudad de ubicación del lugar
      */
     public void setCiudad(Ciudad ciudad) {
-        this.ciudad = ciudad;
+        this.ciudadLugar = ciudad;
     }
 
     /**
@@ -327,16 +332,16 @@ public class Lugar implements Serializable {
      * Método que obtiene el usuario que registro el lugar
      * @return el usuario
      */
-    public Usuario getUsuarioLugar() {
-        return usuarioLugar;
+    public Usuario getUsuarioCreador() {
+        return usuarioCreador;
     }
 
     /**
      * Método que modifica el ususario del lugar
-     * @param usuarioLugar, nuevo usuario del lugar
+     * @param usuarioCreador, nuevo usuario del lugar
      */
-    public void setUsuarioLugar(Usuario usuarioLugar) {
-        this.usuarioLugar = usuarioLugar;
+    public void setUsuarioCreador(Usuario usuarioCreador) {
+        this.usuarioCreador = usuarioCreador;
     }
 
     /**
@@ -371,6 +376,14 @@ public class Lugar implements Serializable {
         this.comentarios = comentarios;
     }
 
+    public List<Imagen> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<Imagen> imagenes) {
+        this.imagenes = imagenes;
+    }
+
     /**
      * Método que compara un lugar con otro
      * @param o, lugar que se va a coparar
@@ -402,12 +415,13 @@ public class Lugar implements Serializable {
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", tipo=" + tipo +
-                ", ciudad=" + ciudad +
+                ", ciudadLugar=" + ciudadLugar.getNombre() +
                 ", fechaCreacion=" + fechaCreacion +
                 ", fechaAprobacion=" + fechaAprobacion +
                 ", latitud=" + latitud +
                 ", longitud=" + longitud +
                 ", estado=" + estado +
+                ", usuarioCreador=" + usuarioCreador.getNombre() +
                 '}';
     }
 }

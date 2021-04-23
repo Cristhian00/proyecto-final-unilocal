@@ -1,0 +1,5 @@
+insert into departamento(nombre, pais) values ("Quindio", "Colombia")
+insert into departamento(nombre, pais) values ("Risaralda", "Colombia")
+insert into departamento(nombre, pais) values ("Cundinamarca", "Colombia")
+insert into departamento(nombre, pais) values ("Caldas", "Colombia")
+insert into departamento(nombre, pais) values ("Nariño", "Colombia")
