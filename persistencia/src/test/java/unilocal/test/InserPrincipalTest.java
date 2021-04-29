@@ -30,6 +30,8 @@ public class InserPrincipalTest {
     private ComentarioRepo comentarioRepo;
     @Autowired
     private ModeradorRepo moderadorRepo;
+    @Autowired
+    private TipoLugarRepo tipoLugarRepo;
 
     @Test
     @Sql("classpath:pruebaPrincipal.sql")
@@ -58,6 +60,11 @@ public class InserPrincipalTest {
         List<Horario> horarios = horarioRepo.findAll();
         for (Horario h: horarios){
             System.out.println(h);
+        }
+
+        List<TipoLugar> tipos = tipoLugarRepo.findAll();
+        for (TipoLugar t: tipos){
+            System.out.println(t);
         }
 
         List<Lugar> lugars = lugarRepo.findAll();

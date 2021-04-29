@@ -28,9 +28,8 @@ public class Lugar implements Serializable {
     private String descripcion;
 
     //Tipo al que pertenece el lugar
-    @Enumerated(EnumType.STRING)
-    @JoinColumn(name = "tipo", nullable = false)
-    private TipoLugar tipo;
+    @ManyToOne
+    private TipoLugar tipoLugar;
 
     //Ciudad en la cuál esta el lugar
     @ManyToOne
@@ -98,7 +97,7 @@ public class Lugar implements Serializable {
      * Constructor completo para crear un lugar
      * @param nombre, nombre que tendrá el lugar
      * @param descripcion, una descripción del lugar
-     * @param tipo, el tipo de sitio que es el lugar
+     * @param tipoLugar, el tipo de sitio que es el lugar
      * @param ciudadLugar, en la cuál esta ubicado el lugar
      * @param fechaCreacion, fecha de registro del lugar
      * @param latitud, latitud de la ubicación del lugar
@@ -106,12 +105,12 @@ public class Lugar implements Serializable {
      * @param estado, estado en el que se encuentra el lugar
      * @param usuarioCreador
      */
-    public Lugar(String nombre, String descripcion, TipoLugar tipo, Ciudad ciudadLugar,
+    public Lugar(String nombre, String descripcion, TipoLugar tipoLugar, Ciudad ciudadLugar,
                  Date fechaCreacion, double latitud, double longitud,
                  EstadoAprobacion estado, Usuario usuarioCreador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.tipo = tipo;
+        this.tipoLugar = tipoLugar;
         this.ciudadLugar = ciudadLugar;
         this.fechaCreacion = fechaCreacion;
         this.latitud = latitud;
@@ -173,7 +172,7 @@ public class Lugar implements Serializable {
      * @return tipo de sitio
      */
     public TipoLugar getTipo() {
-        return tipo;
+        return tipoLugar;
     }
 
     /**
@@ -181,7 +180,7 @@ public class Lugar implements Serializable {
      * @param tipo, tipo nuevo del lugar
      */
     public void setTipo(TipoLugar tipo) {
-        this.tipo = tipo;
+        this.tipoLugar = tipo;
     }
 
     /**
@@ -414,7 +413,7 @@ public class Lugar implements Serializable {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", tipo=" + tipo +
+                ", tipo=" + tipoLugar.getNombre() +
                 ", ciudadLugar=" + ciudadLugar.getNombre() +
                 ", fechaCreacion=" + fechaCreacion +
                 ", fechaAprobacion=" + fechaAprobacion +

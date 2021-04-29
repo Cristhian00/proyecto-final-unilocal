@@ -33,6 +33,8 @@ public class LugarTest {
     private CiudadRepo ciudadRepo;
     @Autowired
     private DepartamentoRepo departamentoRepo;
+    @Autowired
+    private TipoLugarRepo tipoLugarRepo;
 
     /**
      * Test encargado de comprobar el registro de un lugar
@@ -70,10 +72,13 @@ public class LugarTest {
                 "admin", "cris", ciudadNueva);
         usuarioRepo.save(usuNuevo);
 
+        TipoLugar tipoNuevo = new TipoLugar("Cafeteria");
+        tipoLugarRepo.save(tipoNuevo);
+
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
-            Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", TipoLugar.HOTEL,
+            Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", tipoNuevo,
                     ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE, usuNuevo);
             lugarNuevo.setTelefono(telefonos);
             Lugar lugarGuardado = lugarRepo.save(lugarNuevo);
@@ -118,10 +123,13 @@ public class LugarTest {
                 "admin", "cris", ciudadNueva);
         usuarioRepo.save(usuNuevo);
 
+        TipoLugar tipoNuevo = new TipoLugar("Cafeteria");
+        tipoLugarRepo.save(tipoNuevo);
+
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
-            Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", TipoLugar.HOTEL,
+            Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", tipoNuevo,
                     ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE, usuNuevo);
             lugarNuevo.setTelefono(telefonos);
             lugarRepo.save(lugarNuevo);
@@ -171,10 +179,13 @@ public class LugarTest {
                 "admin", "cris", ciudadNueva);
         usuarioRepo.save(usuNuevo);
 
+        TipoLugar tipoNuevo = new TipoLugar("Cafeteria");
+        tipoLugarRepo.save(tipoNuevo);
+
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
-            Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", TipoLugar.HOTEL,
+            Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", tipoNuevo,
                     ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE, usuNuevo);
             lugarNuevo.setTelefono(telefonos);
             Lugar lugarGuardado = lugarRepo.save(lugarNuevo);
