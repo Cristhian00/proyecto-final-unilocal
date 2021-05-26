@@ -46,45 +46,51 @@ public class Imagen implements Serializable {
     }
 
     /**
-     * Método que modifica el código de identificación del horario
-     * @param codigo, número nuevo de identificación
+     * Método que modifica el código de identificación de la imagen
+     * @param id, número nuevo de identificación de la imagen
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * Método que obtiene el código de identificación del horario
-     * @return el código de identificación
+     * Método que obtiene la url de la imagen
+     * @return url de la imagen
      */
     public String getUrl() {
         return url;
     }
 
     /**
-     * Método que modifica el código de identificación del horario
-     * @param codigo, número nuevo de identificación
+     * Método que modifica la url de la imagen
+     * @param url, url nueva de la imagen
      */
     public void setUrl(String url) {
         this.url = url;
     }
 
     /**
-     * Método que obtiene el código de identificación del horario
-     * @return el código de identificación
+     * Método que obtiene el lugar de donde es la imagen
+     * @return el lugar de donde es la imagen
      */
     public Lugar getLugar() {
         return lugar;
     }
 
     /**
-     * Método que modifica el código de identificación del horario
-     * @param codigo, número nuevo de identificación
+     * Método que modifica el lugar de donde pertenece la imagen
+     * @param lugar, lugar nuevo de la imagen
      */
     public void setLugar(Lugar lugar) {
         this.lugar = lugar;
     }
 
+    
+    /**
+     * Metodo que compara dos imagenes
+     * @param o, imagen a comparar
+     * @return true si las imagenes son la misma, de lo contrario false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,7 +105,10 @@ public class Imagen implements Serializable {
     public int hashCode() {
         return id;
     }
-
+     /**
+     * Método que muestra los datos que tiene la imagen
+     * @return una cadena con los datos de la imagen
+     */
     @Override
     public String toString() {
         return "Imagen{" +
