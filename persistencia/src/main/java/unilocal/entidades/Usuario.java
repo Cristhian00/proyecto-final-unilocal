@@ -137,6 +137,10 @@ public class Usuario extends Persona implements Serializable {
         this.comentarios = comentarios;
     }
 
+      /**
+     * Método que muestra los datos que tiene el usuario
+     * @return una cadena con los datos del usuario
+     */
     @Override
     public String toString() {
         return "Usuario{" +
