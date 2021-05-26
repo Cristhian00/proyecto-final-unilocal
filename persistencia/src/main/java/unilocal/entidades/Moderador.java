@@ -74,6 +74,10 @@ public class Moderador extends Persona implements Serializable {
         this.administrador = administrador;
     }
 
+     /**
+     * Método que muestra los datos que tiene el moderador
+     * @return una cadena con los datos del moderador
+     */
     @Override
     public String toString() {
         return "Moderador{" +
