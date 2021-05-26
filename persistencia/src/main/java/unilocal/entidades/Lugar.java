@@ -375,10 +375,18 @@ public class Lugar implements Serializable {
         this.comentarios = comentarios;
     }
 
+    /**
+    *Método que obtiene la lista de las imagenes que estén agregadas de un lugar
+    *@return lista de imagenes
+    */
     public List<Imagen> getImagenes() {
         return imagenes;
     }
-
+    
+    /**
+     * Método que modifica las imagenes agregadas al lugar al lugar
+     * @param imagen
+     */
     public void setImagenes(List<Imagen> imagenes) {
         this.imagenes = imagenes;
     }
