@@ -32,7 +32,7 @@ public class TipoLugar implements Serializable {
     
     /**
     *Constructor completo para crear el tipo de lugar
-    *@param Nombre, nombre del tipo de lugar 
+    *@param nombre, nombre del tipo de lugar
     */
     public TipoLugar(String nombre) {
         this.nombre = nombre;
@@ -60,7 +60,7 @@ public class TipoLugar implements Serializable {
     }
     /**
      * Método que modifica el nombre del tipo del lugar
-     * @param id, nombre nuevo del tipo de lugar
+     * @param nombre nuevo del tipo de lugar
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
