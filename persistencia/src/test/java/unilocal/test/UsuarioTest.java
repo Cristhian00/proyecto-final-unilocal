@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 import unilocal.entidades.Ciudad;
 import unilocal.entidades.Departamento;
@@ -111,13 +114,13 @@ public class UsuarioTest {
     }
 
     /**
-     * Test encargado de mostrar que los usuarios que están registrados
+     * Test encargado de mostrar los usuarios que están registrados,
      * trayendo a todos los que están registrados en el repositorio y agregándolos
      * a una lista para luego imprimirla
      */
     @Test
     @Sql("classpath:usuarios.sql")
-    public void listarUsuarios(){
+    public void listarUsuariosTest(){
 
         /*
         Usuario usuNuevo1 = new Usuario("111", "Cristhian Ortiz", "cristhian1@hotmail.com",
@@ -134,6 +137,45 @@ public class UsuarioTest {
         */
 
         List<Usuario> lista = usuarioRepo.findAll();
+        for (Usuario u: lista){
+            System.out.println(u);
+        }
+    }
+
+    /**
+     * Test que busca un usuario por nombre en la lista de usuarios con
+     * un método creado en UsuarioRepo
+     */
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void listarUsuariosPorNombreTest(){
+
+        List<Usuario> lista = usuarioRepo.findByNombre("Pedro Lopez");
+
+        Assertions.assertNotNull(lista);
+    }
+
+    /**
+     * Test que imprime la lista de usuarios por paginas
+     */
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void listarUsuariosPaginablesTest(){
+
+        List<Usuario> lista = usuarioRepo.obtenerUsuarios(PageRequest.of(1, 2));
+        for (Usuario u: lista){
+            System.out.println(u);
+        }
+    }
+
+    /**
+     * Test que imprime la lista de usuarios ordenados por algún atributo
+     */
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void listarUsuariosOrdenadosTest(){
+
+        List<Usuario> lista = usuarioRepo.obtenerUsuarios(Sort.by("nombre"));
         for (Usuario u: lista){
             System.out.println(u);
         }

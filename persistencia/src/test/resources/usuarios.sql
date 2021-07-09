@@ -17,10 +17,13 @@ insert into usuario(cedula, email, nombre, nickname, contrasenia, ciudad_usuario
     values ("111", "cristhian@gmail.com", "Cristhian Ortiz", "cris", "admin", 1);
 
 insert into usuario(cedula, email, nombre, nickname, contrasenia, ciudad_usuario_id)
-    values ("112", "alejandra@gmail.com", "Alejandra Ladino", "aleja", "admin", 2);
+    values ("112", "daniela@gmail.com", "Daniela Gomez", "aleja", "admin", 2);
 
 insert into usuario(cedula, email, nombre, nickname, contrasenia, ciudad_usuario_id)
     values ("113", "camilo@gmail.com", "Camilo Garcia", "cami", "admin", 3);
 
 insert into usuario(cedula, email, nombre, nickname, contrasenia, ciudad_usuario_id)
     values ("114", "pedro@gmail.com", "Pedro Lopez", "pepe", "admin", 4);
+
+insert into usuario(cedula, email, nombre, nickname, contrasenia, ciudad_usuario_id)
+    values ("115", "pedro2@gmail.com", "Pedro Lopez", "pepe2", "admin", 3);
