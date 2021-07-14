@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 import unilocal.entidades.Ciudad;
 import unilocal.entidades.Departamento;
+import unilocal.entidades.Lugar;
 import unilocal.entidades.Usuario;
 import unilocal.repositorios.CiudadRepo;
 import unilocal.repositorios.DepartamentoRepo;
@@ -178,6 +179,28 @@ public class UsuarioTest {
         List<Usuario> lista = usuarioRepo.obtenerUsuarios(Sort.by("nombre"));
         for (Usuario u: lista){
             System.out.println(u);
+        }
+    }
+
+    @Test
+    @Sql("classpath:unilocal.sql")
+    public void listarLugaresFavoritosTest(){
+
+        List<Lugar> lugares = usuarioRepo.obtenerLugaresFavoritos("111");
+
+        for (Lugar l: lugares) {
+            System.out.println(l.getNombre());
+        }
+    }
+
+    @Test
+    @Sql("classpath:unilocal.sql")
+    public void listarLugaresCreadosTest(){
+
+        List<Object[]> lugares = usuarioRepo.obtenerLugaresPublicadosEEmail();
+
+        for (Object[] l: lugares) {
+            System.out.println(l[0] + " - " + l[1]);
         }
     }
 }

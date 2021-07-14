@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 import unilocal.entidades.Ciudad;
 import unilocal.entidades.Departamento;
+import unilocal.entidades.Usuario;
 import unilocal.repositorios.CiudadRepo;
 import unilocal.repositorios.DepartamentoRepo;
 
@@ -105,6 +106,28 @@ public class CiudadTest {
         List<Ciudad> lista = ciudadRepo.findAll();
         for (Ciudad c: lista){
             System.out.println(c);
+        }
+    }
+
+    @Test
+    @Sql("classpath:unilocal.sql")
+    public void listarUsuariosTest(){
+
+        List<Usuario> usuarios = ciudadRepo.obtenerUsuarios("Armenia");
+
+        for(Usuario u: usuarios){
+            System.out.println(u.getNombre());
+        }
+    }
+
+    @Test
+    @Sql("classpath:unilocal.sql")
+    public void listarUsuariosLeftJoinTest(){
+
+        List<Object[]> usuarios = ciudadRepo.obtenerUsuariosLeftJoin();
+
+        for(Object[] obj: usuarios){
+            System.out.println(obj[0] + " - " + obj[1]);
         }
     }
 }

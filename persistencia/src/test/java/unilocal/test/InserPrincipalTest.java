@@ -34,7 +34,7 @@ public class InserPrincipalTest {
     private TipoLugarRepo tipoLugarRepo;
 
     @Test
-    @Sql("classpath:pruebaPrincipal.sql")
+    @Sql("classpath:unilocal.sql")
     public void crearDatos(){
 
         List<Administrador> administradors = administradorRepo.findAll();

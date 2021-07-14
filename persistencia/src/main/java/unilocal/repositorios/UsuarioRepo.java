@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import unilocal.entidades.Usuario;
+import unilocal.entidades.Lugar;
 
 import java.util.List;
 
@@ -44,4 +45,10 @@ public interface UsuarioRepo extends JpaRepository<Usuario, String> {
 
     //Obtiene los usuarios que tienen un nombre especifico
     List<Usuario> findByNombre(String nombre);
+
+    @Query("select f from Usuario u, IN(u.lugaresFavoritos) f where u.cedula = ?1")
+    List<Lugar> obtenerLugaresFavoritos(String cedula);
+
+    @Query("select u.email, l from Usuario u left join u.lugares l")
+    List<Object[]> obtenerLugaresPublicadosEEmail();
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
+import unilocal.dto.LugarComentariosDTO;
 import unilocal.entidades.*;
 import unilocal.repositorios.*;
 
@@ -49,7 +50,7 @@ public class LugarTest {
         telefonos.put("3136778765", "Celular");
         telefonos.put("7536969", "telefono");
 
-        Departamento departamento = new Departamento("Quindio","Colombia");
+        Departamento departamento = new Departamento("Quindio", "Colombia");
         departamentoRepo.save(departamento);
         Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
         ciudadRepo.save(ciudadNueva);
@@ -88,6 +89,7 @@ public class LugarTest {
             e.printStackTrace();
         }
     }
+
     /**
      * Test encargado de comprobar la eliminación de un lugar
      * mediante la busqueda del mismo por el número de registro
@@ -100,7 +102,7 @@ public class LugarTest {
         telefonos.put("3136778765", "Celular");
         telefonos.put("7536969", "telefono");
 
-        Departamento departamento = new Departamento("Quindio","Colombia");
+        Departamento departamento = new Departamento("Quindio", "Colombia");
         departamentoRepo.save(departamento);
         Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
         ciudadRepo.save(ciudadNueva);
@@ -143,6 +145,7 @@ public class LugarTest {
             e.printStackTrace();
         }
     }
+
     /**
      * Test encargado de comprobar la actualización de datos de un lugar
      * en este caso la actualización del nombre, buscando el
@@ -156,7 +159,7 @@ public class LugarTest {
         telefonos.put("3136778765", "Celular");
         telefonos.put("7536969", "telefono");
 
-        Departamento departamento = new Departamento("Quindio","Colombia");
+        Departamento departamento = new Departamento("Quindio", "Colombia");
         departamentoRepo.save(departamento);
         Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
         ciudadRepo.save(ciudadNueva);
@@ -200,6 +203,7 @@ public class LugarTest {
             e.printStackTrace();
         }
     }
+
     /**
      * Test encargado de mostrar que los lugares están registrados
      * trayendo a todos los que están registrados en el repositorio y agregándolos
@@ -207,7 +211,7 @@ public class LugarTest {
      */
     @Test
     @Sql("classpath:lugares.sql")
-    public void listarLugares() {
+    public void listarLugaresTest() {
 
         /*
         try {
@@ -234,8 +238,50 @@ public class LugarTest {
          */
 
         List<Lugar> lista = lugarRepo.findAll();
-        for(Lugar l: lista){
+        for (Lugar l : lista) {
             System.out.println(l);
+        }
+    }
+
+    /**
+     * Imprime la info de un lugar en especifico
+     */
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void infoLugarTest(){
+
+        List<Object[]> infoLugar = lugarRepo.obtenerInfoLugar(1);
+
+        for (int i = 0; i<infoLugar.get(0).length; i++){
+            System.out.print(infoLugar.get(0)[i] + " ");
+        }
+    }
+
+    /**
+     * Imprime la info de los lugares
+     */
+    @Test
+    @Sql("classpath:lugares.sql")
+    public void infoLugaresTest(){
+
+        List<Object[]> infoLugar = lugarRepo.obtenerInfoLugares();
+
+        for (int i = 0; i < infoLugar.size(); i++){
+            for (int j = 0; j < infoLugar.get(i).length; j++){
+                System.out.print(infoLugar.get(i)[j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    @Sql("classpath:unilocal.sql")
+    public void obtenerComentariosLugaresTest(){
+
+        List<LugarComentariosDTO> infoLugar = lugarRepo.obtenerComentariosLugares();
+
+        for(LugarComentariosDTO lc: infoLugar){
+            System.out.println(lc.getLugar().getNombre() + " - " + lc.getComentario().getMensaje());
         }
     }
 
