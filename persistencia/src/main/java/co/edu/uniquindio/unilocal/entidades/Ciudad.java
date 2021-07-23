@@ -29,7 +29,7 @@ public class Ciudad implements Serializable {
     private int id;
 
     //Nombre de la ciudad
-    @Column(name = "nombre", nullable = false)
+    @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
 
     //Nombre del departamento al cual pertenece

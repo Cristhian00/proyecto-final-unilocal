@@ -40,9 +40,9 @@ public class LugarBean implements Serializable {
         FacesMessage msg;
 
         try{
-            lugar.setCiudad(ciudadServicio.obtenerCiudad("Armenia"));
+            lugar.setCiudadLugar(ciudadServicio.obtenerCiudad("Armenia"));
             lugar.setUsuarioCreador(usuarioServicio.obtenerUsuario("111"));
-            lugar.setTipo(tipoLugarServicio.obtenerTipoLugar(1));
+            lugar.setTipoLugar(tipoLugarServicio.obtenerTipoLugar(1));
 
             lugarServicio.registrarLugar(lugar);
 

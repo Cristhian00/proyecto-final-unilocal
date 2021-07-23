@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface TipoLugarRepo extends JpaRepository<TipoLugar, Integer> {
 
-    @Query("select t from TipoLugar t where t.id = ?1")
-    Optional<TipoLugar> obtenerTipoLugar(int id);
+    Optional<TipoLugar> findById(int id);
+
+    Optional<TipoLugar> findByNombre(String nombre);
 }

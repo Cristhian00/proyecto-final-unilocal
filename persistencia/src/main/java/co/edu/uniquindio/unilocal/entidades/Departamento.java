@@ -29,11 +29,11 @@ public class Departamento implements Serializable {
     private int id;
 
     //Nombre del departamento
-    @Column(name = "nombre", nullable = false, unique = true)
+    @Column(name = "nombre", length = 100, nullable = false, unique = true)
     private String nombre;
 
     //Nombre del país al que pertenece el departamento
-    @Column(name = "pais", nullable = false)
+    @Column(name = "pais", length = 100, nullable = false)
     private String pais;
 
     //Lista de ciudades que contiene el departamentos

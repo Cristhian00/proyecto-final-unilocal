@@ -11,9 +11,9 @@ public interface ComentarioServicio {
 
     Comentario modificarComentario(Comentario c) throws Exception;
 
-    boolean eliminarComentario(Comentario c) throws Exception;
+    boolean eliminarComentario(int id) throws Exception;
 
-    Comentario obtenerComentario(String cedula, int id, Date fecha) throws Exception;
+    Comentario obtenerComentario(int idLugar) throws Exception;
 
-    List<Comentario> listarDepartamento();
+    List<Comentario> listarComentarios();
 }

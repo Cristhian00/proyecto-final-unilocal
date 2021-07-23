@@ -34,11 +34,11 @@ public class Horario implements Serializable {
     private DiaSemana dia;
 
     //Hora de inicio o apertura
-    @Column(name = "hora_apertura", length = 10, nullable = false)
+    @Column(name = "hora_apertura", length = 5, nullable = false)
     private String horaApertura;
 
     //Hora final o cierre
-    @Column(name = "hora_cierre", length = 10, nullable = false)
+    @Column(name = "hora_cierre", length = 5, nullable = false)
     private String horaCierre;
 
     //Lista de lugares que tienen el horario

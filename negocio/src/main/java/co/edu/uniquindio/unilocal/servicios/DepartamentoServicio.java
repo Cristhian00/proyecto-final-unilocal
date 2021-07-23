@@ -10,9 +10,11 @@ public interface DepartamentoServicio {
 
     Departamento modificarDepartamento(Departamento d) throws Exception;
 
-    boolean eliminarDepartamento(Departamento d) throws Exception;
+    boolean eliminarDepartamento(int id) throws Exception;
 
     Departamento obtenerDepartamento(String nombre) throws Exception;
+
+    Departamento obtenerDepartamento(int id) throws Exception;
 
     List<Departamento> listarDepartamento();
 }

@@ -29,7 +29,7 @@ public class TipoLugar implements Serializable {
     private int id;
 
     //Nombre del tipo de lugar
-    @Column(name = "nombre", nullable = false, unique = true)
+    @Column(name = "nombre", length = 50, nullable = false, unique = true)
     private String nombre;
 
     //Lista de los lugares

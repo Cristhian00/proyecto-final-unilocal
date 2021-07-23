@@ -10,9 +10,11 @@ public interface CiudadServicio {
 
     Ciudad modificarCiudad(Ciudad c) throws Exception;
 
-    boolean eliminarCiudad(Ciudad c) throws Exception;
+    boolean eliminarCiudad(int c) throws Exception;
 
     Ciudad obtenerCiudad(String nombre) throws Exception;
+
+    Ciudad obtenerCiudad(int id) throws Exception;
 
     List<Ciudad> listarCiudades();
 }

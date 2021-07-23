@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AdministradorServicioImp implements AdministradorServicio{
+public class AdministradorServicioImp implements AdministradorServicio {
 
     private final AdministradorRepo administradorRepo;
 
@@ -76,8 +76,7 @@ public class AdministradorServicioImp implements AdministradorServicio{
             throw new Exception("El nombre debe tener un máximo de 100 caracteres");
         }
 
-        Administrador adminNew = administradorRepo.save(a);
-        return adminNew;
+        return administradorRepo.save(a);
     }
 
     @Override
@@ -87,7 +86,7 @@ public class AdministradorServicioImp implements AdministradorServicio{
             throw new Exception("Debe ingresar un número de cédula");
         }
         if (cedulaDisponible(a.getCedula())) {
-            throw new Exception("La cédula no se encuentra registrada a ningún administrador");
+            throw new Exception("La cédula no se encuentra registrada en ningún administrador");
         }
         if (a.getNickname() == null) {
             throw new Exception("Debe ingresar un nickname");
@@ -107,9 +106,9 @@ public class AdministradorServicioImp implements AdministradorServicio{
             if (!emailDisponible(a.getEmail())) {
                 throw new Exception("El email ya se encuentra registrado en otro administrador");
             }
-        }
-        if (a.getEmail().length() > 60) {
-            throw new Exception("El email puede tener un máximo de 60 caracteres");
+            if (a.getEmail().length() > 60) {
+                throw new Exception("El email puede tener un máximo de 60 caracteres");
+            }
         }
         if (a.getNombre() == null) {
             throw new Exception("Debe ingresar un nombre y apellido");
@@ -124,10 +123,10 @@ public class AdministradorServicioImp implements AdministradorServicio{
     @Override
     public Administrador obtenerAdministrador(String cedula) throws Exception {
 
-        if(cedula==null){
+        if (cedula == null) {
             throw new Exception("Debe ingresar un número de cédula");
         }
-        if(cedulaDisponible(cedula)){
+        if (cedulaDisponible(cedula)) {
             throw new Exception("El número de cédula no se encuentra registrada en ningún administrador");
         }
         return administradorRepo.obtenerAdministradorCedula(cedula);
@@ -136,10 +135,10 @@ public class AdministradorServicioImp implements AdministradorServicio{
     @Override
     public boolean eliminarAdministrador(String cedula) throws Exception {
 
-        if(cedula==null){
+        if (cedula == null) {
             throw new Exception("Debe ingresar un número de cédula");
         }
-        if(cedulaDisponible(cedula)){
+        if (cedulaDisponible(cedula)) {
             throw new Exception("El número de cédula no se encuentra registrada en ningún administrador");
         }
         Administrador usu = administradorRepo.obtenerAdministradorCedula(cedula);

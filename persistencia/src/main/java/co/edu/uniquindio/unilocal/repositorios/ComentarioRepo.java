@@ -15,11 +15,9 @@ import java.util.List;
 @Repository
 public interface ComentarioRepo extends JpaRepository<Comentario, Integer> {
 
-    List<Comentario> findAll();
-
     @Query("select c from Comentario c where c.usuarioComentario.cedula = ?1 and c.lugarComentario.id = ?2 " +
             "and c.fechaComentario = ?3")
-    Comentario obtenerComentario(String cedula, int id, Date fecha);
+    Comentario obtenerComentario(String cedula, int idLugar, Date fecha);
 
     //Obtiene los comentarios que tengan una calificación mayor a la que se manda por parametro
     @Query("select c from Comentario c where c.calificacion > ?1")

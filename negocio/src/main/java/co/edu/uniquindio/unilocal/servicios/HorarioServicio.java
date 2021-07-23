@@ -10,7 +10,7 @@ public interface HorarioServicio {
 
     Horario modificarHorario(Horario h) throws Exception;
 
-    boolean eliminarHorario(Horario h) throws Exception;
+    boolean eliminarHorario(int id) throws Exception;
 
     Horario obtenerHorario(int id) throws Exception;
 

@@ -10,9 +10,11 @@ public interface TipoLugarServicio {
 
     TipoLugar modificarTipoLugar(TipoLugar t) throws Exception;
 
-    boolean eliminarTipoLugar(TipoLugar t) throws Exception;
+    boolean eliminarTipoLugar(String nombre) throws Exception;
 
     TipoLugar obtenerTipoLugar(int id) throws Exception;
+
+    TipoLugar obtenerTipoLugar(String nombre) throws Exception;
 
     List<TipoLugar> listarTipoLugar();
 }
