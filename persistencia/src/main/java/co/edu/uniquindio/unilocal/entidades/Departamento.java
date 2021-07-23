@@ -1,5 +1,10 @@
 package co.edu.uniquindio.unilocal.entidades;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -10,12 +15,17 @@ import java.util.List;
  * @author Tatiana Arboleda, Diego Mauricio Valencia y Cristhian Ortiz
  */
 @Entity
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
+@Getter
+@Setter
 public class Departamento implements Serializable {
 
     //Código de identificación de un departamento
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @EqualsAndHashCode.Include
     private int id;
 
     //Nombre del departamento
@@ -30,11 +40,6 @@ public class Departamento implements Serializable {
     @OneToMany(mappedBy = "departamento")
     private List<Ciudad> ciudades;
 
-    //Constructor vacío de Departamento
-    public Departamento() {
-        super();
-    }
-
     /**
      * Constructor completo para crear un departamento
      *
@@ -44,99 +49,6 @@ public class Departamento implements Serializable {
     public Departamento(String nombre, String pais) {
         this.nombre = nombre;
         this.pais = pais;
-    }
-
-    /**
-     * Método que obtiene el numero de identificación del departamento
-     *
-     * @return el código de identificación
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Método que modifica el código de identificación del departamento
-     *
-     * @param id, número nuevo de identificación
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * Método que obtiene el nombre del departamento
-     *
-     * @return el nombre del departamento
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * Método que modifica el el nombre del departamento
-     *
-     * @param nombre, nombre nuevo del departamento
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * Método que obtiene el nombre del país al que pertenece el departamento
-     *
-     * @return el nombre del pais
-     */
-    public String getPais() {
-        return pais;
-    }
-
-    /**
-     * Método que modifica el nombre del país al que pertenece el departamento
-     *
-     * @param pais, nombre nuevo del pais
-     */
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    /**
-     * Método que obtiene la lista de las ciudades que pertenecen al departamento
-     *
-     * @return la lista de ciudades
-     */
-    public List<Ciudad> getCiudades() {
-        return ciudades;
-    }
-
-    /**
-     * Método que modifica la lista de las ciudades que pertenecen al departamento
-     *
-     * @param ciudades, lista nueva de ciudades
-     */
-    public void setCiudades(List<Ciudad> ciudades) {
-        this.ciudades = ciudades;
-    }
-
-    /**
-     * Metodo que compara dos departamentos
-     *
-     * @param o, departamento a comparar
-     * @return true si los departamentos son el mismo, de lo contrario false
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Departamento that = (Departamento) o;
-
-        return id == that.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
     }
 
     /**

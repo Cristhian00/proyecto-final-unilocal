@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.bean;
+package co.edu.uniquindio.unilocal.bean;
 
 import org.springframework.stereotype.Component;
 

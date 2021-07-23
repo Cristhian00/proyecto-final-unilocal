@@ -1,5 +1,10 @@
 package co.edu.uniquindio.unilocal.entidades;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -10,12 +15,17 @@ import java.util.List;
  * @author Tatiana Arboleda, Diego Mauricio Valencia y Cristhian Ortiz
  */
 @Entity
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Getter
+@Setter
 public class TipoLugar implements Serializable {
 
     //Numero de identificación del tipo de lugar
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @EqualsAndHashCode.Include
     private int id;
 
     //Nombre del tipo de lugar
@@ -26,11 +36,6 @@ public class TipoLugar implements Serializable {
     @OneToMany(mappedBy = "tipoLugar")
     private List<Lugar> lugares;
 
-    //Constructor vacío de la clase
-    private TipoLugar() {
-        super();
-    }
-
     /**
      * Constructor completo para crear el tipo de lugar
      *
@@ -38,81 +43,6 @@ public class TipoLugar implements Serializable {
      */
     public TipoLugar(String nombre) {
         this.nombre = nombre;
-    }
-
-    /**
-     * Método que obtiene el código de identificación del tipo del lugar
-     *
-     * @return el número de identificación
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Método que modifica el código de identificación del tipo de lugar
-     *
-     * @param id, número nuevo de identificación
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * Método que obtiene nombre del tipo de lugar
-     *
-     * @return nombre de tipo de lugar
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * Método que modifica el nombre del tipo del lugar
-     *
-     * @param nombre nuevo del tipo de lugar
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * Método que obtiene la lista de tipos de lugares
-     *
-     * @return listado de tipos de lugares
-     */
-    public List<Lugar> getLugares() {
-        return lugares;
-    }
-
-    /**
-     * Método que modifica la lista del tipo de lugar
-     *
-     * @param lugares, nueva lista de tipos de lugares
-     */
-    public void setLugares(List<Lugar> lugares) {
-        this.lugares = lugares;
-    }
-
-    /**
-     * Metodo que compara dos tipos de lugares
-     *
-     * @param o, tipo de lugar a comparar
-     * @return true si los tipos de lugares son lo misma, de lo contrario false
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TipoLugar tipoLugar = (TipoLugar) o;
-
-        return id == tipoLugar.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
     }
 
     /**

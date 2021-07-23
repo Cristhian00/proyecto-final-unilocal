@@ -26,6 +26,10 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
     @Query("select l from Lugar l where l.nombre = ?1")
     Lugar obtenerLugarNombre(String nombre);
 
+    //Lugares que esten aprobados por un moderador
+    @Query("select l from Lugar l where l.nombre like concat('%', :nombre, '%') ")
+    List<Lugar> buscarLugares(String nombre);
+
     Optional<Lugar> findByLatitudAndLongitud(double latitud, double longitud);
 
     List<Lugar> findAll();

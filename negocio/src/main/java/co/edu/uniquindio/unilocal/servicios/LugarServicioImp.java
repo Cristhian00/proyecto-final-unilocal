@@ -1,9 +1,11 @@
 package co.edu.uniquindio.unilocal.servicios;
 
+import co.edu.uniquindio.unilocal.entidades.EstadoAprobacion;
 import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.repositorios.LugarRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,6 +63,9 @@ public class LugarServicioImp implements LugarServicio {
         if(l.getDescripcion().length() > 255){
             throw new Exception("La descripción no puede tener más de 255 caracteres");
         }
+        l.setEstado(EstadoAprobacion.PENDIENTE);
+        l.setFechaCreacion(new Date());
+
         Lugar lugarNew = lugarRepo.save(l);
         return lugarNew;
     }
@@ -136,5 +141,10 @@ public class LugarServicioImp implements LugarServicio {
     @Override
     public List<Lugar> listarLugar() {
         return lugarRepo.findAll();
+    }
+
+    @Override
+    public List<Lugar> buscarLugares(String nombre) {
+        return lugarRepo.buscarLugares(nombre);
     }
 }

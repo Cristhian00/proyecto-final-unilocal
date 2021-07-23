@@ -1,5 +1,9 @@
 package co.edu.uniquindio.unilocal.entidades;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
@@ -12,18 +16,14 @@ import java.util.List;
  * @author Tatiana Arboleda, Diego Mauricio Valencia y Cristhian Ortiz
  */
 @Entity
+@NoArgsConstructor
 public class Administrador extends Persona implements Serializable {
 
     //Lista de moderadores que ha aprobado
     @OneToMany(mappedBy = "administrador")
+    @Getter
+    @Setter
     private List<Moderador> moderadores;
-
-    /**
-     * Constructor vacio del administrador
-     */
-    public Administrador() {
-        super();
-    }
 
     /**
      * Constructor completo para Crear administradores
@@ -36,24 +36,6 @@ public class Administrador extends Persona implements Serializable {
      */
     public Administrador(String cedula, String nombre, String email, String contrasenia, String nickname) {
         super(cedula, nombre, email, contrasenia, nickname);
-    }
-
-    /**
-     * Método que obtiene la lista de moderadores que ha aprobado el administrador
-     *
-     * @return la lista de moderadores aprobados
-     */
-    public List<Moderador> getModeradores() {
-        return moderadores;
-    }
-
-    /**
-     * Método que modifica la lista de moderadores que ha aprobado el administrador
-     *
-     * @param moderadores, la nueva lista de moderadores
-     */
-    public void setModeradores(List<Moderador> moderadores) {
-        this.moderadores = moderadores;
     }
 
     @Override

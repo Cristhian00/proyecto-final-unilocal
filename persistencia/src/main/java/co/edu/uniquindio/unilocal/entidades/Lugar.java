@@ -1,5 +1,10 @@
 package co.edu.uniquindio.unilocal.entidades;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -12,12 +17,17 @@ import java.util.Map;
  * @author Tatiana Arboleda, Diego Mauricio Valencia y Cristhian Ortiz
  */
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Lugar implements Serializable {
 
     //Número de identificación del lugar
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @EqualsAndHashCode.Include
     private int id;
 
     //Nombre que tiene el lugar
@@ -88,13 +98,6 @@ public class Lugar implements Serializable {
     private List<Imagen> imagenes;
 
     /**
-     * Constructor vacio del lugar
-     */
-    public Lugar() {
-        super();
-    }
-
-    /**
      * Constructor completo para crear un lugar
      *
      * @param nombre,        nombre que tendrá el lugar
@@ -119,333 +122,6 @@ public class Lugar implements Serializable {
         this.longitud = longitud;
         this.estado = estado;
         this.usuarioCreador = usuarioCreador;
-    }
-
-    /**
-     * Método que obtiene el número de identificación del lugar
-     *
-     * @return el número de identificación
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Método que modifica el número de identificación de un lugar
-     *
-     * @param id, número de identifiación a cambiar
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * Método que obtiene el nombre del lugar
-     *
-     * @return el nombre del lugar
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * Método que modifica el nombre del lugar
-     *
-     * @param nombre, nombre nuevo que tendrá el lugar
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * Método que obtiene la descripción del lugar
-     *
-     * @return la descripción del lugar
-     */
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    /**
-     * Método que modifica la descripción de un lugar
-     *
-     * @param descripcion, nueva descripción que tendrá el lugar
-     */
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    /**
-     * Método que obtiene el tipo de sitio que es el lugar
-     *
-     * @return tipo de sitio
-     */
-    public TipoLugar getTipo() {
-        return tipoLugar;
-    }
-
-    /**
-     * Método que modifica el tipo de sitio que es el lugar
-     *
-     * @param tipo, tipo nuevo del lugar
-     */
-    public void setTipo(TipoLugar tipo) {
-        this.tipoLugar = tipo;
-    }
-
-    /**
-     * Método que obtiene la ciudad en la que esta ubicacdo el lugar
-     *
-     * @return la ciudad de ubicación del lugar
-     */
-    public Ciudad getCiudad() {
-        return ciudadLugar;
-    }
-
-    /**
-     * Método que modifica la ciudad en la que esta ubicado el lugar
-     *
-     * @param ciudad, nueva ciudad de ubicación del lugar
-     */
-    public void setCiudad(Ciudad ciudad) {
-        this.ciudadLugar = ciudad;
-    }
-
-    /**
-     * Métodoq ue obtiene la fecha de creación del lugar
-     *
-     * @return fecha en la que se creo el lugar
-     */
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    /**
-     * Método que modifica la fecha de creación del lugar
-     *
-     * @param fechaCreacion, fecha nueva de creación del luagr
-     */
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    /**
-     * Método que obtiene la fecha de aprobación del lugar
-     *
-     * @return la fecha en la que se aprobo el lugar
-     */
-    public Date getFechaAprobacion() {
-        return fechaAprobacion;
-    }
-
-    /**
-     * Método que modifica la fecha de aprobación del lugar
-     *
-     * @param fechaAprobacion, nueva fecha de aprobación
-     */
-    public void setFechaAprobacion(Date fechaAprobacion) {
-        this.fechaAprobacion = fechaAprobacion;
-    }
-
-    /**
-     * Método que obtiene la latitud del lugar
-     *
-     * @return un número con la latituda del lugar
-     */
-    public double getLatitud() {
-        return latitud;
-    }
-
-    /**
-     * Métodoq ue modifica la latitud del lugar
-     *
-     * @param latitud, nueva latitud que tendrá el lugar
-     */
-    public void setLatitud(double latitud) {
-        this.latitud = latitud;
-    }
-
-    /**
-     * Método que obtiene la longitud del lugar
-     *
-     * @return un número con la longitud del lugar
-     */
-    public double getLongitud() {
-        return longitud;
-    }
-
-    /**
-     * Método que modifica la longitud del lugar
-     *
-     * @param longitud, nueva longitud que tendrá el lugar
-     */
-    public void setLongitud(double longitud) {
-        this.longitud = longitud;
-    }
-
-    /**
-     * Método que obtiene el estado en el que se encuentra el lugar
-     *
-     * @return estado del lugar
-     */
-    public EstadoAprobacion getEstado() {
-        return estado;
-    }
-
-    /**
-     * Método que modifica el estado en el que se encuentra el lugar
-     *
-     * @param estado, nuevo estado del lugar
-     */
-    public void setEstado(EstadoAprobacion estado) {
-        this.estado = estado;
-    }
-
-    /**
-     * Método que obtiene los números telefonicos que tiene un lugar
-     *
-     * @return números telefonicos
-     */
-    public Map<String, String> getTelefono() {
-        return telefono;
-    }
-
-    /**
-     * Método que modifica los números telefonicos del lugar
-     *
-     * @param telefono, números telefonicos a modificar
-     */
-    public void setTelefono(Map<String, String> telefono) {
-        this.telefono = telefono;
-    }
-
-    /**
-     * Método que obtiene los horarios que tiene un lugar
-     *
-     * @return listado de los horarios del lugar
-     */
-    public List<Horario> getHorarios() {
-        return horarios;
-    }
-
-    /**
-     * Método que modifica los horarios que tiene un lugar
-     *
-     * @param horarios, horarios nuevos a modificar
-     */
-    public void setHorarios(List<Horario> horarios) {
-        this.horarios = horarios;
-    }
-
-    /**
-     * Método que obtiene el moderador del lugar
-     *
-     * @return el moderador
-     */
-    public Moderador getModerador() {
-        return moderador;
-    }
-
-    /**
-     * Método que modifica el moderador del lugar
-     *
-     * @param moderador, nuevo moderador a modificar
-     */
-    public void setModerador(Moderador moderador) {
-        this.moderador = moderador;
-    }
-
-    /**
-     * Método que obtiene el usuario que registro el lugar
-     *
-     * @return el usuario
-     */
-    public Usuario getUsuarioCreador() {
-        return usuarioCreador;
-    }
-
-    /**
-     * Método que modifica el ususario del lugar
-     *
-     * @param usuarioCreador, nuevo usuario del lugar
-     */
-    public void setUsuarioCreador(Usuario usuarioCreador) {
-        this.usuarioCreador = usuarioCreador;
-    }
-
-    /**
-     * Método que obtiene los usuarios que han marcado al lugar como favorito
-     *
-     * @return lista de usuarios
-     */
-    public List<Usuario> getUsuariosFavoritos() {
-        return usuariosFavoritos;
-    }
-
-    /**
-     * Método que modifica la lista de ususarios que marcaron al lugar como favorito
-     *
-     * @param usuariosFavoritos, lista nueva de usuarios
-     */
-    public void setUsuariosFavoritos(List<Usuario> usuariosFavoritos) {
-        this.usuariosFavoritos = usuariosFavoritos;
-    }
-
-    /**
-     * Método que obtiene un comentario del lugar
-     *
-     * @return comentario
-     */
-    public List<Comentario> getComentarios() {
-        return comentarios;
-    }
-
-    /**
-     * Método que modifica los comentarios hechos al lugar
-     *
-     * @param comentarios, nuevos comentarios
-     */
-    public void setComentarios(List<Comentario> comentarios) {
-        this.comentarios = comentarios;
-    }
-
-    /**
-     * Método que obtiene la lista de las imagenes que estén agregadas de un lugar
-     *
-     * @return lista de imagenes
-     */
-    public List<Imagen> getImagenes() {
-        return imagenes;
-    }
-
-    /**
-     * Método que modifica las imagenes agregadas al lugar al lugar
-     *
-     * @param imagen
-     */
-    public void setImagenes(List<Imagen> imagenes) {
-        this.imagenes = imagenes;
-    }
-
-    /**
-     * Método que compara un lugar con otro
-     *
-     * @param o, lugar que se va a coparar
-     * @return true si son el mismo lugar, de lo contrario false
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Lugar lugar = (Lugar) o;
-
-        return id == lugar.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
     }
 
     /**

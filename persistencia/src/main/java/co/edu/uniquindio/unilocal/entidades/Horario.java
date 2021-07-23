@@ -1,5 +1,10 @@
 package co.edu.uniquindio.unilocal.entidades;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -10,12 +15,17 @@ import java.util.List;
  * @author Tatiana Arboleda, Diego Mauricio Valencia y Cristhian Ortiz
  */
 @Entity
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Getter
+@Setter
 public class Horario implements Serializable {
 
     //Código de identificación de un horario
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
+    @EqualsAndHashCode.Include
     private int codigo;
 
     //Día de la semana a la que pertenece el horario
@@ -36,13 +46,6 @@ public class Horario implements Serializable {
     private List<Lugar> lugares;
 
     /**
-     * Constructor vacio del horario
-     */
-    public Horario() {
-        super();
-    }
-
-    /**
      * Constructor completo para crear un horario
      *
      * @param dia,          día al que pertenece el horario
@@ -53,103 +56,6 @@ public class Horario implements Serializable {
         this.dia = dia;
         this.horaApertura = horaApertura;
         this.horaCierre = horaCierre;
-    }
-
-    /**
-     * Método que obtiene el código de identificación del horario
-     *
-     * @return el código de identificación
-     */
-    public int getCodigo() {
-        return codigo;
-    }
-
-    /**
-     * Método que modifica el código de identificación del horario
-     *
-     * @param codigo, número nuevo de identificación
-     */
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    /**
-     * Método que obtiene el día de la semana del horario
-     *
-     * @return día de la semana
-     */
-    public DiaSemana getDia() {
-        return dia;
-    }
-
-    /**
-     * Método que modifica el día de la semana a la que pertene el horario
-     *
-     * @param dia, día de la semana
-     */
-    public void setDia(DiaSemana dia) {
-        this.dia = dia;
-    }
-
-    /**
-     * Método que obtiene la hora de apertura en el horario
-     *
-     * @return hora de apertura
-     */
-    public String getHoraApertura() {
-        return horaApertura;
-    }
-
-    /**
-     * Método que modifica la hora de apertura
-     *
-     * @param horaApertura, hora de apertura nueva
-     */
-    public void setHoraApertura(String horaApertura) {
-        this.horaApertura = horaApertura;
-    }
-
-    /**
-     * Método que obtiene la hora de cierre
-     *
-     * @return hora de cierre
-     */
-    public String getHoraCierre() {
-        return horaCierre;
-    }
-
-    /**
-     * Método que modifica la hora de cierre en el horario
-     *
-     * @param horaCierre, hora de cierre nueva
-     */
-    public void setHoraCierre(String horaCierre) {
-        this.horaCierre = horaCierre;
-    }
-
-    /**
-     * Metodo que compara dos horarios
-     *
-     * @param o, horario a comparar
-     * @return true si los horarios son el mismo, de lo contrario false
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Horario horario = (Horario) o;
-        if(this.dia.compareTo(horario.dia) == 0 && this.horaApertura.equals(horario.horaApertura)
-                && this.horaCierre.equals(horario.horaCierre)){
-            return true;
-        }
-
-        return codigo == horario.codigo;
-    }
-
-    @Override
-    public int hashCode() {
-        return codigo;
     }
 
     /**

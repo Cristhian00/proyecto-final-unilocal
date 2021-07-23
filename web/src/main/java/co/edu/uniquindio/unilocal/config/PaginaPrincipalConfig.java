@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.config;
+package co.edu.uniquindio.unilocal.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
