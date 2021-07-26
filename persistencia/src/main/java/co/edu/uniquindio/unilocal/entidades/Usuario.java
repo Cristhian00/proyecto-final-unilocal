@@ -5,6 +5,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -23,10 +27,14 @@ public class Usuario extends Persona implements Serializable {
     //Números telefonicos que tiene el usuario
     @ElementCollection
     @JoinTable(name = "usuario_telefono")
+    @NotEmpty(message = "Debe ingresar al menos un número de contacto")
+    @Pattern(regexp = "\\(\\d{3}\\)\\d{3}\\-\\d{4}", message = "Debe ingresar un número celular valido")
+    @Pattern(regexp = "\\(\\d{1}\\)\\d{3}\\-\\d{4}", message = "Debe ingresar un número telefonico valido")
     private Map<String, String> telefono;
 
     //Ciudad en la cuál reside el usuario
     @ManyToOne
+    @Size(max = 255, message = "El nombre de la ciudad debe tener máximo 255 caracteres")
     private Ciudad ciudadUsuario;
 
     //Lugares que ha registrado el usuario

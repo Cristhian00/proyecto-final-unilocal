@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -30,6 +32,8 @@ public class TipoLugar implements Serializable {
 
     //Nombre del tipo de lugar
     @Column(name = "nombre", length = 50, nullable = false, unique = true)
+    @NotBlank(message = "Debe ingresar el nombre del tipo de lugar")
+    @Size(min = 3, max = 50, message = "El nombre del tipo de lugar debe tener entre 3 y 50 caracteres")
     private String nombre;
 
     //Lista de los lugares

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
-import co.edu.uniquindio.unilocal.entidades.DiaSemana;
 import co.edu.uniquindio.unilocal.entidades.Horario;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public class HorarioTest {
     @Test
     public void registrarHorarioTest() {
 
-        Horario horarioNuevo = new Horario(DiaSemana.LUNES, "14:00", "22:00");
+        Horario horarioNuevo = new Horario("Lunes", "14:00", "22:00");
 
         Horario horarioGuardado = horarioRepo.save(horarioNuevo);
 
@@ -50,7 +49,7 @@ public class HorarioTest {
     @Test
     public void eliminarHorarioTest() {
 
-        Horario horarioNuevo = new Horario(DiaSemana.LUNES, "14:00", "22:00");
+        Horario horarioNuevo = new Horario("Lunes", "14:00", "22:00");
 
         horarioRepo.save(horarioNuevo);
         horarioRepo.delete(horarioNuevo);
@@ -69,7 +68,7 @@ public class HorarioTest {
     @Test
     public void modificarHorarioTest() {
 
-        Horario horarioNuevo = new Horario(DiaSemana.LUNES, "14:00", "22:00");
+        Horario horarioNuevo = new Horario("Lunes", "14:00", "22:00");
 
         Horario horarioGuardado = horarioRepo.save(horarioNuevo);
         horarioGuardado.setHoraApertura("13:00");

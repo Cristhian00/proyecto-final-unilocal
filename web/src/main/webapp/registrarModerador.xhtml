@@ -12,12 +12,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="mapbox-gl.css"/>
     <h:outputStylesheet library="css" name="style.css"/>
     <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
-    <h:outputScript library="js" name="mapbox-gl.js"/>
-    <h:outputScript library="js" name="script_lugar.js"/>
-    <title>Registrar Lugar</title>
+    <title>Registrar Moderador</title>
 </h:head>
 <h:body>
 
@@ -57,53 +54,39 @@
     </div>
 
     <div class="container">
-        <p:panel header="Registrar nuevo lugar">
+        <p:panel header="Registrar Usuario">
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="nombre_moderador" value="Nombre completo"/>
+                    <p:inputText id="nombre_moderador" value="#{moderadorBean.moderador.nombre}"
+                                 required="true" requiredMessage="Debe ingresar el nombre completo"/>
+                    <p:message for="nombre_moderador"/>
 
-            <div class="row">
-                <div class="col">
-                    <div id="mapa" style="width: 100%; height: 400px"/>
-                </div>
+                    <p:outputLabel for="cedula_moderador" value="Cédula"/>
+                    <p:inputText id="cedula_moderador" value="#{moderadorBean.moderador.cedula}" required="true"
+                                 requiredMessage="Debe ingresar un número de cédula"/>
+                    <p:message for="cedula_moderador"/>
 
-                <div class="col">
-                    <h:form id="crear-lugar">
+                    <p:outputLabel for="email_moderador" value="Email"/>
+                    <p:inputText id="email_moderador" value="#{moderadorBean.moderador.email}" required="true"
+                                 requiredMessage="Debe ingresar el email"/>
+                    <p:message for="email_moderador"/>
 
-                        <h:inputHidden id="lat-lugar" value="#{lugarBean.lugar.latitud}"/>
-                        <h:inputHidden id="lng-lugar" value="#{lugarBean.lugar.longitud}"/>
+                    <p:outputLabel for="nickname_moderador" value="Nickname"/>
+                    <p:inputText id="nickname_moderador" value="#{moderadorBean.moderador.nickname}" required="true"
+                                 requiredMessage="Debe ingresar el nickname"/>
+                    <p:message for="nickname_moderador"/>
 
-                        <h:panelGrid columns="3" cellpadding="5">
-                            <p:outputLabel for="nombre_lugar" value="Nombre: "/>
-                            <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" required="true"/>
-                            <p:message for="nombre_lugar"/>
-
-                            <p:outputLabel for="tipo_lugar" value="Tipo lugar: "/>
-                            <p:selectOneMenu id="tipo_lugar" value="#{lugarBean.lugar.tipoLugar}"
-                                             converter="#{tipoLugarConverter}" required="true"
-                                             requiredMessage="Debe seleccionar un tipo">
-                                <f:selectItem itemLabel="Seleccione: " noSelectionOption="true"/>
-                                <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
-                            </p:selectOneMenu>
-                            <p:message for="tipo_lugar"/>
-
-                            <p:outputLabel for="ciudad_lugar" value="Ciudad: "/>
-                            <p:selectOneMenu id="ciudad_lugar" value="#{lugarBean.lugar.ciudadLugar}"
-                                             converter="#{ciudadConverter}" required="true"
-                                             requiredMessage="Debe seleccionar una ciudad">
-                                <f:selectItem itemLabel="Seleccione: " noSelectionOption="true"/>
-                                <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{lugarBean.ciudades}"/>
-                            </p:selectOneMenu>
-                            <p:message for="ciudad_lugar"/>
-
-                            <p:outputLabel for="descripcion_lugar" value="Descripción: "/>
-                            <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}"
-                                             required="true"/>
-                            <p:message for="descripcion_lugar"/>
-
-                        </h:panelGrid>
-                        <p:commandButton action="#{lugarBean.registrarLugar()}" value="Registrar Lugar" update="@form"/>
-                        <p:growl for="mensaje_bean" showDetail="true"/>
-                    </h:form>
-                </div>
-            </div>
+                    <p:outputLabel for="contrasenia_moderador" value="Contraseña"/>
+                    <p:password id="contrasenia_moderador" value="#{moderadorBean.moderador.contrasenia}"
+                                required="true"
+                                requiredMessage="Debe ingresar una contraseña"/>
+                    <p:message for="contrasenia_moderador"/>
+                </h:panelGrid>
+                <p:commandButton value="Registrar Moderador" action="#{moderadorBean.registrarModerador}"
+                                 update="@form"/>
+                <p:growl for="mensaje-Moderador" showDetail="true"/>
+            </h:form>
         </p:panel>
     </div>
 

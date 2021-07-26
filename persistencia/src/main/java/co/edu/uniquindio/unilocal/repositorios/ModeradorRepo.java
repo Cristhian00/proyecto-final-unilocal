@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unilocal.repositorios;
 
+import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.entidades.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,4 +34,7 @@ public interface ModeradorRepo extends JpaRepository<Moderador, String> {
     //Obtiene la lista de moderadores de la base de datos
     @Query("select m from Moderador m")
     List<Moderador> obtenerModeradores();
+
+    @Query("select l from Moderador m, IN(m.lugares) l where m.cedula = ?1")
+    List<Lugar> obtenerLugaresRevisados(String cedula);
 }

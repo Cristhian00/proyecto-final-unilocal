@@ -2,6 +2,8 @@ package co.edu.uniquindio.unilocal.bean;
 
 import co.edu.uniquindio.unilocal.entidades.Departamento;
 import co.edu.uniquindio.unilocal.servicios.DepartamentoServicio;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -16,6 +18,8 @@ import java.io.Serializable;
 public class DepartamentoBean implements Serializable {
 
     private final DepartamentoServicio depaServicio;
+
+    @Getter @Setter
     private Departamento departamento;
 
     public DepartamentoBean(DepartamentoServicio depaServicio) {
@@ -55,13 +59,5 @@ public class DepartamentoBean implements Serializable {
                     "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-    }
-
-    public Departamento getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
     }
 }

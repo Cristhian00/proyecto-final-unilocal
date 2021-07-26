@@ -58,10 +58,10 @@ public class LugarTest {
         Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
         ciudadRepo.save(ciudadNueva);
 
-        Horario horario1 = new Horario(DiaSemana.LUNES, "14:00", "22:00");
-        Horario horario2 = new Horario(DiaSemana.SABADO, "14:00", "22:00");
-        Horario horario3 = new Horario(DiaSemana.DOMINGO, "14:00", "22:00");
-        Horario horario4 = new Horario(DiaSemana.FESTIVO, "14:00", "22:00");
+        Horario horario1 = new Horario("Lunes a Viernes", "14:00", "22:00");
+        Horario horario2 = new Horario("Sabado", "14:00", "22:00");
+        Horario horario3 = new Horario("Domingo", "14:00", "22:00");
+        Horario horario4 = new Horario("Festivo", "14:00", "22:00");
         horarioRepo.save(horario1);
         horarioRepo.save(horario2);
         horarioRepo.save(horario3);
@@ -83,7 +83,7 @@ public class LugarTest {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
             Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", tipoNuevo,
-                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE, usuNuevo);
+                    ciudadNueva, fecha, 2.7777f, 134.4555f, EstadoAprobacion.PENDIENTE, usuNuevo);
             lugarNuevo.setTelefono(telefonos);
             Lugar lugarGuardado = lugarRepo.save(lugarNuevo);
             Assertions.assertNotNull(lugarGuardado);
@@ -110,10 +110,10 @@ public class LugarTest {
         Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
         ciudadRepo.save(ciudadNueva);
 
-        Horario horario1 = new Horario(DiaSemana.LUNES, "14:00", "22:00");
-        Horario horario2 = new Horario(DiaSemana.SABADO, "14:00", "22:00");
-        Horario horario3 = new Horario(DiaSemana.DOMINGO, "14:00", "22:00");
-        Horario horario4 = new Horario(DiaSemana.FESTIVO, "14:00", "22:00");
+        Horario horario1 = new Horario("Lunes a Viernes", "14:00", "22:00");
+        Horario horario2 = new Horario("Sabado", "14:00", "22:00");
+        Horario horario3 = new Horario("Domingo", "14:00", "22:00");
+        Horario horario4 = new Horario("Festivo", "14:00", "22:00");
         horarioRepo.save(horario1);
         horarioRepo.save(horario2);
         horarioRepo.save(horario3);
@@ -135,7 +135,7 @@ public class LugarTest {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
             Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", tipoNuevo,
-                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE, usuNuevo);
+                    ciudadNueva, fecha, 2.7777f, 134.4555f, EstadoAprobacion.PENDIENTE, usuNuevo);
             lugarNuevo.setTelefono(telefonos);
             lugarRepo.save(lugarNuevo);
             lugarRepo.delete(lugarNuevo);
@@ -167,10 +167,10 @@ public class LugarTest {
         Ciudad ciudadNueva = new Ciudad("Armenia", departamento);
         ciudadRepo.save(ciudadNueva);
 
-        Horario horario1 = new Horario(DiaSemana.LUNES, "14:00", "22:00");
-        Horario horario2 = new Horario(DiaSemana.SABADO, "14:00", "22:00");
-        Horario horario3 = new Horario(DiaSemana.DOMINGO, "14:00", "22:00");
-        Horario horario4 = new Horario(DiaSemana.FESTIVO, "14:00", "22:00");
+        Horario horario1 = new Horario("Lunes a Viernes", "14:00", "22:00");
+        Horario horario2 = new Horario("Sabado", "14:00", "22:00");
+        Horario horario3 = new Horario("Domingo", "14:00", "22:00");
+        Horario horario4 = new Horario("Festivo", "14:00", "22:00");
         horarioRepo.save(horario1);
         horarioRepo.save(horario2);
         horarioRepo.save(horario3);
@@ -192,7 +192,7 @@ public class LugarTest {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date fecha = sdf.parse("2021/04/15");
             Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", tipoNuevo,
-                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE, usuNuevo);
+                    ciudadNueva, fecha, 2.7777f, 134.4555f, EstadoAprobacion.PENDIENTE, usuNuevo);
             lugarNuevo.setTelefono(telefonos);
             Lugar lugarGuardado = lugarRepo.save(lugarNuevo);
             lugarGuardado.setNombre("Hotel Armenia");

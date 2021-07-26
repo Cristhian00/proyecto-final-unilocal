@@ -16,8 +16,8 @@
     <h:outputStylesheet library="css" name="style.css"/>
     <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
     <h:outputScript library="js" name="mapbox-gl.js"/>
-    <h:outputScript library="js" name="script_lugar.js"/>
-    <title>Registrar Lugar</title>
+    <h:outputScript library="js" name="script-detalle.js"/>
+    <title>Unilocal | Detalle lugar</title>
 </h:head>
 <h:body>
 
@@ -56,56 +56,17 @@
         </nav>
     </div>
 
-    <div class="container">
-        <p:panel header="Registrar nuevo lugar">
-
-            <div class="row">
-                <div class="col">
-                    <div id="mapa" style="width: 100%; height: 400px"/>
-                </div>
-
-                <div class="col">
-                    <h:form id="crear-lugar">
-
-                        <h:inputHidden id="lat-lugar" value="#{lugarBean.lugar.latitud}"/>
-                        <h:inputHidden id="lng-lugar" value="#{lugarBean.lugar.longitud}"/>
-
-                        <h:panelGrid columns="3" cellpadding="5">
-                            <p:outputLabel for="nombre_lugar" value="Nombre: "/>
-                            <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" required="true"/>
-                            <p:message for="nombre_lugar"/>
-
-                            <p:outputLabel for="tipo_lugar" value="Tipo lugar: "/>
-                            <p:selectOneMenu id="tipo_lugar" value="#{lugarBean.lugar.tipoLugar}"
-                                             converter="#{tipoLugarConverter}" required="true"
-                                             requiredMessage="Debe seleccionar un tipo">
-                                <f:selectItem itemLabel="Seleccione: " noSelectionOption="true"/>
-                                <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
-                            </p:selectOneMenu>
-                            <p:message for="tipo_lugar"/>
-
-                            <p:outputLabel for="ciudad_lugar" value="Ciudad: "/>
-                            <p:selectOneMenu id="ciudad_lugar" value="#{lugarBean.lugar.ciudadLugar}"
-                                             converter="#{ciudadConverter}" required="true"
-                                             requiredMessage="Debe seleccionar una ciudad">
-                                <f:selectItem itemLabel="Seleccione: " noSelectionOption="true"/>
-                                <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{lugarBean.ciudades}"/>
-                            </p:selectOneMenu>
-                            <p:message for="ciudad_lugar"/>
-
-                            <p:outputLabel for="descripcion_lugar" value="Descripción: "/>
-                            <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}"
-                                             required="true"/>
-                            <p:message for="descripcion_lugar"/>
-
-                        </h:panelGrid>
-                        <p:commandButton action="#{lugarBean.registrarLugar()}" value="Registrar Lugar" update="@form"/>
-                        <p:growl for="mensaje_bean" showDetail="true"/>
-                    </h:form>
-                </div>
-            </div>
-        </p:panel>
+    <div id="content">
+        <div id="mapa">
+            <div id="map"></div>
+        </div>
     </div>
+
+    <p>#{detalleLugarBean.lugar}</p>
+
+    <p>#{detalleLugarBean.comentarios}</p>
+
+    <p>#{detalleLugarBean.horarios}</p>
 
     <div class="footer">
         <div class="py-4 bg-light" align="center">
@@ -116,6 +77,5 @@
             </div>
         </div>
     </div>
-
 </h:body>
 </html>

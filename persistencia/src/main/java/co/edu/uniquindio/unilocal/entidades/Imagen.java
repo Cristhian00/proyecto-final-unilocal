@@ -4,8 +4,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.aspectj.bridge.IMessage;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -24,10 +27,13 @@ public class Imagen implements Serializable {
 
     //Dirección de la url a la que pertenece la imagen
     @Column(name = "url", nullable = false, unique = true)
+    @NotBlank(message = "Debe ingresar la url de la imagen")
+    @Size(max = 255, message = "La url no puede tener más de 255 caracteres")
     private String url;
 
     //Lugar el cual la imagen está describiendo
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Lugar lugar;
 
     /**

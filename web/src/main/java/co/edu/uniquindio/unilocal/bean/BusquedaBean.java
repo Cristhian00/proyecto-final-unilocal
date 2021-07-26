@@ -30,7 +30,7 @@ public class BusquedaBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         if (busquedaParam != null && !busquedaParam.isEmpty()) {
-            lugares = lugarServicio.buscarLugares(busquedaParam);
+            lugares = lugarServicio.buscarLugaresPorPalabra(busquedaParam);
         }
 
     }

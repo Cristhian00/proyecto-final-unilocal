@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -31,11 +31,16 @@ public class Comentario implements Serializable {
 
     //Mensaje realizado por un usuario
     @Column(name = "mensaje", nullable = false)
+    @NotBlank(message = "Debe ingresar un mensaje como comentario")
+    @Size(min = 1, max = 255, message = "El mensaje debe tener entre 1 y 255 caracteres")
     private String mensaje;
 
     //puntuación dada
     @Column(name = "calificacion", nullable = false, precision = 1, scale = 1)
-    @Positive
+    @Positive(message = "La calificación debe ser positiva")
+    @NotBlank(message = "Debe seleccionar una calificación valida")
+    @DecimalMin(value = "0.0", message = "La calificación mínima es 0.0")
+    @DecimalMax(value = "5.0", message = "La calificación máxima es 5.0")
     private double calificacion;
 
     //Respuesta dada al comentario
@@ -45,14 +50,17 @@ public class Comentario implements Serializable {
     //Fecha en la que se realizo el comentario
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_comentario", nullable = false)
+    @NotBlank(message = "Debe ingresar la fecha en la que se realizo el comentario")
     private Date fechaComentario;
 
     //Usuario que realizo el comentario
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuarioComentario;
 
     //Lugar a el cúal se le realizo el comentario
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Lugar lugarComentario;
 
     /**
@@ -60,12 +68,10 @@ public class Comentario implements Serializable {
      *
      * @param mensaje,         mensaje realizado en el comentario
      * @param calificacion,    puntuación dada en el comentario
-     * @param fechaComentario, fecha en la que se realizo el comentario
      */
-    public Comentario(String mensaje, @Positive double calificacion, Date fechaComentario, Usuario usuarioComentario, Lugar lugarComentario) {
+    public Comentario(String mensaje, @Positive double calificacion, Usuario usuarioComentario, Lugar lugarComentario) {
         this.mensaje = mensaje;
         this.calificacion = calificacion;
-        this.fechaComentario = fechaComentario;
         this.usuarioComentario = usuarioComentario;
         this.lugarComentario = lugarComentario;
     }

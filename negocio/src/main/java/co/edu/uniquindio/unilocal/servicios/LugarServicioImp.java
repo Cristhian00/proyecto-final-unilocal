@@ -1,7 +1,10 @@
 package co.edu.uniquindio.unilocal.servicios;
 
+import co.edu.uniquindio.unilocal.entidades.Comentario;
 import co.edu.uniquindio.unilocal.entidades.EstadoAprobacion;
+import co.edu.uniquindio.unilocal.entidades.Horario;
 import co.edu.uniquindio.unilocal.entidades.Lugar;
+import co.edu.uniquindio.unilocal.repositorios.ComentarioRepo;
 import co.edu.uniquindio.unilocal.repositorios.LugarRepo;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +16,11 @@ import java.util.Optional;
 public class LugarServicioImp implements LugarServicio {
 
     private final LugarRepo lugarRepo;
+    private final ComentarioRepo comentarioRepo;
 
-    public LugarServicioImp(LugarRepo lugarRepo) {
+    public LugarServicioImp(LugarRepo lugarRepo, ComentarioRepo comentarioRepo) {
         this.lugarRepo = lugarRepo;
+        this.comentarioRepo = comentarioRepo;
     }
 
     public boolean idDisponible(int id) {
@@ -57,10 +62,10 @@ public class LugarServicioImp implements LugarServicio {
             throw new Exception("Ya hay un lugar registrado con la misma ubicación (latitud y longitud)");
         }
         //Resto de validaciones
-        if(l.getDescripcion().isEmpty()){
+        if (l.getDescripcion().isEmpty()) {
             throw new Exception("Debe ingresar una descripción");
         }
-        if(l.getDescripcion().length() > 255){
+        if (l.getDescripcion().length() > 255) {
             throw new Exception("La descripción no puede tener más de 255 caracteres");
         }
         l.setEstado(EstadoAprobacion.PENDIENTE);
@@ -73,7 +78,7 @@ public class LugarServicioImp implements LugarServicio {
     @Override
     public Lugar modificarLugar(Lugar l) throws Exception {
 
-        if(idDisponible(l.getId())){
+        if (idDisponible(l.getId())) {
             throw new Exception("El id del lugar no se encuentra registrado");
         }
         Lugar lugar = lugarRepo.obtenerLugar(l.getId());
@@ -81,12 +86,12 @@ public class LugarServicioImp implements LugarServicio {
         if (l.getNombre().isEmpty()) {
             throw new Exception("Debe ingresar un nombre");
         }
-        if(!lugar.getNombre().equals(l.getNombre())){
+        if (!lugar.getNombre().equals(l.getNombre())) {
             if (!nombreDisponible(l.getNombre())) {
                 throw new Exception("El nombre ya se encuentra registrado en otro lugar");
             }
         }
-        if(l.getNombre().length() > 100){
+        if (l.getNombre().length() > 100) {
             throw new Exception("El nombre no puede tener más de 100 caracteres");
         }
         //Validaciones de la ubicacion
@@ -96,15 +101,15 @@ public class LugarServicioImp implements LugarServicio {
         if (l.getLongitud() == 0.0d) {
             throw new Exception("Debe ingresar una longitud");
         }
-        if(!(lugar.getLatitud() == l.getLatitud() && lugar.getLongitud() == l.getLongitud())){
-            if(ubicacionDisponible(l.getLatitud(), l.getLongitud())){
+        if (!(lugar.getLatitud() == l.getLatitud() && lugar.getLongitud() == l.getLongitud())) {
+            if (ubicacionDisponible(l.getLatitud(), l.getLongitud())) {
                 throw new Exception("Ya hay un lugar registrado con esa ubicción");
             }
         }
-        if(l.getDescripcion().isEmpty()){
+        if (l.getDescripcion().isEmpty()) {
             throw new Exception("Debe ingresar una descrición");
         }
-        if(l.getDescripcion().length()>255){
+        if (l.getDescripcion().length() > 255) {
             throw new Exception("La descripción no debe tener más de 255 caracteres");
         }
         Lugar lugarNew = lugarRepo.save(l);
@@ -114,10 +119,10 @@ public class LugarServicioImp implements LugarServicio {
     @Override
     public boolean eliminarLugar(String nombre) throws Exception {
 
-        if(nombre.isEmpty()){
+        if (nombre.isEmpty()) {
             throw new Exception("Debe ingresar el nombre de un lugar");
         }
-        if(nombreDisponible(nombre)){
+        if (nombreDisponible(nombre)) {
             throw new Exception("El nombre no se encuentra registrado");
         }
         Lugar lugar = obtenerLugar(nombre);
@@ -127,13 +132,23 @@ public class LugarServicioImp implements LugarServicio {
     }
 
     @Override
+    public Lugar obtenerLugar(int id) throws Exception {
+
+        Optional<Lugar> l = lugarRepo.findById(id);
+        if (l.isEmpty()) {
+            throw new Exception("El id del lugar no se encuentra registrado");
+        }
+        return l.get();
+    }
+
+    @Override
     public Lugar obtenerLugar(String nombre) throws Exception {
 
-        if (nombre.isEmpty()) {
-            throw new Exception("Debe ingresar el nombre de un lugar");
+        if (nombre != null && !nombre.isEmpty()) {
+            throw new Exception("Debe ingresar el nombre del lugar");
         }
         if (nombreDisponible(nombre)) {
-            throw new Exception("El nombre no se encuentra registrado");
+            throw new Exception("El nombre del lugar no se encuentra registrado");
         }
         return lugarRepo.obtenerLugarNombre(nombre);
     }
@@ -144,7 +159,23 @@ public class LugarServicioImp implements LugarServicio {
     }
 
     @Override
-    public List<Lugar> buscarLugares(String nombre) {
+    public List<Lugar> buscarLugaresPorPalabra(String nombre) {
         return lugarRepo.buscarLugares(nombre);
     }
+
+    @Override
+    public List<Lugar> lugaresPorModerador(String moderador) {
+        return lugarRepo.obtenerLugaresModerador(moderador);
+    }
+
+    @Override
+    public List<Comentario> obtenerComentarios(Integer idLugar) {
+        return lugarRepo.obtenerComentarios(idLugar);
+    }
+
+    @Override
+    public List<Horario> obtenerHorarios(Integer idLugar) {
+        return lugarRepo.obtenerHorarios(idLugar);
+    }
+
 }

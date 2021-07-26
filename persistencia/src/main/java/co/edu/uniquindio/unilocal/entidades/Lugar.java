@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -32,23 +33,30 @@ public class Lugar implements Serializable {
 
     //Nombre que tiene el lugar
     @Column(name = "nombre", length = 100, nullable = false, unique = true)
+    @NotBlank(message = "Debe ingresar el nombre del lugar")
+    @Size(min = 3, max = 100, message = "El nombre del lugar debe tener entre 3 y 100 caracteres")
     private String nombre;
 
     //Descripción del lugar
     @Column(name = "descripcion", nullable = false)
+    @NotBlank(message = "Debe ingresar una descripción del lugar")
+    @Size(min = 20, max = 255, message = "La descripción del lugar debe tener entre 20 y 255 caracteres")
     private String descripcion;
 
     //Tipo al que pertenece el lugar
     @ManyToOne
+    @JoinColumn(nullable = false)
     private TipoLugar tipoLugar;
 
     //Ciudad en la cuál esta el lugar
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Ciudad ciudadLugar;
 
     //Fecha de creación del luagr en la plataforma
     @Column(name = "fecha_creacion", nullable = false)
     @Temporal(TemporalType.DATE)
+    @NotBlank(message = "Debe ingresar la fecha en la que se creo el lugar")
     private Date fechaCreacion;
 
     //Fecha en la que se aprobó el lugar
@@ -58,24 +66,31 @@ public class Lugar implements Serializable {
 
     //Latitud de la ubicación del lugar
     @Column(name = "latitud", nullable = false, unique = true)
-    private double latitud;
+    private float latitud;
 
     //Longitud de la ubicación del lugar
     @Column(name = "longitud", nullable = false, unique = true)
-    private double longitud;
+    private float longitud;
 
     //Estado en el que se encuentra el lugar
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false)
+    @NotBlank(message = "Debe ingresar el estado en el que se encuentra el lugar")
+    @Size(max = 255, message = "EL estado debe tener máximo 255 caracteres")
     private EstadoAprobacion estado;
 
     //Números telefonicos con los que cuenta el lugar
     @ElementCollection
     @JoinColumn(name = "telefono")
+    @NotEmpty(message = "Debe ingresar al menos un número de contacto")
+    @Pattern(regexp = "\\(\\d{3}\\)\\d{3}\\-\\d{4}", message = "Debe ingresar un número celular valido")
+    @Pattern(regexp = "\\(\\d{1}\\)\\d{3}\\-\\d{4}", message = "Debe ingresar un número telefonico valido")
+    @JoinColumn(nullable = false)
     private Map<String, String> telefono;
 
     //Lista de horarios que tiene el lugar
     @ManyToMany
+    @NotEmpty(message = "Debe ingresar al menos un horario")
     private List<Horario> horarios;
 
     //Moderador que evaluo al lugar
@@ -84,6 +99,8 @@ public class Lugar implements Serializable {
 
     //Usuario que registro el lugar
     @ManyToOne
+    @NotBlank(message = "Debe seleccionar el usuario creador del lugar")
+    @JoinColumn(nullable = false)
     private Usuario usuarioCreador;
 
     //Usuarios que han seleccionado al lugar como favorito
@@ -95,6 +112,7 @@ public class Lugar implements Serializable {
     private List<Comentario> comentarios;
 
     @OneToMany(mappedBy = "lugar")
+    @NotEmpty
     private List<Imagen> imagenes;
 
     /**
@@ -111,7 +129,7 @@ public class Lugar implements Serializable {
      * @param usuarioCreador
      */
     public Lugar(String nombre, String descripcion, TipoLugar tipoLugar, Ciudad ciudadLugar,
-                 Date fechaCreacion, double latitud, double longitud,
+                 Date fechaCreacion, float latitud, float longitud,
                  EstadoAprobacion estado, Usuario usuarioCreador) {
         this.nombre = nombre;
         this.descripcion = descripcion;

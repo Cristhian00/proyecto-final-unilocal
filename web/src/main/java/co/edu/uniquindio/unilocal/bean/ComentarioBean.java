@@ -1,41 +1,41 @@
 package co.edu.uniquindio.unilocal.bean;
 
-import co.edu.uniquindio.unilocal.entidades.Ciudad;
-import co.edu.uniquindio.unilocal.servicios.CiudadServicio;
+import co.edu.uniquindio.unilocal.entidades.Comentario;
+import co.edu.uniquindio.unilocal.servicios.ComentarioServicio;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 
 @Component
 @RequestScope
-public class CiudadBean implements Serializable {
+public class ComentarioBean implements Serializable {
 
-    private final CiudadServicio ciudadServicio;
+    private final ComentarioServicio comentarioServicio;
 
     @Getter @Setter
-    private Ciudad ciudad;
+    private Comentario comentario;
 
-    public CiudadBean(CiudadServicio ciudadServicio) {
-        this.ciudadServicio = ciudadServicio;
+    public ComentarioBean(ComentarioServicio comentarioServicio) {
+        this.comentarioServicio = comentarioServicio;
     }
 
     @PostConstruct
     public void inicializar(){
-        this.ciudad = new Ciudad();
+        this.comentario = new Comentario();
     }
 
-    public void registrarCiudad(){
+    public void registrarComentario(){
 
         FacesMessage msg;
         try {
-            ciudadServicio.registrarCiudad(ciudad);
+            comentarioServicio.registrarComentario(comentario);
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Alerta", "El registro fue exitoso");
             FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -46,11 +46,11 @@ public class CiudadBean implements Serializable {
         }
     }
 
-    public void modificarCiudad(){
+    public void modificarComentario(){
 
         FacesMessage msg;
         try {
-            ciudadServicio.modificarCiudad(ciudad);
+            comentarioServicio.modificarComentario(comentario);
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Alerta", "Se modifico con exito");
             FacesContext.getCurrentInstance().addMessage(null, msg);

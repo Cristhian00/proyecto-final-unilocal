@@ -16,6 +16,7 @@
     <h:outputStylesheet library="css" name="style.css"/>
     <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
     <h:outputScript library="js" name="mapbox-gl.js"/>
+    <h:outputScript library="js" name="script-home.js"/>
     <title>Unilocal</title>
 </h:head>
 <h:body>
@@ -58,14 +59,8 @@
     <div id="content">
         <div id="mapa">
             <div id="map"></div>
-            <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoiY3Jpc3RoaWFuMDAiLCJhIjoiY2tyZmd5MWU1M3prcDJvbjNlMjBqM3ozdyJ9.VtY6dHuMqZSNPlZeKHKPtQ';
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11'
-                });
-            </script>
         </div>
+
         <div class="container">
             <div class="">
                 <div>
@@ -80,7 +75,45 @@
                     <h2>Lugares más populares</h2>
                 </div>
                 <div>
-                    <p>Lista de lugares</p>
+                    <h:form id="form">
+                        <p:dataView var="lugar" value="#{inicioBean.lugares}" rows="12" paginator="true"
+                                    gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+
+                            <p:dataViewGridItem>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="" class="card-img-top" alt="..."/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">#{lugar.nombre}</h5>
+                                        <p class="card-text">#{lugar.descripcion}</p>
+                                        <p:commandButton value="Ver detalles"
+                                                         action="#{inicioBean.irADetalle(lugar.id)}"
+                                                         styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                         iconPos="right"/>
+                                    </div>
+                                </div>
+                            </p:dataViewGridItem>
+
+                            <p:dataViewListItem>
+                                <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+                                    <p:graphicImage styleClass="imagen-lugar"/>
+                                    <p:outputPanel>
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <h:outputText value="Nombre:"/>
+                                            <h:outputText value="#{lugar.nombre}" style="font-weight: bold"/>
+                                            <h:outputText value="Tipo:"/>
+                                            <h:outputText value="#{lugar.tipo.nombre}"/>
+                                            <h:outputText value="Descripción:"/>
+                                            <h:outputText value="#{lugar.descripcion}"/>
+                                        </h:panelGrid>
+                                    </p:outputPanel>
+                                    <p:commandButton value="Ver detalles" action="#{inicioBean.irADetalle(lugar.id)}"
+                                                     styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                     iconPos="right"/>
+                                </h:panelGrid>
+                            </p:dataViewListItem>
+
+                        </p:dataView>
+                    </h:form>
                 </div>
             </div>
         </div>

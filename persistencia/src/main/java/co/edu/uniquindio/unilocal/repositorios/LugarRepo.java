@@ -2,6 +2,9 @@ package co.edu.uniquindio.unilocal.repositorios;
 
 
 import co.edu.uniquindio.unilocal.dto.LugarComentariosDTO;
+import co.edu.uniquindio.unilocal.entidades.Comentario;
+import co.edu.uniquindio.unilocal.entidades.Horario;
+import co.edu.uniquindio.unilocal.entidades.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,6 +25,12 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
 
     @Query("select l from Lugar l where l.id = ?1")
     Lugar obtenerLugar(int id);
+
+    @Query("select c from Comentario c where c.lugarComentario.id = ?1")
+    List<Comentario> obtenerComentarios(Integer idLugar);
+
+    @Query("select h from Horario h, IN(h.lugares) l where l.id = ?1")
+    List<Horario> obtenerHorarios(Integer idLugar);
 
     @Query("select l from Lugar l where l.nombre = ?1")
     Lugar obtenerLugarNombre(String nombre);
@@ -57,4 +66,10 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
     @Query("select l.tipoLugar.nombre, count(l) as total from Lugar l where l.estado = 'APROBADO' " +
             "group by l.tipoLugar order by total desc")
     List<String> obetenerTipoLugarPreferido();
+
+    @Query("select u from Lugar l, IN(l.usuariosFavoritos) u where l.id = ?1")
+    List<Usuario> obtenerUsuariosFavoritos(int id);
+
+    @Query("select l from Lugar l, IN(l.moderador) m where m.cedula = ?1")
+    List<Lugar> obtenerLugaresModerador(String cedula);
 }

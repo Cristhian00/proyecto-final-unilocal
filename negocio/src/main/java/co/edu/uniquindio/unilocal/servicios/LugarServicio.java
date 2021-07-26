@@ -1,8 +1,11 @@
 package co.edu.uniquindio.unilocal.servicios;
 
+import co.edu.uniquindio.unilocal.entidades.Comentario;
+import co.edu.uniquindio.unilocal.entidades.Horario;
 import co.edu.uniquindio.unilocal.entidades.Lugar;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface LugarServicio {
 
@@ -12,9 +15,18 @@ public interface LugarServicio {
 
     boolean eliminarLugar(String nombre) throws Exception;
 
+    Lugar obtenerLugar(int id) throws Exception;
+
     Lugar obtenerLugar(String nombre) throws Exception;
 
     List<Lugar> listarLugar();
 
-    List<Lugar> buscarLugares(String nombre);
+    List<Lugar> buscarLugaresPorPalabra(String nombre);
+
+    List<Lugar> lugaresPorModerador(String moderador);
+
+    List<Comentario> obtenerComentarios(Integer idLugar);
+
+    List<Horario> obtenerHorarios(Integer idLugar);
+
 }

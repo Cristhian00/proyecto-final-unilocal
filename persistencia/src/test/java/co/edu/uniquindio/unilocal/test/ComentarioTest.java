@@ -63,11 +63,11 @@ public class ComentarioTest {
             Date fecha = sdf.parse("2021/04/15");
 
             Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", tipoNuevo,
-                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE,
+                    ciudadNueva, fecha, 2.7777f, 134.4555f, EstadoAprobacion.PENDIENTE,
                     usuNuevo);
             lugarRepo.save(lugarNuevo);
 
-            Comentario comenNuevo = new Comentario("Un excelente hotel", 4.5, fecha, usuNuevo, lugarNuevo);
+            Comentario comenNuevo = new Comentario("Un excelente hotel", 4.5, usuNuevo, lugarNuevo);
             Comentario comenGuardado = comentarioRepo.save(comenNuevo);
             Assertions.assertNotNull(comenGuardado);
 
@@ -100,11 +100,11 @@ public class ComentarioTest {
             Date fecha = sdf.parse("2021/04/15");
 
             Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", tipoNuevo,
-                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE,
+                    ciudadNueva, fecha, 2.7777f, 134.4555f, EstadoAprobacion.PENDIENTE,
                     usuNuevo);
             lugarRepo.save(lugarNuevo);
 
-            Comentario comenNuevo = new Comentario("Un excelente hotel", 4.5, fecha, usuNuevo, lugarNuevo);
+            Comentario comenNuevo = new Comentario("Un excelente hotel", 4.5, usuNuevo, lugarNuevo);
             comentarioRepo.save(comenNuevo);
             comentarioRepo.delete(comenNuevo);
 
@@ -142,11 +142,11 @@ public class ComentarioTest {
             Date fecha = sdf.parse("2021/04/15");
 
             Lugar lugarNuevo = new Lugar("Mocawa", "hotal de lujo", tipoNuevo,
-                    ciudadNueva, fecha, 2.7777, 134.4555, EstadoAprobacion.PENDIENTE,
+                    ciudadNueva, fecha, 2.7777f, 134.4555f, EstadoAprobacion.PENDIENTE,
                     usuNuevo);
             lugarRepo.save(lugarNuevo);
 
-            Comentario comenNuevo = new Comentario("Un excelente hotel", 4.5, fecha, usuNuevo, lugarNuevo);
+            Comentario comenNuevo = new Comentario("Un excelente hotel", 4.5, usuNuevo, lugarNuevo);
             Comentario comenGuardado = comentarioRepo.save(comenNuevo);
             comenGuardado.setMensaje("Pesimo servicio");
             comentarioRepo.save(comenGuardado);

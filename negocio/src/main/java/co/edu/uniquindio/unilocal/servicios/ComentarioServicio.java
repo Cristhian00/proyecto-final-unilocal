@@ -13,7 +13,7 @@ public interface ComentarioServicio {
 
     boolean eliminarComentario(int id) throws Exception;
 
-    Comentario obtenerComentario(int idLugar) throws Exception;
+    Comentario obtenerComentario(int id) throws Exception;
 
     List<Comentario> listarComentarios();
 }

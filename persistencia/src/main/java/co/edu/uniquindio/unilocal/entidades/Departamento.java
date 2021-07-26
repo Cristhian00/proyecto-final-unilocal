@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -30,10 +32,14 @@ public class Departamento implements Serializable {
 
     //Nombre del departamento
     @Column(name = "nombre", length = 100, nullable = false, unique = true)
+    @NotBlank(message = "Debe ingresar el nombre del departamento")
+    @Size(min = 2, max = 100, message = "El nombre del departamento debe tener entre 2 y 100 caracteres")
     private String nombre;
 
     //Nombre del país al que pertenece el departamento
     @Column(name = "pais", length = 100, nullable = false)
+    @NotBlank(message = "Debe ingresar el nombre del pais")
+    @Size(min = 2, max = 100, message = "El nombre del pais debe tener entre 2 y 100 caracteres")
     private String pais;
 
     //Lista de ciudades que contiene el departamentos

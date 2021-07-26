@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -30,10 +32,13 @@ public class Ciudad implements Serializable {
 
     //Nombre de la ciudad
     @Column(name = "nombre", length = 100, nullable = false)
+    @NotBlank(message = "El nombre de la ciudad es obligatorio")
+    @Size(min = 2, max = 100, message = "El nombre de la ciudad solo puede tener entre 2 y 100 caracteres")
     private String nombre;
 
     //Nombre del departamento al cual pertenece
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Departamento departamento;
 
     //Lista de las personas que están en la ciudad

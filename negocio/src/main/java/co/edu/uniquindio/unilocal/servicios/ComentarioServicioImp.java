@@ -33,6 +33,7 @@ public class ComentarioServicioImp implements ComentarioServicio {
         if (c.getCalificacion() > 5) {
             throw new Exception("La calificación debe ser máximo 5");
         }
+        c.setFechaComentario(new Date());
         return comentarioRepo.save(c);
     }
 
@@ -55,6 +56,7 @@ public class ComentarioServicioImp implements ComentarioServicio {
         if (c.getCalificacion() > 5) {
             throw new Exception("La calificación debe ser máximo 5");
         }
+        c.setFechaComentario(new Date());
         return comentarioRepo.save(c);
     }
 

@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,16 +32,23 @@ public class Horario implements Serializable {
     private int codigo;
 
     //Día de la semana a la que pertenece el horario
-    @Enumerated(EnumType.STRING)
-    @Column(name = "dia", nullable = false)
-    private DiaSemana dia;
+    @Column(name = "dia", nullable = false, length = 100)
+    @NotBlank(message = "Debe escribir un día para el horario")
+    @Size(min = 5, max = 100, message = "El día debe tener entre 5 y 100 caracteres")
+    private String dia;
 
     //Hora de inicio o apertura
     @Column(name = "hora_apertura", length = 5, nullable = false)
+    @NotBlank(message = "Debe seleccionar hora una de apertura")
+    @Size(min = 5, max = 5, message = "La hora de apertura debe tener 5 caracteres")
+    @Pattern(regexp = "\\d{2}\\:\\d{2}", message = "Debe ingresar un formato valido de hora. Ejemplo: 09:00")
     private String horaApertura;
 
     //Hora final o cierre
     @Column(name = "hora_cierre", length = 5, nullable = false)
+    @NotBlank(message = "Debe seleccionar hora una de cierre")
+    @Size(min = 5, max = 5, message = "La hora de cierre debe tener 5 caracteres")
+    @Pattern(regexp = "\\d{2}\\:\\d{2}", message = "Debe ingresar un formato valido de hora. Ejemplo: 09:00")
     private String horaCierre;
 
     //Lista de lugares que tienen el horario
@@ -52,7 +62,7 @@ public class Horario implements Serializable {
      * @param horaApertura, hora de inicio del horario
      * @param horaCierre,   hora de cierre del horario
      */
-    public Horario(DiaSemana dia, String horaApertura, String horaCierre) {
+    public Horario(String dia, String horaApertura, String horaCierre) {
         this.dia = dia;
         this.horaApertura = horaApertura;
         this.horaCierre = horaCierre;
