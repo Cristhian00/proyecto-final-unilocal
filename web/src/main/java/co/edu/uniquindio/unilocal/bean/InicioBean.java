@@ -9,17 +9,16 @@ import lombok.Setter;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@ViewScoped
-public class IncioBean implements Serializable {
+@RequestScope
+public class InicioBean implements Serializable {
 
     @Autowired
     private LugarServicio lugarServicio;
@@ -29,14 +28,15 @@ public class IncioBean implements Serializable {
     private List<Lugar> lugares;
 
     @PostConstruct
-    public void inicializar(){
-        this.lugares = lugarServicio.listarLugar();
+    public void inicializar() {
 
-        PrimeFaces.current().executeScript("crearMapa("+new Gson().toJson(this.lugares.stream()
-                .map(l -> new MarkerDTO(l.getId(), l.getNombre(), l.getTipoLugar(),l.getDescripcion(), l.getLatitud(), l.getLongitud())).collect(Collectors.toList()))+");");
+        this.lugares = lugarServicio.listarLugar();
+        System.out.println("Lista:" +this.lugares.size());
+        PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(this.lugares.stream()
+                .map(l -> new MarkerDTO(l.getId(), l.getNombre(), l.getTipoLugar().getNombre(), l.getDescripcion(), l.getLatitud(), l.getLongitud())).collect(Collectors.toList())) + ");");
     }
 
-    public String irADetalle(int id){
-        return "/detalleLugar?faces-redirect=true&amp;lugar="+id;
+    public String irADetalle(int id) {
+        return "/detalleLugar?faces-redirect=true&amp;lugar=" + id;
     }
 }

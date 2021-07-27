@@ -59,7 +59,6 @@ public class TipoLugar implements Serializable {
         return "TipoLugar{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", lugares=" + lugares +
                 '}';
     }
 }

@@ -39,7 +39,7 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
     @Query("select l from Lugar l where l.nombre like concat('%', :nombre, '%') ")
     List<Lugar> buscarLugares(String nombre);
 
-    Optional<Lugar> findByLatitudAndLongitud(double latitud, double longitud);
+    Optional<Lugar> findByLatitudAndLongitud(Float latitud, Float longitud);
 
     List<Lugar> findAll();
 

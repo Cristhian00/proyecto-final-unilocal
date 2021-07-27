@@ -50,10 +50,6 @@ public class DetalleLugarBean implements Serializable {
                 this.comentarios = lugarServicio.obtenerComentarios(id);
                 this.horarios = lugarServicio.obtenerHorarios(id);
 
-                PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(
-                        new MarkerDTO(lugar.getId(), lugar.getNombre(), lugar.getTipoLugar(),
-                                lugar.getDescripcion(), lugar.getLatitud(), lugar.getLongitud())));
-
             } catch (Exception e) {
                 e.printStackTrace();
             }

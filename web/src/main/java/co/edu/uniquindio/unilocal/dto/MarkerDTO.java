@@ -15,7 +15,7 @@ public class MarkerDTO {
 
     private int id;
     private String nombre;
-    private TipoLugar tipoLugar;
+    private String tipoLugar;
     private String descripcion;
     private float lat, lng;
 

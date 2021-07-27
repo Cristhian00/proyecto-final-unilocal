@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-@Component
+//@Component
 public class informacionPorDefecto implements CommandLineRunner {
 
     @Autowired
@@ -150,26 +152,30 @@ public class informacionPorDefecto implements CommandLineRunner {
             ciuServicio.registrarCiudad(ciu5);
         }
 
-        if(usuServicio.listaUsuarios().isEmpty()) {
+        if (usuServicio.listaUsuarios().isEmpty()) {
 
             Ciudad ciu1 = ciuServicio.obtenerCiudad(1);
             Ciudad ciu2 = ciuServicio.obtenerCiudad(2);
             Ciudad ciu3 = ciuServicio.obtenerCiudad(3);
 
-            Usuario usu1 = new Usuario("1030677", "Alejandro Murillo", "alejo@mail.com",
-                    "usu123", "usu1", ciu1);
+            Map<String, String> tels = new HashMap<>();
+            tels.put("casa", "1234");
+            tels.put("movil", "262626");
+
+            Usuario usu1 = new Usuario("1030677", "Alejandro Murillo", "alejo@mail.com", "usu123", "usu1", ciu1);
+            usu1.setTelefono(tels);
             usuServicio.registraUsuario(usu1);
 
-            Usuario usu2 = new Usuario("1030678", "Andres Ortiz", "andres@mail.com",
-                    "usu123", "usu2", ciu2);
+            Usuario usu2 = new Usuario("1030678", "Andres Ortiz", "andres@mail.com", "usu123", "usu2", ciu2);
+            usu2.setTelefono(tels);
             usuServicio.registraUsuario(usu2);
 
-            Usuario usu3 = new Usuario("1030679", "Tobias Martinez", "tobias@mail.com",
-                    "usu123", "usu3", ciu3);
+            Usuario usu3 = new Usuario("1030679", "Tobias Martinez", "tobias@mail.com", "usu123", "usu3", ciu3);
+            usu3.setTelefono(tels);
             usuServicio.registraUsuario(usu3);
         }
 
-        if(lugServicio.listarLugar().isEmpty()){
+        if (lugServicio.listarLugar().isEmpty()) {
 
             Usuario usu1 = usuServicio.obtenerUsuario("1030677");
             Usuario usu2 = usuServicio.obtenerUsuario("1030678");
@@ -184,23 +190,26 @@ public class informacionPorDefecto implements CommandLineRunner {
 
             Moderador mod1 = modeServicio.obtenerModerador("1030677819");
 
-            Lugar l1 = new Lugar("Juan B","Restaurante de truchas", tip1, ciu1,
-                    new Date(), 4.55092f, -75.6557f, EstadoAprobacion.PENDIENTE, usu1);
-            l1.setImagenes(new ArrayList<>());
+            Lugar l1 = new Lugar("Juan B", "Restaurante de truchas", tip1, ciu1,
+                    new Date(), 4.55092F, -75.6557F, EstadoAprobacion.PENDIENTE, usu1);
+            l1.setImagenes(new ArrayList<>());//Not empty obliga a llenar todo esto, por ahora lo voy a quitar y luego ya usted lo pone de nuevo
             l1.setHorarios(new ArrayList<>());
+            l1.setTelefono(new HashMap<>());
             lugServicio.registrarLugar(l1);
 
-            Lugar l2 = new Lugar("Caffeto","Cafe-bar con buena música", tip2, ciu2,
-                    new Date(), 4.52892f, -75.6775f, EstadoAprobacion.APROBADO, usu2);
-            l1.setModerador(mod1);
-            l1.setImagenes(new ArrayList<>());
-            l1.setHorarios(new ArrayList<>());
+            Lugar l2 = new Lugar("Caffeto", "Cafe-bar con buena música", tip2, ciu2,
+                    new Date(), 4.52892F, -75.6775F, EstadoAprobacion.APROBADO, usu2);
+            l2.setModerador(mod1);
+            l2.setImagenes(new ArrayList<>());
+            l2.setHorarios(new ArrayList<>());
+            l2.setTelefono(new HashMap<>());
             lugServicio.registrarLugar(l2);
 
-            Lugar l3 = new Lugar("La conquista","Restaurante de comidas rápidas", tip3, ciu3,
-                    new Date(), 4.54029f, -75.6667f, EstadoAprobacion.PENDIENTE, usu1);
-            l1.setImagenes(new ArrayList<>());
-            l1.setHorarios(new ArrayList<>());
+            Lugar l3 = new Lugar("La conquista", "Restaurante de comidas rápidas", tip3, ciu3,
+                    new Date(), 4.54029F, -75.6667F, EstadoAprobacion.PENDIENTE, usu1);
+            l3.setImagenes(new ArrayList<>());
+            l3.setHorarios(new ArrayList<>());
+            l3.setTelefono(new HashMap<>());
             lugServicio.registrarLugar(l3);
         }
     }

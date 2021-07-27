@@ -33,7 +33,7 @@ public class LugarServicioImp implements LugarServicio {
         return lugar.isEmpty();
     }
 
-    public boolean ubicacionDisponible(double latitud, double longitud) {
+    public boolean ubicacionDisponible(Float latitud, Float longitud) {
         Optional<Lugar> lugar = lugarRepo.findByLatitudAndLongitud(latitud, longitud);
         return lugar.isEmpty();
     }
@@ -52,10 +52,10 @@ public class LugarServicioImp implements LugarServicio {
             throw new Exception("El nombre del lugar no puede tener más de 100 caracteres");
         }
         //Validaciones de la ubicacion
-        if (l.getLatitud() == 0.0d) {
+        if (l.getLatitud() == 0.0F) {
             throw new Exception("Debe ingresar una latitud");
         }
-        if (l.getLongitud() == 0.0d) {
+        if (l.getLongitud() == 0.0F) {
             throw new Exception("Debe ingresar una longitud");
         }
         if (!ubicacionDisponible(l.getLatitud(), l.getLongitud())) {

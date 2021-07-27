@@ -38,7 +38,7 @@
                             <a class="nav-link" href="registrarUsuario.xhtml">Registrarse</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="crearLugar.xhtml">Crear Lugar</a>
+                            <a class="nav-link" href="registrarLugar.xhtml">Registrar Lugar</a>
                         </li>
                     </ul>
                     <div class="d-flex">
@@ -60,7 +60,6 @@
         <div id="mapa">
             <div id="map"></div>
         </div>
-
         <div class="container">
             <div class="">
                 <div>
@@ -101,7 +100,7 @@
                                             <h:outputText value="Nombre:"/>
                                             <h:outputText value="#{lugar.nombre}" style="font-weight: bold"/>
                                             <h:outputText value="Tipo:"/>
-                                            <h:outputText value="#{lugar.tipo.nombre}"/>
+                                            <h:outputText value="#{lugar.tipoLugar.nombre}"/>
                                             <h:outputText value="Descripción:"/>
                                             <h:outputText value="#{lugar.descripcion}"/>
                                         </h:panelGrid>
