@@ -1,7 +1,10 @@
 package co.edu.uniquindio.unilocal.bean;
 
+import co.edu.uniquindio.unilocal.dto.MarkerDTO;
 import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.servicios.LugarServicio;
+import com.google.gson.Gson;
+import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @ViewScoped
@@ -30,7 +34,11 @@ public class BusquedaBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         if (busquedaParam != null && !busquedaParam.isEmpty()) {
-            lugares = lugarServicio.buscarLugaresPorPalabra(busquedaParam);
+            this.lugares = lugarServicio.buscarLugaresPorPalabra(busquedaParam);
+
+            PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(this.lugares.stream()
+                    .map(l -> new MarkerDTO(l.getId(), l.getNombre(), l.getTipoLugar().getNombre(),
+                            l.getDescripcion(), l.getLatitud(), l.getLongitud())).collect(Collectors.toList())) + ");");
         }
 
     }

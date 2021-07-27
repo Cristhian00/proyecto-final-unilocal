@@ -44,6 +44,7 @@ public class informacionPorDefecto implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        /*
         if (adminServicio.listaAdministradores().isEmpty()) {
             Administrador admin1 = new Administrador("1030677817", "Cristhian Ortiz",
                     "cortizm_1@uqvirtual.edu.co", "admin123", "admin1");
@@ -212,5 +213,7 @@ public class informacionPorDefecto implements CommandLineRunner {
             l3.setTelefono(new HashMap<>());
             lugServicio.registrarLugar(l3);
         }
+
+         */
     }
 }

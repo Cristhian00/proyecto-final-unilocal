@@ -10,7 +10,7 @@ window.onload = function () {
                 container: 'mapa',
                 style: 'mapbox://styles/mapbox/streets-v11',
                 center: [position.coords.longitude, position.coords.latitude],
-                zoom: 14
+                zoom: 20
             });
 
             map.addControl(new mapboxgl.GeolocateControl({

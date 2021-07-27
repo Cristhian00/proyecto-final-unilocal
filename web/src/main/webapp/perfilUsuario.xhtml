@@ -14,24 +14,11 @@
     <ui:define name="head">
         <h:outputStylesheet library="css" name="mapbox-gl.css"/>
         <h:outputScript library="js" name="mapbox-gl.js"/>
-        <h:outputScript library="js" name="script-detalle.js"/>
     </ui:define>
 
-    <ui:define name="title">Unilocal | Detalle lugar</ui:define>
+    <ui:define name="title">Unilocal | Perfil Usuario</ui:define>
 
     <ui:define name="content">
-        <div id="mapa">
-            <div id="map"></div>
-        </div>
-
-        <p:panel header="Comentarios" styleClass="mt-3">
-            <p:dataList id="lista-c" value="#{detalleLugarBean.comentarios}" var="comentario"
-                        emptyMessage="No hay comentarios" type="">
-                <div>
-                    <p>#{comentario.usuarioComentario.nombre}: #{comentario.mensaje}</p>
-                </div>
-            </p:dataList>
-        </p:panel>
 
     </ui:define>
 </ui:composition>

@@ -68,10 +68,11 @@ public class LugarBean implements Serializable {
             if (lugar.getLatitud() != 0 && lugar.getLongitud() != 0) {
 
                 lugar.setUsuarioCreador(usuarioServicio.obtenerUsuario("1030678"));
-
                 lugarServicio.registrarLugar(lugar);
 
-                return "lugarCreado?faces-redirect=true";
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "Alerta", "El lugar se creó correctamente");
+                FacesContext.getCurrentInstance().addMessage("mensaje_bean", msg);
             } else {
                 msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Alerta", "Es necesario ubicar el lugar en el mapa");
