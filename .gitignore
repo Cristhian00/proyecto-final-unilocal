@@ -1,1 +1,10 @@
 *.class
+
+#Maven temporary files
+/**/target/
+
+#IntelliJ files
+*.iml
+/.idea
+
+web/src/main/webapp/uploads

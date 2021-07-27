@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -104,9 +105,10 @@ public class Lugar implements Serializable {
     @OneToMany(mappedBy = "lugarComentario")
     private List<Comentario> comentarios;
 
-    @OneToMany(mappedBy = "lugar")
-    //@NotEmpty
-    private List<Imagen> imagenes;
+    @ElementCollection
+    @JoinColumn(name = "imagen", nullable = false)
+    //@NotEmpty(message = "Debe agregar al menos una imagen")
+    private List<String> imagenes;
 
     /**
      * Constructor completo para crear un lugar
@@ -133,6 +135,7 @@ public class Lugar implements Serializable {
         this.longitud = longitud;
         this.estado = estado;
         this.usuarioCreador = usuarioCreador;
+        this.imagenes = new ArrayList<>();
     }
 
     /**
@@ -155,5 +158,14 @@ public class Lugar implements Serializable {
                 ", estado=" + estado +
                 ", usuarioCreador=" + usuarioCreador.getNombre() +
                 '}';
+    }
+
+    public String getImagenPrincipal(){
+
+        if(imagenes != null && !imagenes.isEmpty()){
+            return imagenes.get(0);
+        } else{
+            return "default.png";
+        }
     }
 }

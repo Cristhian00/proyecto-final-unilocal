@@ -61,6 +61,11 @@
                                              required="true"/>
                             <p:message for="descripcion_lugar"/>
 
+                            <p:outputLabel for="imagenes_lugar" value="Imágenes: "/>
+                            <p:fileUpload id="imagenes_lugar" listener="#{lugarBean.subirImagenes}"
+                                          mode="advance" multiple="true" sizeLimit="1000000" fileLimit="5"
+                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true"/>
+
                         </h:panelGrid>
                         <p:commandButton action="#{lugarBean.registrarLugar()}" value="Registrar Lugar" update="@form"/>
                         <p:growl for="mensaje_bean" showDetail="true"/>
