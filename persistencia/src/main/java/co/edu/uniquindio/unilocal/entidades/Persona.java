@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unilocal.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -18,11 +15,12 @@ import java.io.Serializable;
  * @author Tatiana Arboleda, Diego Mauricio Valencia y Cristhian Ortiz
  */
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@MappedSuperclass
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
+@Entity
 public abstract class Persona implements Serializable {
 
     //Número de cédula de la persona
@@ -57,22 +55,5 @@ public abstract class Persona implements Serializable {
     @NotBlank(message = "El nickname es obligatorio")
     @Size(min = 3, max = 50, message = "El nickname debe tener entre 3 y 50 caracteres")
     private String nickname;
-
-    /**
-     * Constructor completo con la que se creara una persona
-     *
-     * @param cedula,      número de cédula de la persona
-     * @param nombre,      nombre de la persona
-     * @param email,       correo electronico de la persona
-     * @param contrasenia, contraseña con la que inicara sesión
-     * @param nickname,    nombre de usuario con la que iniciara sesión
-     */
-    public Persona(String cedula, String nombre, String email, String contrasenia, String nickname) {
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.email = email;
-        this.contrasenia = contrasenia;
-        this.nickname = nickname;
-    }
 
 }

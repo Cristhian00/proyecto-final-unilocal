@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unilocal.bean;
 
-import co.edu.uniquindio.unilocal.entidades.Ciudad;
-import co.edu.uniquindio.unilocal.entidades.Horario;
-import co.edu.uniquindio.unilocal.entidades.Lugar;
-import co.edu.uniquindio.unilocal.entidades.TipoLugar;
+import co.edu.uniquindio.unilocal.entidades.*;
 import co.edu.uniquindio.unilocal.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -56,6 +53,9 @@ public class LugarBean implements Serializable {
 
     private List<String> imagenes;
 
+    @Value(value = "#{seguridadBean.persona}")
+    private Persona personaLogin;
+
     public LugarBean(LugarServicio lugarServicio, CiudadServicio ciudadServicio, UsuarioServicio usuarioServicio,
                      TipoLugarServicio tipoLugarServicio, HorarioServicio horarioServicio) {
         this.lugarServicio = lugarServicio;
@@ -79,19 +79,22 @@ public class LugarBean implements Serializable {
         FacesMessage msg;
 
         try {
-            if (lugar.getLatitud() != 0 && lugar.getLongitud() != 0 && !imagenes.isEmpty()) {
+            if (personaLogin != null) {
 
-                lugar.setUsuarioCreador(usuarioServicio.obtenerUsuario("1030678"));
-                lugar.setImagenes(imagenes);
-                lugarServicio.registrarLugar(lugar);
+                if (lugar.getLatitud() != 0 && lugar.getLongitud() != 0 && !imagenes.isEmpty()) {
 
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "Alerta", "El lugar se creó correctamente");
-                FacesContext.getCurrentInstance().addMessage("mensaje_bean", msg);
-            } else {
-                msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Alerta", "Es necesario ubicar el lugar en el mapa y subir al menos una imagen");
-                FacesContext.getCurrentInstance().addMessage("mensaje_bean", msg);
+                    lugar.setUsuarioCreador((Usuario) personaLogin);
+                    lugar.setImagenes(imagenes);
+                    lugarServicio.registrarLugar(lugar);
+
+                    msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Alerta", "El lugar se creó correctamente");
+                    FacesContext.getCurrentInstance().addMessage("mensaje_bean", msg);
+                } else {
+                    msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Alerta", "Es necesario ubicar el lugar en el mapa y subir al menos una imagen");
+                    FacesContext.getCurrentInstance().addMessage("mensaje_bean", msg);
+                }
             }
         } catch (Exception e) {
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -101,16 +104,16 @@ public class LugarBean implements Serializable {
         return null;
     }
 
-    public void subirImagenes(FileUploadEvent event){
+    public void subirImagenes(FileUploadEvent event) {
         UploadedFile imagen = event.getFile();
         String nombreImagen = subirImagen(imagen);
-        if(nombreImagen!=null){
+        if (nombreImagen != null) {
             imagenes.add(nombreImagen);
         }
     }
 
-    public String subirImagen(UploadedFile file){
-        try{
+    public String subirImagen(UploadedFile file) {
+        try {
             InputStream input = file.getInputStream();
             String filename = FilenameUtils.getName((file.getFileName()));
             String basename = FilenameUtils.getBaseName(filename) + "_";
@@ -119,7 +122,7 @@ public class LugarBean implements Serializable {
             FileOutputStream output = new FileOutputStream(fileDest);
             IOUtils.copy(input, output);
             return fileDest.getName();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
