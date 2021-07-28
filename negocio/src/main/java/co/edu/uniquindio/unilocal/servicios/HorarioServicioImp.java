@@ -2,7 +2,6 @@ package co.edu.uniquindio.unilocal.servicios;
 
 import co.edu.uniquindio.unilocal.entidades.Horario;
 import co.edu.uniquindio.unilocal.repositorios.HorarioRepo;
-import net.bytebuddy.description.NamedElement;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

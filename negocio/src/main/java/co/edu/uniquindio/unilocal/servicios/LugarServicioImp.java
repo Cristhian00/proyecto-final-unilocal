@@ -1,9 +1,9 @@
 package co.edu.uniquindio.unilocal.servicios;
 
+import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.entidades.Comentario;
 import co.edu.uniquindio.unilocal.entidades.EstadoAprobacion;
 import co.edu.uniquindio.unilocal.entidades.Horario;
-import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.repositorios.ComentarioRepo;
 import co.edu.uniquindio.unilocal.repositorios.LugarRepo;
 import org.springframework.stereotype.Service;

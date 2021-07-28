@@ -1,6 +1,5 @@
 package co.edu.uniquindio.unilocal.servicios;
 
-import co.edu.uniquindio.unilocal.entidades.Ciudad;
 import co.edu.uniquindio.unilocal.entidades.Departamento;
 import co.edu.uniquindio.unilocal.repositorios.DepartamentoRepo;
 import org.springframework.stereotype.Service;

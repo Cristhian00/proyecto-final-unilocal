@@ -1,8 +1,6 @@
 package co.edu.uniquindio.unilocal.test;
 
 import co.edu.uniquindio.unilocal.dto.LugarComentariosDTO;
-import co.edu.uniquindio.unilocal.entidades.*;
-import co.edu.uniquindio.unilocal.repositorios.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

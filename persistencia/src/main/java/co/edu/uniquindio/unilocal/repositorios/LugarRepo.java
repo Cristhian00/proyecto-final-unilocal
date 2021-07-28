@@ -2,16 +2,15 @@ package co.edu.uniquindio.unilocal.repositorios;
 
 
 import co.edu.uniquindio.unilocal.dto.LugarComentariosDTO;
-import co.edu.uniquindio.unilocal.entidades.Comentario;
 import co.edu.uniquindio.unilocal.entidades.Horario;
+import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.entidades.Usuario;
+import co.edu.uniquindio.unilocal.entidades.Comentario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import co.edu.uniquindio.unilocal.entidades.Lugar;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

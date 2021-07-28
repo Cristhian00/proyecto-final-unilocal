@@ -1,14 +1,11 @@
 package co.edu.uniquindio.unilocal.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +25,6 @@ public class Usuario extends Persona implements Serializable {
     //Números telefonicos que tiene el usuario
     @ElementCollection
     @JoinTable(name = "usuario_telefono")
-    //@NotEmpty(message = "Debe ingresar al menos un número de contacto")
     private Map<String, String> telefono;
 
     //Ciudad en la cuál reside el usuario
@@ -37,16 +33,19 @@ public class Usuario extends Persona implements Serializable {
 
     //Lugares que ha registrado el usuario
     @OneToMany(mappedBy = "usuarioCreador")
+    @JsonIgnore
     private List<Lugar> lugares;
 
     //Lugares que ha seleccionado como favoritos el usuario
     @ManyToMany
     @JoinTable(name = "favorito", joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_lugar"))
+    @JsonIgnore
     private List<Lugar> lugaresFavoritos;
 
     //Comentarios que ha realizado el usuario
     @OneToMany(mappedBy = "usuarioComentario")
+    @JsonIgnore
     private List<Comentario> comentarios;
 
     /**

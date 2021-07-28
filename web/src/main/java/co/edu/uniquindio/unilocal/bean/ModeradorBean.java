@@ -6,7 +6,6 @@ import co.edu.uniquindio.unilocal.servicios.LugarServicio;
 import co.edu.uniquindio.unilocal.servicios.ModeradorServicio;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 

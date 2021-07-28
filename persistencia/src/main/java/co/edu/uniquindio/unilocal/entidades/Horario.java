@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unilocal.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,6 +54,7 @@ public class Horario implements Serializable {
 
     //Lista de lugares que tienen el horario
     @ManyToMany(mappedBy = "horarios")
+    @JsonIgnore
     private List<Lugar> lugares;
 
     /**

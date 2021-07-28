@@ -1,7 +1,6 @@
 package co.edu.uniquindio.unilocal.servicios;
 
 import co.edu.uniquindio.unilocal.entidades.Administrador;
-import co.edu.uniquindio.unilocal.entidades.Usuario;
 import co.edu.uniquindio.unilocal.repositorios.AdministradorRepo;
 import org.springframework.stereotype.Service;
 

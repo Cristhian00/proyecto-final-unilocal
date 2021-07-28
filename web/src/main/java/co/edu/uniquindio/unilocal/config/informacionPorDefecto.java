@@ -1,15 +1,8 @@
 package co.edu.uniquindio.unilocal.config;
 
-import co.edu.uniquindio.unilocal.entidades.*;
 import co.edu.uniquindio.unilocal.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 //@Component
 public class informacionPorDefecto implements CommandLineRunner {

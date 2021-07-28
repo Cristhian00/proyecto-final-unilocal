@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unilocal.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -85,7 +86,7 @@ public class Lugar implements Serializable {
 
     //Lista de horarios que tiene el lugar
     @ManyToMany
-    //@NotEmpty(message = "Debe ingresar al menos un horario")
+    @JsonIgnore
     private List<Horario> horarios;
 
     //Moderador que evaluo al lugar
@@ -99,15 +100,16 @@ public class Lugar implements Serializable {
 
     //Usuarios que han seleccionado al lugar como favorito
     @ManyToMany(mappedBy = "lugaresFavoritos")
+    @JsonIgnore
     private List<Usuario> usuariosFavoritos;
 
     //Comentarios que se le han realizado al lugar
     @OneToMany(mappedBy = "lugarComentario")
+    @JsonIgnore
     private List<Comentario> comentarios;
 
     @ElementCollection
     @JoinColumn(name = "imagen", nullable = false)
-    //@NotEmpty(message = "Debe agregar al menos una imagen")
     private List<String> imagenes;
 
     /**

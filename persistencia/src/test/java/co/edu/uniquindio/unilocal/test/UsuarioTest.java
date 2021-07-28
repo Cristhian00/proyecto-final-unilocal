@@ -1,5 +1,9 @@
 package co.edu.uniquindio.unilocal.test;
 
+import co.edu.uniquindio.unilocal.entidades.Ciudad;
+import co.edu.uniquindio.unilocal.entidades.Departamento;
+import co.edu.uniquindio.unilocal.entidades.Lugar;
+import co.edu.uniquindio.unilocal.entidades.Usuario;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
-import co.edu.uniquindio.unilocal.entidades.Ciudad;
-import co.edu.uniquindio.unilocal.entidades.Departamento;
-import co.edu.uniquindio.unilocal.entidades.Lugar;
-import co.edu.uniquindio.unilocal.entidades.Usuario;
 import co.edu.uniquindio.unilocal.repositorios.CiudadRepo;
 import co.edu.uniquindio.unilocal.repositorios.DepartamentoRepo;
 import co.edu.uniquindio.unilocal.repositorios.UsuarioRepo;

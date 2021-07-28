@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unilocal.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,10 +44,12 @@ public class Ciudad implements Serializable {
 
     //Lista de las personas que están en la ciudad
     @OneToMany(mappedBy = "ciudadUsuario")
+    @JsonIgnore
     private List<Usuario> usuarios;
 
     //Lista de lugares que hay en la ciudad
     @OneToMany(mappedBy = "ciudadLugar")
+    @JsonIgnore
     private List<Lugar> lugares;
 
     /**

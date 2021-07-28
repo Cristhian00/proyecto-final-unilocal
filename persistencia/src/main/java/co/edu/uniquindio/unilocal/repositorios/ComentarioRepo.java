@@ -1,10 +1,10 @@
 package co.edu.uniquindio.unilocal.repositorios;
 
+import co.edu.uniquindio.unilocal.entidades.Comentario;
+import co.edu.uniquindio.unilocal.entidades.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import co.edu.uniquindio.unilocal.entidades.Comentario;
-import co.edu.uniquindio.unilocal.entidades.Usuario;
 
 import java.util.Date;
 import java.util.List;

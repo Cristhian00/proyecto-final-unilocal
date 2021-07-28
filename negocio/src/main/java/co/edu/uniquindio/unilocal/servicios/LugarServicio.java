@@ -5,7 +5,6 @@ import co.edu.uniquindio.unilocal.entidades.Horario;
 import co.edu.uniquindio.unilocal.entidades.Lugar;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface LugarServicio {
 

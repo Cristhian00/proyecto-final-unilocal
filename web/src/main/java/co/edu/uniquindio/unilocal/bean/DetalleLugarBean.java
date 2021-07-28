@@ -1,9 +1,9 @@
 package co.edu.uniquindio.unilocal.bean;
 
+import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.dto.MarkerDTO;
 import co.edu.uniquindio.unilocal.entidades.Comentario;
 import co.edu.uniquindio.unilocal.entidades.Horario;
-import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.servicios.LugarServicio;
 import com.google.gson.Gson;
 import lombok.Getter;

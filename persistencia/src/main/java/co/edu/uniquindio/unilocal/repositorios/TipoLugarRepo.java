@@ -1,9 +1,8 @@
 package co.edu.uniquindio.unilocal.repositorios;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 import co.edu.uniquindio.unilocal.entidades.TipoLugar;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 

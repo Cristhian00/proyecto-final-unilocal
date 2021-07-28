@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unilocal.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,7 @@ public class Departamento implements Serializable {
 
     //Lista de ciudades que contiene el departamentos
     @OneToMany(mappedBy = "departamento")
+    @JsonIgnore
     private List<Ciudad> ciudades;
 
     /**

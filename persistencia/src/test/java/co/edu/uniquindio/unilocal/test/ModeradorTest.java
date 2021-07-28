@@ -1,5 +1,7 @@
 package co.edu.uniquindio.unilocal.test;
 
+import co.edu.uniquindio.unilocal.entidades.Administrador;
+import co.edu.uniquindio.unilocal.entidades.Moderador;
 import co.edu.uniquindio.unilocal.repositorios.AdministradorRepo;
 import co.edu.uniquindio.unilocal.repositorios.ModeradorRepo;
 import org.junit.jupiter.api.Assertions;
@@ -8,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
-import co.edu.uniquindio.unilocal.entidades.Administrador;
-import co.edu.uniquindio.unilocal.entidades.Moderador;
 
 import java.util.List;
 

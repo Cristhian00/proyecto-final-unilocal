@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unilocal.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,7 @@ public class TipoLugar implements Serializable {
 
     //Lista de los lugares
     @OneToMany(mappedBy = "tipoLugar")
+    @JsonIgnore
     private List<Lugar> lugares;
 
     /**

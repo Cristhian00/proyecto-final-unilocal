@@ -1,6 +1,5 @@
 package co.edu.uniquindio.unilocal.dto;
 
-import co.edu.uniquindio.unilocal.entidades.TipoLugar;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
