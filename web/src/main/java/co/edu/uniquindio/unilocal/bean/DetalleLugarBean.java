@@ -16,6 +16,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -40,6 +41,14 @@ public class DetalleLugarBean implements Serializable {
     @Setter
     private List<Horario> horarios;
 
+    @Getter
+    @Setter
+    private List<String> imagenes;
+
+    @Getter
+    @Setter
+    private List<String> imagenesBase;
+
     @PostConstruct
     public void init() {
 
@@ -49,6 +58,9 @@ public class DetalleLugarBean implements Serializable {
                 this.lugar = lugarServicio.obtenerLugar(id);
                 this.comentarios = lugarServicio.obtenerComentarios(id);
                 this.horarios = lugarServicio.obtenerHorarios(id);
+                this.imagenes = lugar.getImagenes();
+                this.imagenesBase = obetenerNameBaseImg(this.imagenes);
+                System.out.println("IMG base = " + this.imagenesBase);
 
                 PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(
                         new MarkerDTO(lugar.getId(), lugar.getNombre(), lugar.getTipoLugar().getNombre(),
@@ -58,5 +70,22 @@ public class DetalleLugarBean implements Serializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public List<String> obetenerNameBaseImg(List<String> imagenes) {
+
+        int pos = 0;
+        List<String> nameBase = new ArrayList<>();
+
+        for (int i = 0; i < imagenes.size(); i++) {
+            for (int j = 0; j < imagenes.get(i).length(); j++) {
+                if (imagenes.get(i).charAt(j) == '.') {
+                    pos = j;
+                    break;
+                }
+            }
+            nameBase.add(imagenes.get(i).substring(0, pos));
+        }
+        return nameBase;
     }
 }

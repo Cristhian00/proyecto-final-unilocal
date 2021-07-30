@@ -31,7 +31,7 @@ public class Lugar implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     //Nombre que tiene el lugar
     @Column(name = "nombre", length = 100, nullable = false, unique = true)
@@ -169,5 +169,14 @@ public class Lugar implements Serializable {
         } else{
             return "default.png";
         }
+    }
+
+    public int calificacionPromedio(){
+
+        int res = 0;
+        for(int i = 0; i < comentarios.size(); i++){
+            res += comentarios.get(i).getCalificacion();
+        }
+        return res/comentarios.size();
     }
 }

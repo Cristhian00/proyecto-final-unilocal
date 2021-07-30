@@ -10,7 +10,7 @@ window.onload = function () {
                 container: 'mapa',
                 style: 'mapbox://styles/mapbox/streets-v11',
                 center: [position.coords.longitude, position.coords.latitude],
-                zoom: 20
+                zoom: 12
             });
 
             map.addControl(new mapboxgl.GeolocateControl({
@@ -36,6 +36,13 @@ window.onload = function () {
                 }
             });
         })
+    } else{
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-72.309, 4.473],
+            zoom: 4.5
+        });
     }
 }
 

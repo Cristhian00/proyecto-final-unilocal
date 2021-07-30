@@ -51,7 +51,10 @@ public class LugarBean implements Serializable {
     @Value("${upload.url}")
     private String urlImagenes;
 
+    @Getter
+    @Setter
     private List<String> imagenes;
+
 
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
@@ -89,22 +92,23 @@ public class LugarBean implements Serializable {
 
                     msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Alerta", "El lugar se creó correctamente");
-                    FacesContext.getCurrentInstance().addMessage("mensaje_bean", msg);
+                    FacesContext.getCurrentInstance().addMessage("mensaje_lugar", msg);
                 } else {
                     msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "Alerta", "Es necesario ubicar el lugar en el mapa y subir al menos una imagen");
-                    FacesContext.getCurrentInstance().addMessage("mensaje_bean", msg);
+                    FacesContext.getCurrentInstance().addMessage("mensaje_lugar", msg);
                 }
             }
         } catch (Exception e) {
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensaje_bean", msg);
+            FacesContext.getCurrentInstance().addMessage("mensaje_lugar", msg);
         }
         return null;
     }
 
     public void subirImagenes(FileUploadEvent event) {
+
         UploadedFile imagen = event.getFile();
         String nombreImagen = subirImagen(imagen);
         if (nombreImagen != null) {
@@ -123,8 +127,11 @@ public class LugarBean implements Serializable {
             IOUtils.copy(input, output);
             return fileDest.getName();
         } catch (Exception e) {
-            e.printStackTrace();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensaje_lugar", msg);
         }
         return null;
     }
+
 }

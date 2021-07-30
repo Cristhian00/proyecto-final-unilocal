@@ -39,9 +39,7 @@ public class Comentario implements Serializable {
     @Column(name = "calificacion", nullable = false, precision = 1, scale = 1)
     @Positive(message = "La calificación debe ser positiva")
     @NotBlank(message = "Debe seleccionar una calificación valida")
-    @DecimalMin(value = "0.0", message = "La calificación mínima es 0.0")
-    @DecimalMax(value = "5.0", message = "La calificación máxima es 5.0")
-    private double calificacion;
+    private Integer calificacion;
 
     //Respuesta dada al comentario
     @Column(name = "respuesta")
@@ -69,7 +67,7 @@ public class Comentario implements Serializable {
      * @param mensaje,         mensaje realizado en el comentario
      * @param calificacion,    puntuación dada en el comentario
      */
-    public Comentario(String mensaje, @Positive double calificacion, Usuario usuarioComentario, Lugar lugarComentario) {
+    public Comentario(String mensaje, @Positive Integer calificacion, Usuario usuarioComentario, Lugar lugarComentario) {
         this.mensaje = mensaje;
         this.calificacion = calificacion;
         this.usuarioComentario = usuarioComentario;

@@ -20,8 +20,69 @@
     <ui:define name="title">Unilocal | Detalle lugar</ui:define>
 
     <ui:define name="content">
+
+        <p:panel header="Registrar nuevo lugar">
+            <div class="row">
+                <div class="col">
+
+                    <p:galleria value="#{detalleLugarBean.imagenes}" var="image" panelWidth="500" panelHeight="313"
+                                showCaption="true" transitionInterval="10000">
+                        <p:graphicImage url="/uploads/#{image}" height="315" width="500" title="#{image}"/>
+                    </p:galleria>
+                </div>
+
+                <div class="col">
+                    <h1>#{detalleLugarBean.lugar.nombre}</h1>
+
+                    <p:rating value="#{3}" readonly="true"/>
+                </div>
+            </div>
+        </p:panel>
+        <p:panel>
+            <div class="_3pPyAT">
+                <ul class="_3TYstR _2RH2yJ">
+                    <li class="_3Ca02T _2Y71AG">
+                        <div>
+                            <span>Estacionamiento gratis</span>
+                        </div>
+                    </li>
+                    <li class="_1ADbJ7 _2Y71AG">
+                        <div>
+                            <span>Piscina</span>
+                        </div>
+                    </li>
+                    <li class="_1aUzLh _2Y71AG">
+                        <div>
+                            <span>Wifi gratis</span>
+                        </div>
+                    </li>
+                    <li class="_26-GzK _2Y71AG">
+                        <div>
+                            <span>Traslado desde/hacia el aeropuerto</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </p:panel>
+
+
         <div id="mapa">
             <div id="map"></div>
+        </div>
+
+        <div class="media border p-3">
+            <img src="img_avatar3.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;"/>
+            <div class="media-body">
+                <h4>John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+                <p>Lorem ipsum...</p>
+                <div class="media p-3">
+                    <img src="img_avatar2.png" alt="Jane Doe" class="mr-3 mt-3 rounded-circle" style="width:45px;"/>
+                    <div class="media-body">
+                        <h4>Jane Doe <small><i>Posted on February 20 2016</i></small></h4>
+                        <p>Lorem ipsum...</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <p:panel header="Comentarios" styleClass="mt-3">

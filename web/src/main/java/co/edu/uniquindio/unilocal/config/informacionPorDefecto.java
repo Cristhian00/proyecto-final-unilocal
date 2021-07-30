@@ -186,7 +186,7 @@ public class informacionPorDefecto implements CommandLineRunner {
 
             Lugar l1 = new Lugar("Juan B", "Restaurante de truchas", tip1, ciu1,
                     new Date(), 4.55092F, -75.6557F, EstadoAprobacion.PENDIENTE, usu1);
-            l1.setImagenes(new ArrayList<>());//Not empty obliga a llenar todo esto, por ahora lo voy a quitar y luego ya usted lo pone de nuevo
+            l1.setImagenes(new ArrayList<>());
             l1.setHorarios(new ArrayList<>());
             l1.setTelefono(new HashMap<>());
             lugServicio.registrarLugar(l1);

@@ -65,7 +65,7 @@ public class ComentarioTest {
                     usuNuevo);
             lugarRepo.save(lugarNuevo);
 
-            Comentario comenNuevo = new Comentario("Un excelente hotel", 4.5, usuNuevo, lugarNuevo);
+            Comentario comenNuevo = new Comentario("Un excelente hotel", 4, usuNuevo, lugarNuevo);
             Comentario comenGuardado = comentarioRepo.save(comenNuevo);
             Assertions.assertNotNull(comenGuardado);
 
@@ -102,7 +102,7 @@ public class ComentarioTest {
                     usuNuevo);
             lugarRepo.save(lugarNuevo);
 
-            Comentario comenNuevo = new Comentario("Un excelente hotel", 4.5, usuNuevo, lugarNuevo);
+            Comentario comenNuevo = new Comentario("Un excelente hotel", 4, usuNuevo, lugarNuevo);
             comentarioRepo.save(comenNuevo);
             comentarioRepo.delete(comenNuevo);
 
@@ -144,7 +144,7 @@ public class ComentarioTest {
                     usuNuevo);
             lugarRepo.save(lugarNuevo);
 
-            Comentario comenNuevo = new Comentario("Un excelente hotel", 4.5, usuNuevo, lugarNuevo);
+            Comentario comenNuevo = new Comentario("Un excelente hotel", 4, usuNuevo, lugarNuevo);
             Comentario comenGuardado = comentarioRepo.save(comenNuevo);
             comenGuardado.setMensaje("Pesimo servicio");
             comentarioRepo.save(comenGuardado);

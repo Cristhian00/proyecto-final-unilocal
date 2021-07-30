@@ -16,9 +16,9 @@
         <h:outputScript library="js" name="mapbox-gl.js"/>
         <h:outputScript library="js" name="script-home.js"/>
     </ui:define>
-    
+
     <ui:define name="title">Unilocal | Home</ui:define>
-    
+
     <ui:define name="content">
         <div id="mapa">
             <div id="map"></div>
@@ -26,10 +26,48 @@
         <div class="container">
             <div class="">
                 <div>
-                    <h2>Categorías</h2>
+                    <strong>Filtros</strong>
                 </div>
                 <div>
-                    <p>Lista categorías</p>
+                    <nav class="navbar navbar-expand-md bg-light navbar-light" >
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <p:selectOneMenu id="ciudades" value="#{lugarBean.lugar.ciudadLugar}"
+                                                 converter="#{ciudadConverter}">
+                                    <f:selectItem itemLabel="Seleccione una ciudad: " noSelectionOption="true"/>
+                                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{lugarBean.ciudades}"/>
+                                </p:selectOneMenu>
+                            </li>
+                            <li class="nav-item">
+                                <p:selectOneMenu id="puntuacion" value="">
+                                    <f:selectItem itemLabel="Seleccione puntuación:" noSelectionOption="true"/>
+                                    <f:selectItem itemLabel="1 Estrella"/>
+                                    <f:selectItem itemLabel="2 Estrellas"/>
+                                    <f:selectItem itemLabel="3 Estrellas"/>
+                                    <f:selectItem itemLabel="4 Estrellas"/>
+                                    <f:selectItem itemLabel="5 Estrellas"/>
+                                </p:selectOneMenu>
+                            </li>
+                            <li class="nav-item">
+                                <p:selectOneMenu id="categoria" value="#{lugarBean.lugar.tipoLugar}"
+                                                 converter="#{tipoLugarConverter}">
+                                    <f:selectItem itemLabel="Seleccione un tipo: " noSelectionOption="true"/>
+                                    <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
+                                </p:selectOneMenu>
+                            </li>
+                            <li class="nav-item">
+                                <p:selectOneMenu id="distancia" value="#{lugarBean.lugar.tipoLugar}"
+                                                 converter="#{tipoLugarConverter}">
+                                    <f:selectItem itemLabel="Seleccione un rango: " noSelectionOption="true"/>
+                                    <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
+                                </p:selectOneMenu>
+                            </li>
+                            <li class="nav-item">
+                                <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar"
+                                                 icon="pi pi-search" iconPos="righ" action="#{busquedaBean.buscar}"/>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <div class="">
@@ -43,7 +81,8 @@
 
                             <p:dataViewGridItem>
                                 <div class="card" style="width: 18rem;">
-                                    <img src="/uploads/#{lugar.imagenPrincipal}" class="card-img-top" alt="..."/>
+                                    <img width="250" height="250" src="/uploads/#{lugar.imagenPrincipal}"
+                                         class="card-img-top" alt="..."/>
                                     <div class="card-body">
                                         <h5 class="card-title">#{lugar.nombre}</h5>
                                         <p class="card-text">#{lugar.descripcion}</p>
@@ -57,7 +96,8 @@
 
                             <p:dataViewListItem>
                                 <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
-                                    <p:graphicImage url="/uploads/#{lugar.imagenPrincipal}" styleClass="imagen-lugar"/>
+                                    <p:graphicImage width="150" height="150" url="/uploads/#{lugar.imagenPrincipal}"
+                                                    styleClass="imagen-lugar"/>
                                     <p:outputPanel>
                                         <h:panelGrid columns="2" cellpadding="5">
                                             <h:outputText value="Nombre:"/>
