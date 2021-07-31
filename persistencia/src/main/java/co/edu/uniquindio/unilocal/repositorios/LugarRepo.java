@@ -74,4 +74,16 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
 
     @Query("select l from Lugar l where l.estado = 'PENDIENTE'")
     List<Lugar> obtenerLugaresPendientes();
+    @Query("select l from Lugar l join Comentario  c  on l.id = c.lugarComentario.id where c.calificacion = ?1")
+    List<Lugar> obtenerLugarCalificaion(int calificion);
+
+    @Query("select  l from Lugar l join Ciudad c on l.ciudadLugar.id = c.id where c.nombre = ?1 ")
+    List<Lugar> obtenerLugarPorCiudad(String nombre);
+
+    @Query("select  l from Lugar l where l.tipoLugar.nombre= ?1")
+    List<Lugar> obtenerLugarPorTipo(String tipo);
+
+    @Query("select l.nombre, l.descripcion, l.ciudadLugar.nombre, l.tipoLugar.nombre " +
+            "from Lugar l where l.moderador.cedula = ?1 and l.estado = 'APROBADO' or  l.estado='RECHAZADO'")
+    List<Object[]> obtenerLugaresRevisadoModerador(String cedulaModerador);
 }
