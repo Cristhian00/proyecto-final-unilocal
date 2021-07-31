@@ -14,6 +14,67 @@
     <ui:define name="title">Unilocal | Administrador</ui:define>
     <ui:define name="content">
 
+        <div class="card">
+            <h:form>
+                <p:dataTable var="moderador" value="#{administradorBean.moderadores}">
+                    <f:facet name="header">
+                        Moderadores registrados. Expanda para ver detalles o eliminar
+                    </f:facet>
+                    <p:column style="width:2rem">
+                        <p:rowToggler/>
+                    </p:column>
+
+                    <p:column headerText="Cédula">
+                        <h:outputText value="#{moderador.cedula}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{moderador.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Email">
+                        <h:outputText value="#{moderador.email}"/>
+                    </p:column>
+
+                    <p:column headerText="Nickname">
+                        <h:outputText value="#{moderador.nickname}"/>
+                    </p:column>
+
+                    <p:column headerText="Contraseña">
+                        <h:outputText value="#{moderador.contrasenia}"/>
+                    </p:column>
+
+                    <p:rowExpansion>
+                        <div class="moderador">
+                            <div class="row">
+                                <div class="col" align="left">
+                                    <div class="col">
+                                        <img src="/resources/img/moderador.png" alt="img"
+                                             style="width: 200px; height: 200px"/>
+                                    </div>
+                                </div>
+                                <div class="col" align="left">
+                                    <div class="col" align="left" style="width: 100%">
+                                        <div class="moderador-admin">Administrador: #{moderador.administrador.nombre}</div>
+                                        <br/>
+                                        <div class="moderador-name">Lugares Aprobados: #{moderadorBean.lugaresAprobados.size()}</div>
+                                        <div class="moderador-cedula">Lugares Rechazados: #{moderadorBean.lugaresRechazados.size()}</div>
+                                        <div class="moderador-name">Total lugares revisados: #{moderadorBean.lugaresRevisados.size()}</div>
+                                        <br/><br/>
+                                        <p:commandButton
+                                                action="#{administradorBean.eliminarModerador(moderador.cedula)}"
+                                                icon="pi pi-trash" update="@form"
+                                                value="Eliminar moderador" iconPos="right"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </p:rowExpansion>
+                </p:dataTable>
+            </h:form>
+        </div>
+
     </ui:define>
 </ui:composition>
 </html>

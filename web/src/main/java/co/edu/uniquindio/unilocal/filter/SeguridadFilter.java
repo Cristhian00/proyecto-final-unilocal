@@ -18,9 +18,11 @@ public class SeguridadFilter implements Filter {
             throws IOException, ServletException {
 
         try {
+
             final HttpServletRequest request = (HttpServletRequest) servletRequest;
             final HttpServletResponse response = (HttpServletResponse) servletResponse;
             final String requestURI = request.getRequestURI();
+
             //Aplicar el filtro a esta carpeta
             if (requestURI.startsWith("/usuario/")) {
                 //Obtenemos el objeto seguridadBean de la sesión actual
@@ -46,14 +48,14 @@ public class SeguridadFilter implements Filter {
 
                 if (userManager != null) {
                     if (userManager.isAutenticado() && userManager.getRol().equals("administrador")) {
-                        //El usuario está logueado entonces si puede ver la página solicitada
+                        //El administrador está logueado entonces si puede ver la página solicitada
                         filterChain.doFilter(servletRequest, servletResponse);
                     } else {
-                        //El usuario no está logueado, entonces se redirecciona al inicio
+                        //El administrador no está logueado, entonces se redirecciona al inicio
                         response.sendRedirect(request.getContextPath() + PAGINA_INICIO);
                     }
                 } else {
-                    //El usuario no está logueado, entonces se redirecciona al inicio
+                    //El administrador no está logueado, entonces se redirecciona al inicio
                     response.sendRedirect(request.getContextPath() + PAGINA_INICIO);
                 }
             } else if (requestURI.startsWith("/moderador/")) {
@@ -63,23 +65,22 @@ public class SeguridadFilter implements Filter {
 
                 if (userManager != null) {
                     if (userManager.isAutenticado() && userManager.getRol().equals("moderador")) {
-                        //El usuario está logueado entonces si puede ver la página solicitada
+                        //El moderador está logueado entonces si puede ver la página solicitada
                         filterChain.doFilter(servletRequest, servletResponse);
                     } else {
-                        //El usuario no está logueado, entonces se redirecciona al inicio
+                        //El moderador no está logueado, entonces se redirecciona al inicio
                         response.sendRedirect(request.getContextPath() + PAGINA_INICIO);
                     }
                 } else {
-                    //El usuario no está logueado, entonces se redirecciona al inicio
+                    //El moderador no está logueado, entonces se redirecciona al inicio
                     response.sendRedirect(request.getContextPath() + PAGINA_INICIO);
                 }
             } else {
-                //La página solicitada no está en la carpeta /usuario entonces el filtro no aplica
+                //La página solicitada no está en la carpeta /moderador entonces el filtro no aplica
                 filterChain.doFilter(servletRequest, servletResponse);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

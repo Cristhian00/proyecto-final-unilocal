@@ -28,7 +28,7 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
     @Query("select c from Comentario c where c.lugarComentario.id = ?1")
     List<Comentario> obtenerComentarios(Integer idLugar);
 
-    @Query("select h from Horario h, IN(h.lugares) l where l.id = ?1")
+    @Query("select h from Horario h, IN(h.lugarHorario) l where l.id = ?1")
     List<Horario> obtenerHorarios(Integer idLugar);
 
     @Query("select l from Lugar l where l.nombre = ?1")
@@ -71,4 +71,7 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
 
     @Query("select l from Lugar l, IN(l.moderador) m where m.cedula = ?1")
     List<Lugar> obtenerLugaresModerador(String cedula);
+
+    @Query("select l from Lugar l where l.estado = 'PENDIENTE'")
+    List<Lugar> obtenerLugaresPendientes();
 }

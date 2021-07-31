@@ -14,6 +14,174 @@
     <ui:define name="title">Unilocal | Moderador</ui:define>
     <ui:define name="content">
 
+        <p:panel header="Moderador" style="text-align: center">
+            <div class="row" align="center">
+                <h:form>
+                    <h:panelGrid columns="3" cellpadding="5">
+                        <p:outputLabel for="nombre_moderador" value="Nombre completo"/>
+                        <p:inputText id="nombre_moderador" value="#{moderadorBean.moderador.nombre}"
+                                     required="true" requiredMessage="Debe ingresar el nombre completo"/>
+                        <p:message for="nombre_moderador"/>
+
+                        <p:outputLabel for="cedula_moderador" value="Cédula"/>
+                        <p:inputText id="cedula_moderador" value="#{moderadorBean.moderador.cedula}"
+                                     required="true" disabled="true"
+                                     requiredMessage="Debe ingresar un número de cédula"/>
+                        <p:message for="cedula_moderador"/>
+
+                        <p:outputLabel for="email_moderador" value="Email"/>
+                        <p:inputText id="email_moderador" value="#{moderadorBean.moderador.email}"
+                                     required="true"
+                                     requiredMessage="Debe ingresar el email"/>
+                        <p:message for="email_moderador"/>
+
+                        <p:outputLabel for="nickname_moderador" value="Nickname"/>
+                        <p:inputText id="nickname_moderador" value="#{moderadorBean.moderador.nickname}"
+                                     required="true"
+                                     requiredMessage="Debe ingresar el nickname"/>
+                        <p:message for="nickname_moderador"/>
+
+                        <p:outputLabel for="contrasenia_moderador" value="Contraseña"/>
+                        <p:password id="contrasenia_moderador"
+                                    value="#{moderadorBean.moderador.contrasenia}"
+                                    required="true"
+                                    requiredMessage="Debe ingresar una contraseña"/>
+                        <p:message for="contrasenia_moderador"/>
+                        <br/>
+                    </h:panelGrid>
+                    <p:commandButton value="Actualizar Datos" icon="user-edit" iconPos="righ"
+                                     action="#{moderadorBean.modificarModerador}"
+                                     update="@form"/>
+                    <p:growl for="mensaje-Moderador" showDetail="true"/>
+                </h:form>
+            </div>
+        </p:panel>
+
+        <div class="row" style="margin-top: 20px">
+            <div class="col">
+                <p:panel header="Lugares pendientes por revisar">
+                    <div class="card">
+                        <h:form>
+                            <p:dataTable var="lugar" value="#{moderadorBean.lugaresPendientes}">
+                                <f:facet name="header">
+                                    Expanda para más información
+                                </f:facet>
+                                <p:column style="width:2rem">
+                                    <p:rowToggler/>
+                                </p:column>
+
+                                <p:column headerText="Código">
+                                    <h:outputText value="#{lugar.id}"/>
+                                </p:column>
+
+                                <p:column headerText="nombre">
+                                    <h:outputText value="#{lugar.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Categoria">
+                                    <h:outputText value="#{lugar.tipoLugar.nombre}"/>
+                                </p:column>
+
+                                <p:rowExpansion>
+                                    <div class="row">
+                                        <div class="col">
+                                            <img src="/uploads/#{lugar.imagenPrincipal}" alt="img"
+                                                 style="width: 150px; height: 150px"/>
+                                            <br/>
+                                            <i class="pi pi-user"/><span
+                                                class="product-category">#{lugar.usuarioCreador.nombre}</span>
+                                            <br/>
+                                            <i class="pi pi-phone"/><span
+                                                class="product-category">#{lugar.telefono}</span>
+                                            <br/>
+                                            <i class="pi pi-home"/><span
+                                                class="product-category">#{lugar.ciudadLugar.nombre}</span>
+                                            <!--<p:rating readonly="true" value="#{product.rating}"/>-->
+                                        </div>
+                                        <div class="col">
+                                            <div class="product-description">#{lugar.descripcion}</div>
+                                            <br/>
+                                            <p:commandButton value="Ver detalles"
+                                                             action="#{inicioBean.irADetalle(lugar.id)}"
+                                                             styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                             iconPos="right"/>
+                                        </div>
+                                        <p:commandButton value="APROBAR" icon="pi pi-check" iconPos="left"
+                                                         update="@form"
+                                                         action="#{moderadorBean.aprobarLugar(lugar.id)}">
+                                        </p:commandButton>
+                                        <p:commandButton value="RECHAZAR" icon="pi pi-ban" iconPos="left"
+                                                         style="background-color: #a52834" update="@form"
+                                                         action="#{moderadorBean.rechazarLugar(id)}">
+                                        </p:commandButton>
+                                    </div>
+                                </p:rowExpansion>
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </p:panel>
+            </div>
+            <div class="col">
+                <p:panel header="Lugares Revisados">
+                    <div class="card">
+                        <h:form>
+                            <p:dataTable var="lugar" value="#{moderadorBean.lugaresRevisados}">
+                                <f:facet name="header">
+                                    Expanda para más información
+                                </f:facet>
+                                <p:column style="width:1rem">
+                                    <p:rowToggler/>
+                                </p:column>
+
+                                <p:column headerText="Código">
+                                    <h:outputText value="#{lugar.id}"/>
+                                </p:column>
+
+                                <p:column headerText="nombre">
+                                    <h:outputText value="#{lugar.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Categoria">
+                                    <h:outputText value="#{lugar.tipoLugar.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Estado">
+                                    <h:outputText value="#{lugar.estado}"/>
+                                </p:column>
+
+                                <p:rowExpansion>
+                                    <div class="row">
+                                        <div class="col">
+                                            <img src="/uploads/#{lugar.imagenPrincipal}" alt="img"
+                                                 style="width: 150px; height: 150px"/>
+                                            <br/>
+                                            <p:rating value="#{lugar.id}" readonly="true"/>
+                                            <i class="pi pi-user"/><span
+                                                class="product-category">#{lugar.usuarioCreador.nombre}</span>
+                                            <br/>
+                                            <i class="pi pi-phone"/><span
+                                                class="product-category">#{lugar.telefono}</span>
+                                            <br/>
+                                            <i class="pi pi-home"/><span
+                                                class="product-category">#{lugar.ciudadLugar.nombre}</span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="product-description">#{lugar.descripcion}</div>
+
+                                        </div>
+                                        <p:commandButton value="Ver detalles"
+                                                         action="#{inicioBean.irADetalle(lugar.id)}"
+                                                         styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                         iconPos="right"/>
+                                    </div>
+                                </p:rowExpansion>
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </p:panel>
+            </div>
+        </div>
+
     </ui:define>
 </ui:composition>
 </html>

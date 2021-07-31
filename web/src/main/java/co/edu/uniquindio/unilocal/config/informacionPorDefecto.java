@@ -1,10 +1,17 @@
 package co.edu.uniquindio.unilocal.config;
 
+import co.edu.uniquindio.unilocal.entidades.*;
 import co.edu.uniquindio.unilocal.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
-//@Component
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+@Component
 public class informacionPorDefecto implements CommandLineRunner {
 
     @Autowired
@@ -37,7 +44,7 @@ public class informacionPorDefecto implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*
+/*
         if (adminServicio.listaAdministradores().isEmpty()) {
             Administrador admin1 = new Administrador("1030677817", "Cristhian Ortiz",
                     "cortizm_1@uqvirtual.edu.co", "admin123", "admin1");
@@ -207,6 +214,6 @@ public class informacionPorDefecto implements CommandLineRunner {
             lugServicio.registrarLugar(l3);
         }
 
-         */
+*/
     }
 }

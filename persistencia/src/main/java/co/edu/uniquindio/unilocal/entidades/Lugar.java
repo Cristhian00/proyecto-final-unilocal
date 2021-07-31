@@ -85,7 +85,7 @@ public class Lugar implements Serializable {
     private Map<String, String> telefono;
 
     //Lista de horarios que tiene el lugar
-    @ManyToMany
+    @OneToMany(mappedBy = "lugarHorario")
     @JsonIgnore
     private List<Horario> horarios;
 
@@ -162,21 +162,21 @@ public class Lugar implements Serializable {
                 '}';
     }
 
-    public String getImagenPrincipal(){
+    public String getImagenPrincipal() {
 
-        if(imagenes != null && !imagenes.isEmpty()){
+        if (imagenes != null && !imagenes.isEmpty()) {
             return imagenes.get(0);
-        } else{
+        } else {
             return "default.png";
         }
     }
 
-    public int calificacionPromedio(){
+    public int calificacionPromedio() {
 
         int res = 0;
-        for(int i = 0; i < comentarios.size(); i++){
+        for (int i = 0; i < comentarios.size(); i++) {
             res += comentarios.get(i).getCalificacion();
         }
-        return res/comentarios.size();
+        return comentarios.size() == 0 ? res / comentarios.size() : 0;
     }
 }

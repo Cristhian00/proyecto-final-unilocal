@@ -52,10 +52,10 @@ public class Horario implements Serializable {
     @Pattern(regexp = "\\d{2}\\:\\d{2}", message = "Debe ingresar un formato valido de hora. Ejemplo: 09:00")
     private String horaCierre;
 
-    //Lista de lugares que tienen el horario
-    @ManyToMany(mappedBy = "horarios")
+    //Lugar que posee el horario
+    @ManyToOne
     @JsonIgnore
-    private List<Lugar> lugares;
+    private Lugar lugarHorario;
 
     /**
      * Constructor completo para crear un horario

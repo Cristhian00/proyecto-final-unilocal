@@ -36,4 +36,10 @@ public interface ModeradorRepo extends JpaRepository<Moderador, String> {
 
     @Query("select l from Moderador m, IN(m.lugares) l where m.cedula = ?1")
     List<Lugar> obtenerLugaresRevisados(String cedula);
+
+    @Query("select l from Moderador m, IN(m.lugares) l where m.cedula = ?1 and l.estado = 'APROBADO'")
+    List<Lugar> obtenerLugaresAprobados(String cedula);
+
+    @Query("select l from Moderador m, IN(m.lugares) l where m.cedula = ?1 and l.estado = 'RECHAZADO'")
+    List<Lugar> obtenerLugaresRechazados(String cedula);
 }

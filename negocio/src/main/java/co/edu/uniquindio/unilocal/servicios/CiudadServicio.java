@@ -17,4 +17,6 @@ public interface CiudadServicio {
     Ciudad obtenerCiudad(int id) throws Exception;
 
     List<Ciudad> listarCiudades();
+
+    List<Ciudad> listarCiudadesOrdenadas();
 }

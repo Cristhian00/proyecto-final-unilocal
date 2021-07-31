@@ -4,6 +4,7 @@ import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.dto.MarkerDTO;
 import co.edu.uniquindio.unilocal.entidades.Comentario;
 import co.edu.uniquindio.unilocal.entidades.Horario;
+import co.edu.uniquindio.unilocal.entidades.Usuario;
 import co.edu.uniquindio.unilocal.servicios.LugarServicio;
 import com.google.gson.Gson;
 import lombok.Getter;
@@ -47,7 +48,7 @@ public class DetalleLugarBean implements Serializable {
 
     @Getter
     @Setter
-    private List<String> imagenesBase;
+    private String favorito = "no_favorito.png";
 
     @PostConstruct
     public void init() {
@@ -59,8 +60,6 @@ public class DetalleLugarBean implements Serializable {
                 this.comentarios = lugarServicio.obtenerComentarios(id);
                 this.horarios = lugarServicio.obtenerHorarios(id);
                 this.imagenes = lugar.getImagenes();
-                this.imagenesBase = obetenerNameBaseImg(this.imagenes);
-                System.out.println("IMG base = " + this.imagenesBase);
 
                 PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(
                         new MarkerDTO(lugar.getId(), lugar.getNombre(), lugar.getTipoLugar().getNombre(),
@@ -72,20 +71,13 @@ public class DetalleLugarBean implements Serializable {
         }
     }
 
-    public List<String> obetenerNameBaseImg(List<String> imagenes) {
+    public void cambiarImagen(){
 
-        int pos = 0;
-        List<String> nameBase = new ArrayList<>();
-
-        for (int i = 0; i < imagenes.size(); i++) {
-            for (int j = 0; j < imagenes.get(i).length(); j++) {
-                if (imagenes.get(i).charAt(j) == '.') {
-                    pos = j;
-                    break;
-                }
-            }
-            nameBase.add(imagenes.get(i).substring(0, pos));
+        if(favorito.equals("favorito.png")){
+            favorito = "no_favorito.png";
+        } else{
+            favorito = "favorito.png";
         }
-        return nameBase;
     }
+
 }

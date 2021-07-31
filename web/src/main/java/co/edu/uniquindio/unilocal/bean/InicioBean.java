@@ -37,6 +37,6 @@ public class InicioBean implements Serializable {
     }
 
     public String irADetalle(int id) {
-        return "/detalleLugar?faces-redirect=true&amp;lugar=" + id;
+        return "/detalleLugar.xhtml?faces-redirect=true&amp;lugar=" + id;
     }
 }

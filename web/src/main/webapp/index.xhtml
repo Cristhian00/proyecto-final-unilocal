@@ -24,7 +24,7 @@
             <div id="map"></div>
         </div>
         <div class="container">
-            <div class="">
+            <div class="mt-4">
                 <div>
                     <strong>Filtros</strong>
                 </div>
@@ -32,37 +32,35 @@
                     <nav class="navbar navbar-expand-md bg-light navbar-light" >
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <p:selectOneMenu id="ciudades" value="#{lugarBean.lugar.ciudadLugar}"
+                                <p:selectOneMenu id="ciudades" value="#{filtrosBean.ciudad}"
                                                  converter="#{ciudadConverter}">
                                     <f:selectItem itemLabel="Seleccione una ciudad: " noSelectionOption="true"/>
-                                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{lugarBean.ciudades}"/>
+                                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{filtrosBean.ciudades}"/>
                                 </p:selectOneMenu>
                             </li>
-                            <li class="nav-item">
-                                <p:selectOneMenu id="puntuacion" value="">
+                            <li class="nav-item" style="margin-left: 3%;">
+
+                                <p:selectOneMenu id="calificacion" value="#{filtrosBean.calificacion}">
                                     <f:selectItem itemLabel="Seleccione puntuación:" noSelectionOption="true"/>
-                                    <f:selectItem itemLabel="1 Estrella"/>
-                                    <f:selectItem itemLabel="2 Estrellas"/>
-                                    <f:selectItem itemLabel="3 Estrellas"/>
-                                    <f:selectItem itemLabel="4 Estrellas"/>
-                                    <f:selectItem itemLabel="5 Estrellas"/>
+                                    <f:selectItems var="calificacion" itemLabel="#{calificaion}" value="#{filtrosBean.calificaciones}"/>
                                 </p:selectOneMenu>
+
                             </li>
-                            <li class="nav-item">
-                                <p:selectOneMenu id="categoria" value="#{lugarBean.lugar.tipoLugar}"
+                            <li class="nav-item" style="margin-left: 3%;">
+                                <p:selectOneMenu id="categoria" value="#{filtrosBean.categoria}"
                                                  converter="#{tipoLugarConverter}">
-                                    <f:selectItem itemLabel="Seleccione un tipo: " noSelectionOption="true"/>
-                                    <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
+                                    <f:selectItem itemLabel="Seleccione una categoria: " noSelectionOption="true"/>
+                                    <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{filtrosBean.tipos}"/>
                                 </p:selectOneMenu>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="margin-left: 3%;">
                                 <p:selectOneMenu id="distancia" value="#{lugarBean.lugar.tipoLugar}"
                                                  converter="#{tipoLugarConverter}">
                                     <f:selectItem itemLabel="Seleccione un rango: " noSelectionOption="true"/>
                                     <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
                                 </p:selectOneMenu>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="margin-left: 3%;">
                                 <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar"
                                                  icon="pi pi-search" iconPos="righ" action="#{busquedaBean.buscar}"/>
                             </li>
@@ -84,9 +82,10 @@
                                     <img width="250" height="250" src="/uploads/#{lugar.imagenPrincipal}"
                                          class="card-img-top" alt="..."/>
                                     <div class="card-body">
+
                                         <h5 class="card-title">#{lugar.nombre}</h5>
                                         <p class="card-text">#{lugar.descripcion}</p>
-                                        <p:commandButton value="Ver detalles"
+                                        <p:commandButton value="Ver más"
                                                          action="#{inicioBean.irADetalle(lugar.id)}"
                                                          styleClass="ui-button-raised" icon="pi pi-arrow-right"
                                                          iconPos="right"/>

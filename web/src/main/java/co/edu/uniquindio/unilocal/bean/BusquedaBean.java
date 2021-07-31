@@ -4,6 +4,8 @@ import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.dto.MarkerDTO;
 import co.edu.uniquindio.unilocal.servicios.LugarServicio;
 import com.google.gson.Gson;
+import lombok.Getter;
+import lombok.Setter;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -18,11 +20,17 @@ import java.util.stream.Collectors;
 @ViewScoped
 public class BusquedaBean implements Serializable {
 
+    @Getter
+    @Setter
     private String busqueda;
 
+    @Getter
+    @Setter
     @Value("#{param['busqueda']}")
     private String busquedaParam;
 
+    @Getter
+    @Setter
     private List<Lugar> lugares;
 
     private final LugarServicio lugarServicio;
@@ -48,29 +56,5 @@ public class BusquedaBean implements Serializable {
             return "resultadoBusqueda?faces-redirect=true&amp;busqueda=" + busqueda;
         }
         return "";
-    }
-
-    public String getBusqueda() {
-        return busqueda;
-    }
-
-    public void setBusqueda(String busqueda) {
-        this.busqueda = busqueda;
-    }
-
-    public String getBusquedaParam() {
-        return busquedaParam;
-    }
-
-    public void setBusquedaParam(String busquedaParam) {
-        this.busquedaParam = busquedaParam;
-    }
-
-    public List<Lugar> getLugares() {
-        return lugares;
-    }
-
-    public void setLugares(List<Lugar> lugares) {
-        this.lugares = lugares;
     }
 }

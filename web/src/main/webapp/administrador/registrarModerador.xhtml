@@ -12,36 +12,36 @@
 
     <ui:define name="title">Unilocal | Registrar Moderador</ui:define>
     <ui:define name="content">
-        <p:panel header="Registrar Usuario">
+        <p:panel header="Registrar Moderador" style="text-align: center">
             <h:form>
-                <h:panelGrid columns="3" cellpadding="5">
+                <h:panelGrid columns="3" cellpadding="5" style="align-items: center">
                     <p:outputLabel for="nombre_moderador" value="Nombre completo"/>
-                    <p:inputText id="nombre_moderador" value="#{moderadorBean.moderador.nombre}"
+                    <p:inputText id="nombre_moderador" value="#{administradorBean.moderador.nombre}"
                                  required="true" requiredMessage="Debe ingresar el nombre completo"/>
                     <p:message for="nombre_moderador"/>
 
                     <p:outputLabel for="cedula_moderador" value="Cédula"/>
-                    <p:inputText id="cedula_moderador" value="#{moderadorBean.moderador.cedula}" required="true"
+                    <p:inputText id="cedula_moderador" value="#{administradorBean.moderador.cedula}" required="true"
                                  requiredMessage="Debe ingresar un número de cédula"/>
                     <p:message for="cedula_moderador"/>
 
                     <p:outputLabel for="email_moderador" value="Email"/>
-                    <p:inputText id="email_moderador" value="#{moderadorBean.moderador.email}" required="true"
+                    <p:inputText id="email_moderador" value="#{administradorBean.moderador.email}" required="true"
                                  requiredMessage="Debe ingresar el email"/>
                     <p:message for="email_moderador"/>
 
                     <p:outputLabel for="nickname_moderador" value="Nickname"/>
-                    <p:inputText id="nickname_moderador" value="#{moderadorBean.moderador.nickname}" required="true"
+                    <p:inputText id="nickname_moderador" value="#{administradorBean.moderador.nickname}" required="true"
                                  requiredMessage="Debe ingresar el nickname"/>
                     <p:message for="nickname_moderador"/>
 
                     <p:outputLabel for="contrasenia_moderador" value="Contraseña"/>
-                    <p:password id="contrasenia_moderador" value="#{moderadorBean.moderador.contrasenia}"
+                    <p:password id="contrasenia_moderador" value="#{administradorBean.moderador.contrasenia}"
                                 required="true"
                                 requiredMessage="Debe ingresar una contraseña"/>
                     <p:message for="contrasenia_moderador"/>
                 </h:panelGrid>
-                <p:commandButton value="Registrar Moderador" action="#{moderadorBean.registrarModerador}"
+                <p:commandButton value="Registrar Moderador" action="#{administradorBean.registrarModerador}"
                                  update="@form"/>
                 <p:growl for="mensaje-Moderador" showDetail="true"/>
             </h:form>

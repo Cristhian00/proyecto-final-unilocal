@@ -26,57 +26,86 @@
                 <div class="col">
                     <div id="mapa" style="width: 100%; height: 400px"/>
                 </div>
-
-                <div class="col">
-                    <h:form id="crear-lugar">
-
-                        <h:inputHidden id="lat-lugar" value="#{lugarBean.lugar.latitud}"/>
-                        <h:inputHidden id="lng-lugar" value="#{lugarBean.lugar.longitud}"/>
-
-                        <h:panelGrid columns="3" cellpadding="5">
-                            <p:outputLabel for="nombre_lugar" value="Nombre: "/>
-                            <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" required="true"/>
-                            <p:message for="nombre_lugar"/>
-
-                            <p:outputLabel for="tipo_lugar" value="Tipo lugar: "/>
-                            <p:selectOneMenu id="tipo_lugar" value="#{lugarBean.lugar.tipoLugar}"
-                                             converter="#{tipoLugarConverter}" required="true"
-                                             requiredMessage="Debe seleccionar un tipo">
-                                <f:selectItem itemLabel="Seleccione: " noSelectionOption="true"/>
-                                <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
-                            </p:selectOneMenu>
-                            <p:message for="tipo_lugar"/>
-
-                            <p:outputLabel for="ciudad_lugar" value="Ciudad: "/>
-                            <p:selectOneMenu id="ciudad_lugar" value="#{lugarBean.lugar.ciudadLugar}"
-                                             converter="#{ciudadConverter}" required="true"
-                                             requiredMessage="Debe seleccionar una ciudad">
-                                <f:selectItem itemLabel="Seleccione: " noSelectionOption="true"/>
-                                <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{lugarBean.ciudades}"/>
-                            </p:selectOneMenu>
-                            <p:message for="ciudad_lugar"/>
-
-                            <p:outputLabel for="descripcion_lugar" value="Descripción: "/>
-                            <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}"
-                                             required="true"/>
-                            <p:message for="descripcion_lugar"/>
-
-                            <p:outputLabel for="imagenes_lugar" value="Imágenes: "/>
-                            <p:fileUpload id="imagenes_lugar" listener="#{lugarBean.subirImagenes}" mode="advanced" dragDropSupport="true"
-                                          update="messages" multiple="true" sizeLimit="1000000" fileLimit="5"
-                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
-                            <p:message for="imagenes_lugar"/>
-
-
-
-                            <p:growl id="messages" showDetail="true"/>
-
-                        </h:panelGrid>
-                        <p:commandButton action="#{lugarBean.registrarLugar()}" value="Registrar Lugar" update="@form"/>
-                        <p:growl for="mensaje_lugar" showDetail="true"/>
-                    </h:form>
-                </div>
             </div>
+            <p:panel header="Información y Horarios">
+                <h:form id="crear-lugar">
+                    <div class="row">
+                        <div class="col">
+
+
+                            <h:inputHidden id="lat-lugar" value="#{lugarBean.lugar.latitud}"/>
+                            <h:inputHidden id="lng-lugar" value="#{lugarBean.lugar.longitud}"/>
+
+                            <h:panelGrid columns="3" cellpadding="5">
+                                <p:outputLabel for="nombre_lugar" value="Nombre: "/>
+                                <p:inputText id="nombre_lugar" value="#{lugarBean.lugar.nombre}" required="true"
+                                             size="35"/>
+                                <p:message for="nombre_lugar"/>
+
+                                <p:outputLabel for="tipo_lugar" value="Categoria: "/>
+                                <p:selectOneMenu id="tipo_lugar" value="#{lugarBean.lugar.tipoLugar}"
+                                                 converter="#{tipoLugarConverter}" required="true"
+                                                 requiredMessage="Debe seleccionar un tipo">
+                                    <f:selectItem itemLabel="Seleccione: " noSelectionOption="true"/>
+                                    <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{lugarBean.tipos}"/>
+                                </p:selectOneMenu>
+                                <p:message for="tipo_lugar"/>
+
+                                <p:outputLabel for="ciudad_lugar" value="Ciudad: "/>
+                                <p:selectOneMenu id="ciudad_lugar" value="#{lugarBean.lugar.ciudadLugar}"
+                                                 converter="#{ciudadConverter}" required="true"
+                                                 requiredMessage="Debe seleccionar una ciudad">
+                                    <f:selectItem itemLabel="Seleccione: " noSelectionOption="true"/>
+                                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"
+                                                   value="#{lugarBean.ciudades}"/>
+                                </p:selectOneMenu>
+                                <p:message for="ciudad_lugar" style="width: 200px"/>
+
+                                <p:outputLabel for="descripcion_lugar" value="Descripción: "/>
+                                <p:inputTextarea id="descripcion_lugar" value="#{lugarBean.lugar.descripcion}"
+                                                 required="true" cols="35" rows="6"/>
+                                <p:message for="descripcion_lugar"/>
+
+                                <p:outputLabel for="imagenes_lugar" value="Imágenes: "/>
+                                <p:fileUpload id="imagenes_lugar" listener="#{lugarBean.subirImagenes}" mode="advanced"
+                                              dragDropSupport="true"
+                                              update="messages" multiple="true" sizeLimit="1000000" fileLimit="5"
+                                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width: 80%"/>
+                                <p:message for="imagenes_lugar"/>
+                                <p:growl id="messages" showDetail="true"/>
+
+                            </h:panelGrid>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <h1>Horarios</h1>
+                                <h:form>
+                                    <div class="card">
+                                        <p:dataTable var="horario" value="#{detalleLugarBean.horarios}">
+                                            <p:column headerText="Día">
+                                                <h:outputText value="#{horario.dia}"/>
+                                            </p:column>
+
+                                            <p:column headerText="Hora apertura">
+                                                <h:outputText value="#{horario.horaApertura}"/>
+                                            </p:column>
+
+                                            <p:column headerText="Hora cierre">
+                                                <h:outputText value="#{horario.horaCierre}"/>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                        <div align="center">
+                            <p:commandButton action="#{lugarBean.registrarLugar()}" value="Registrar Lugar"
+                                             update="@form"/>
+                            <p:growl for="mensaje_lugar" showDetail="true"/>
+                        </div>
+                    </div>
+                </h:form>
+            </p:panel>
         </p:panel>
     </ui:define>
 </ui:composition>

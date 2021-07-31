@@ -178,4 +178,9 @@ public class LugarServicioImp implements LugarServicio {
         return lugarRepo.obtenerHorarios(idLugar);
     }
 
+    @Override
+    public List<Lugar> obtenerLugaresPendientes() {
+        return lugarRepo.obtenerLugaresPendientes();
+    }
+
 }

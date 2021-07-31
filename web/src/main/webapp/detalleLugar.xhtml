@@ -6,6 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
 
@@ -32,60 +33,129 @@
                 </div>
 
                 <div class="col">
-                    <h1>#{detalleLugarBean.lugar.nombre}</h1>
+                    <div class="row">
+                        <div class="col">
+                            <h1>#{detalleLugarBean.lugar.nombre}</h1>
+                            <p:rating value="#{detalleLugarBean.lugar.id}" readonly="true"/>
+                            <br/>
+                            <h4>
+                                <img src="/resources/img/marcador.png" alt="img"
+                                     style="width: 30px; height: 30px"/>
+                                #{detalleLugarBean.lugar.ciudadLugar.nombre}
+                            </h4>
+                            <h4>
+                                <img src="/resources/img/categoria.png" alt="img"
+                                     style="width: 30px; height: 30px"/>
+                                #{detalleLugarBean.lugar.tipoLugar.nombre}
+                            </h4>
 
-                    <p:rating value="#{3}" readonly="true"/>
+                        </div>
+                        <div class="col">
+                            <h:commandButton action="#{detalleLugarBean.cambiarImagen()}"
+                                             image="/resources/img/#{detalleLugarBean.favorito}"
+                                             style="width: 30px; height: 30px; margin-left: 200px"/>
+                            <!--
+                            <button id="close" class="closing" onclick=""
+                                    style="background: none; border: none; margin-left: 200px">
+                                <img src="/resources/img/#{detalleLugarBean.favorito}" alt="Favorito"
+                                     style="width: 30px; height: 30px"/>
+                            </button>
+                            -->
+                        </div>
+                    </div>
+                    <div class="content">
+                        <br/>
+                        <h5>
+                            <img src="/resources/img/informacion.png" alt="img"
+                                 style="width: 30px; height: 30px"/>
+                            #{detalleLugarBean.lugar.descripcion}
+                        </h5>
+
+                    </div>
                 </div>
             </div>
         </p:panel>
         <p:panel>
-            <div class="_3pPyAT">
-                <ul class="_3TYstR _2RH2yJ">
-                    <li class="_3Ca02T _2Y71AG">
-                        <div>
-                            <span>Estacionamiento gratis</span>
-                        </div>
-                    </li>
-                    <li class="_1ADbJ7 _2Y71AG">
-                        <div>
-                            <span>Piscina</span>
-                        </div>
-                    </li>
-                    <li class="_1aUzLh _2Y71AG">
-                        <div>
-                            <span>Wifi gratis</span>
-                        </div>
-                    </li>
-                    <li class="_26-GzK _2Y71AG">
-                        <div>
-                            <span>Traslado desde/hacia el aeropuerto</span>
-                        </div>
-                    </li>
-                </ul>
+            <div class="row">
+                <div class="col">
+                    <span>
+                        <img src="/resources/img/parqueadero.png" alt="img"
+                             style="width: 30px; height: 30px"/>
+                        Estacionamiento gratis
+                    </span>
+                </div>
+                <div class="col">
+                    <span>
+                        <img src="/resources/img/wifi.png" alt="img"
+                             style="width: 30px; height: 30px"/>
+                        Wifi gratis
+                    </span>
+                </div>
+                <div class="col">
+                    <span>
+                        <img src="/resources/img/picni.png" alt="img"
+                             style="width: 30px; height: 30px"/>
+                        Zona de picni
+                    </span>
+                </div>
+                <div class="col">
+                    <span>
+                        <img src="/resources/img/tarjeta.png" alt="img"
+                             style="width: 30px; height: 30px"/>
+                        Se reciben todas las tarjetas
+                    </span>
+                </div>
             </div>
         </p:panel>
 
+        <p:panel>
+            <div class="row">
+                <div class="col">
+                    <div id="mapa">
+                        <div id="map"></div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <h1 align="center">Horarios</h1>
+                        <h:form>
+                            <div class="card">
+                                <p:dataTable var="horario" value="#{detalleLugarBean.horarios}">
+                                    <p:column headerText="Día">
+                                        <h:outputText value="#{horario.dia}"/>
+                                    </p:column>
 
-        <div id="mapa">
-            <div id="map"></div>
-        </div>
+                                    <p:column headerText="Hora apertura">
+                                        <h:outputText value="#{horario.horaApertura}"/>
+                                    </p:column>
 
-        <div class="media border p-3">
-            <img src="img_avatar3.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;"/>
-            <div class="media-body">
-                <h4>John Doe <small><i>Posted on February 19, 2016</i></small></h4>
-                <p>Lorem ipsum...</p>
-                <div class="media p-3">
-                    <img src="img_avatar2.png" alt="Jane Doe" class="mr-3 mt-3 rounded-circle" style="width:45px;"/>
-                    <div class="media-body">
-                        <h4>Jane Doe <small><i>Posted on February 20 2016</i></small></h4>
-                        <p>Lorem ipsum...</p>
+                                    <p:column headerText="Hora cierre">
+                                        <h:outputText value="#{horario.horaCierre}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </h:form>
                     </div>
                 </div>
             </div>
-        </div>
+        </p:panel>
 
         <p:panel header="Comentarios" styleClass="mt-3">
+            <div class="media border p-3">
+                <img src="img_avatar3.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;"/>
+                <div class="media-body">
+                    <h4>John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+                    <p>Lorem ipsu....</p>
+                    <div class="media p-3">
+                        <img src="img_avatar2.png" alt="Jane Doe" class="mr-3 mt-3 rounded-circle" style="width:45px;"/>
+                        <div class="media-body">
+                            <h4>Jane Doe <small><i>Posted on February 20 2016</i></small></h4>
+                            <p>Lorem ipsum...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <p:dataList id="lista-c" value="#{detalleLugarBean.comentarios}" var="comentario"
                         emptyMessage="No hay comentarios" type="">
                 <div>

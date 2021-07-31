@@ -74,7 +74,7 @@ public class LugarBean implements Serializable {
         this.imagenes = new ArrayList<>();
         this.ciudades = ciudadServicio.listarCiudades();
         this.tipos = tipoLugarServicio.listarTipoLugar();
-        this.horarios = horarioServicio.listarHorario();
+        this.horarios = new ArrayList<>();
     }
 
     public String registrarLugar() {

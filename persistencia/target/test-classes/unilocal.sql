@@ -79,16 +79,16 @@ insert into lugar(nombre, ciudad_lugar_id, descripcion, estado, fecha_creacion, 
 
 -- ------------------------------------- Comentarios ---------------------------------------------------------
 insert into comentario(calificacion, fecha_comentario, mensaje, lugar_comentario_id, usuario_comentario_cedula)
-    values (4.5, "2016/04/10", "Excelente servicio", 1, "111");
+    values (4, "2016/04/10", "Excelente servicio", 1, "111");
 
 insert into comentario(calificacion, fecha_comentario, mensaje, lugar_comentario_id, usuario_comentario_cedula)
-    values (3.0, "2016/04/10", "Mala atención", 2, "112");
+    values (3, "2016/04/10", "Mala atención", 2, "112");
 
 insert into comentario(calificacion, fecha_comentario, mensaje, lugar_comentario_id, usuario_comentario_cedula)
-    values (2.0, "2016/04/10", "No lo recomiendo", 3, "113");
+    values (2, "2016/04/10", "No lo recomiendo", 3, "113");
 
 insert into comentario(calificacion, fecha_comentario, mensaje, lugar_comentario_id, usuario_comentario_cedula)
-    values (5.0, "2016/04/10", "Excelente servicio", 4, "111");
+    values (5, "2016/04/10", "Excelente servicio", 4, "111");
 
 -- -------------------------------------- Favoritos -------------------------------------------------------------
 insert into favorito(id_usuario, id_lugar) values ("111", 1);

@@ -16,6 +16,9 @@ public interface CiudadRepo extends JpaRepository<Ciudad, Integer> {
 
     Optional<Ciudad> findById(int id);
 
+    @Query("select c from Ciudad c order by c.nombre")
+    List<Ciudad> listarCiudadesOrdenadas();
+
     @Query("select u from Ciudad c, IN(c.usuarios) u where c.nombre = ?1")
     List<Usuario> obtenerUsuarios(String ciudad);
 

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unilocal.servicios;
 
+import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.entidades.Moderador;
 import co.edu.uniquindio.unilocal.repositorios.ModeradorRepo;
 import org.springframework.stereotype.Service;
@@ -149,5 +150,20 @@ public class ModeradorServicioImp implements ModeradorServicio{
     @Override
     public List<Moderador> listaModerador() {
         return moderadorRepo.obtenerModeradores();
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresRevisados(String cedula) {
+        return moderadorRepo.obtenerLugaresRevisados(cedula);
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresAprobados(String cedula) {
+        return moderadorRepo.obtenerLugaresAprobados(cedula);
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresRechazados(String cedula) {
+        return moderadorRepo.obtenerLugaresRechazados(cedula);
     }
 }

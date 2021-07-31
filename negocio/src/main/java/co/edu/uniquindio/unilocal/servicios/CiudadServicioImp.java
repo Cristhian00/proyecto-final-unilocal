@@ -98,4 +98,9 @@ public class CiudadServicioImp implements CiudadServicio {
     public List<Ciudad> listarCiudades() {
         return ciudadRepo.findAll();
     }
+
+    public List<Ciudad> listarCiudadesOrdenadas(){
+
+        return ciudadRepo.listarCiudadesOrdenadas();
+    }
 }

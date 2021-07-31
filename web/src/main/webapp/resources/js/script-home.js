@@ -6,19 +6,19 @@ function crearMapa(lugares) {
     let markers = [];
 
     for (let l of lugares) {
-        markers.push( new mapboxgl.Marker().setLngLat([l.lng, l.lat]).setPopup(new mapboxgl.Popup()
+        markers.push(new mapboxgl.Marker().setLngLat([l.lng, l.lat]).setPopup(new mapboxgl.Popup()
             .setHTML("<strong>" + l.nombre + "</strong><br>" + l.descripcion +
                 "<br><a href='/detalleLugar.xhtml?lugar=" + l.id + "'>Ver detalles</a>") ));
         bounds.extend([l.lng, l.lat]);
     }
-    if(bounds.isEmpty()){
+    if (bounds.isEmpty()) {
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [-72.309, 4.473],
-            zoom: 8
+            zoom: 5
         });
-    } else{
+    } else {
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',

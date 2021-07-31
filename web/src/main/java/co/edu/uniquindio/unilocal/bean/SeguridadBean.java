@@ -44,10 +44,8 @@ public class SeguridadBean implements Serializable {
     public String iniciarSesion() {
 
         if (emailOrNick != null && contrasenia != null) {
-
             try {
                 persona = personaServicio.login(emailOrNick, contrasenia);
-
                 if(persona instanceof Usuario){
                     rol = "usuario";
                 } else if(persona instanceof Administrador){
@@ -55,20 +53,18 @@ public class SeguridadBean implements Serializable {
                 } else{
                     rol = "moderador";
                 }
-
                 autenticado = true;
-                return "/index?faces-redirect=true";
+                return "/index.xhtml?faces-redirect=true";
             } catch (Exception e) {
                 FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("mensaje-sesion", m);
             }
-
         }
         return null;
     }
 
     public String cerrarSesion(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/index?faces-redirect=true";
+        return "/index.xhtml?faces-redirect=true";
     }
 }

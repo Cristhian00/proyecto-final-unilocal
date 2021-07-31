@@ -28,4 +28,6 @@ public interface LugarServicio {
 
     List<Horario> obtenerHorarios(Integer idLugar);
 
+    List<Lugar> obtenerLugaresPendientes();
+
 }

@@ -39,10 +39,10 @@ public class UsuarioBean implements Serializable {
     @PostConstruct
     public void inicializar(){
         this.usuario = new Usuario();
-        this.ciudades = ciudadServicio.listarCiudades();
+        this.ciudades = ciudadServicio.listarCiudadesOrdenadas();
     }
 
-    public void registrarUsuario(){
+    public String registrarUsuario(){
 
         FacesMessage msg;
         try {
@@ -50,11 +50,13 @@ public class UsuarioBean implements Serializable {
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Alerta", "El registro fue exitoso");
             FacesContext.getCurrentInstance().addMessage("mensaje-usuario", msg);
+            return "/index.xhtml?faces-redirect=true";
         } catch (Exception e) {
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensaje-usuario", msg);
         }
+        return "";
     }
 
     public void modificarUsuario(){
