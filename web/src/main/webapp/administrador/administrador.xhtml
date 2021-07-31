@@ -57,9 +57,9 @@
                                     <div class="col" align="left" style="width: 100%">
                                         <div class="moderador-admin">Administrador: #{moderador.administrador.nombre}</div>
                                         <br/>
-                                        <div class="moderador-name">Lugares Aprobados: #{moderadorBean.lugaresAprobados.size()}</div>
-                                        <div class="moderador-cedula">Lugares Rechazados: #{moderadorBean.lugaresRechazados.size()}</div>
-                                        <div class="moderador-name">Total lugares revisados: #{moderadorBean.lugaresRevisados.size()}</div>
+                                        <div class="moderador-name">Lugares Aprobados: #{administradorBean.lugaresApro(moderador.cedula)}</div>
+                                        <div class="moderador-cedula">Lugares Rechazados: #{administradorBean.lugaresRecha(moderador.cedula)}</div>
+                                        <div class="moderador-name">Total lugares revisados: #{administradorBean.lugaresRev(moderador.cedula)}</div>
                                         <br/><br/>
                                         <p:commandButton
                                                 action="#{administradorBean.eliminarModerador(moderador.cedula)}"

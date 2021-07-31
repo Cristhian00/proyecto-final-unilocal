@@ -16,9 +16,136 @@
         <h:outputScript library="js" name="mapbox-gl.js"/>
     </ui:define>
 
-    <ui:define name="title">Unilocal | Perfil Usuario</ui:define>
-
+    <ui:define name="title">Unilocal | Usuario</ui:define>
     <ui:define name="content">
+
+        <p:panel header="Usuario" style="width: 55%; margin-left: 25%">
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="nombre_usuario" value="Nombre completo"/>
+                    <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}"
+                                 required="true" requiredMessage="Debe ingresar el nombre completo"/>
+                    <p:message for="nombre_usuario"/>
+
+                    <p:outputLabel for="cedula_usuario" value="Cédula"/>
+                    <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.cedula}" required="true"
+                                 requiredMessage="Debe ingresar un número de cédula" disabled="true"/>
+                    <p:message for="cedula_usuario"/>
+
+                    <p:outputLabel for="email_usuario" value="Email"/>
+                    <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" required="true"
+                                 requiredMessage="Debe ingresar el email"/>
+                    <p:message for="email_usuario"/>
+
+                    <p:outputLabel for="nickname_usuario" value="Nickname"/>
+                    <p:inputText id="nickname_usuario" value="#{usuarioBean.usuario.nickname}" required="true"
+                                 requiredMessage="Debe ingresar el nickname"/>
+                    <p:message for="nickname_usuario"/>
+
+                    <p:outputLabel for="ciudad_usuario" value="Ciudad: "/>
+                    <p:selectOneMenu id="ciudad_usuario" value="#{usuarioBean.usuario.ciudadUsuario}"
+                                     converter="#{ciudadConverter}" required="true"
+                                     requiredMessage="Debe seleccionar una ciudad">
+                        <f:selectItem itemLabel="Seleccione: " noSelectionOption="true"/>
+                        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.ciudades}"/>
+                    </p:selectOneMenu>
+                    <p:message for="ciudad_usuario"/>
+
+                    <p:outputLabel for="contrasenia_usuario" value="Contraseña"/>
+                    <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.contrasenia}" required="true"
+                                requiredMessage="Debe ingresar una contraseña"/>
+                    <p:message for="contrasenia_usuario"/>
+                </h:panelGrid>
+                <p:commandButton styleClass="mt-4" value="Actualizar datos" icon="user-edit" iconPos="righ"
+                                 action="#{usuarioBean.modificarUsuario}"
+                                 update="@form"/>
+                <p:growl for="mensaje-usuario" showDetail="true"/>
+            </h:form>
+        </p:panel>
+
+        <div class="row">
+            <div class="col-7">
+                <p:panel header="Lugares propios">
+                    <div class="card">
+                        <h:form>
+                            <p:dataTable var="lugar" value="#{usuarioBean.lugaresPropios}">
+                                <f:facet name="header">
+                                    Expanda para más información
+                                </f:facet>
+                                <p:column style="width:1rem">
+                                    <p:rowToggler/>
+                                </p:column>
+
+                                <p:column headerText="nombre">
+                                    <h:outputText value="#{lugar.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Estado">
+                                    <h:outputText value="#{lugar.estado}"/>
+                                </p:column>
+
+                                <p:column headerText="Calificación">
+                                    <p:rating value="#{lugar.id}" readonly="true"/>
+                                </p:column>
+
+                                <p:rowExpansion>
+                                    <div class="row">
+                                        <div class="col">
+                                            <img src="/uploads/#{lugar.imagenPrincipal}" alt="img"
+                                                 style="width: 150px; height: 150px"/>
+                                            <br/>
+                                            <i class="pi pi-id-card"/><span
+                                                class="product-category">Moderador: #{lugar.moderador.nombre}</span>
+                                            <br/>
+                                            <i class="pi pi-envelope"/><span
+                                                class="product-category">Email: #{lugar.moderador.email}</span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="product-description">#{lugar.descripcion}</div>
+
+                                        </div>
+                                        <p:commandButton value="Responder comentarios"
+                                                         action="#{inicioBean.irADetalle(lugar.id)}"
+                                                         styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                         iconPos="right"/>
+                                    </div>
+                                </p:rowExpansion>
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </p:panel>
+            </div>
+
+            <div class="col-5">
+                <p:panel header="Lugares favoritos">
+                    <div class="card">
+                        <h:form>
+                            <p:dataTable var="lugar" value="#{usuarioBean.lugaresFavoritos}">
+
+                                <p:column style="width:1rem">
+                                    <p:rowToggler/>
+                                </p:column>
+
+                                <p:column headerText="nombre">
+                                    <h:outputText value="#{lugar.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="ciudad">
+                                    <h:outputText value="#{lugar.ciudadLugar.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Detalles">
+                                    <p:commandButton value="Ver detalles"
+                                                     action="#{inicioBean.irADetalle(lugar.id)}"
+                                                     styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                     iconPos="right"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </p:panel>
+            </div>
+        </div>
 
     </ui:define>
 </ui:composition>

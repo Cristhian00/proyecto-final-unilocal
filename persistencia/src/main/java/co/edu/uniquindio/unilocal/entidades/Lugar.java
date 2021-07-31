@@ -174,9 +174,10 @@ public class Lugar implements Serializable {
     public int calificacionPromedio() {
 
         int res = 0;
+
         for (int i = 0; i < comentarios.size(); i++) {
             res += comentarios.get(i).getCalificacion();
         }
-        return comentarios.size() == 0 ? res / comentarios.size() : 0;
+        return comentarios.size() == 0 ? Math.round(res / comentarios.size()) : 0;
     }
 }

@@ -12,47 +12,48 @@
 
     <ui:define name="title">Unilocal | Registrar Usuario</ui:define>
     <ui:define name="content">
-        <p:panel header="Registrar Usuario" style="align-items: center">
-            <h:form>
-                <h:panelGrid columns="3" cellpadding="5">
-                    <p:outputLabel for="nombre_usuario" value="Nombre completo"/>
-                    <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}"
-                                 required="true" requiredMessage="Debe ingresar el nombre completo"/>
-                    <p:message for="nombre_usuario"/>
+        <p:panel header="Registrar Usuario" style="width: 55%; margin-left: 25%">
+                <h:form>
+                    <h:panelGrid columns="3" cellpadding="5">
+                        <p:outputLabel for="nombre_usuario" value="Nombre completo"/>
+                        <p:inputText id="nombre_usuario" value="#{usuarioRegBean.usuario.nombre}"
+                                     required="true" requiredMessage="Debe ingresar el nombre completo"/>
+                        <p:message for="nombre_usuario"/>
 
-                    <p:outputLabel for="cedula_usuario" value="Cédula"/>
-                    <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.cedula}" required="true"
-                                 requiredMessage="Debe ingresar un número de cédula"/>
-                    <p:message for="cedula_usuario"/>
+                        <p:outputLabel for="cedula_usuario" value="Cédula"/>
+                        <p:inputText id="cedula_usuario" value="#{usuarioRegBean.usuario.cedula}" required="true"
+                                     requiredMessage="Debe ingresar un número de cédula"/>
+                        <p:message for="cedula_usuario"/>
 
-                    <p:outputLabel for="email_usuario" value="Email"/>
-                    <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" required="true"
-                                 requiredMessage="Debe ingresar el email"/>
-                    <p:message for="email_usuario"/>
+                        <p:outputLabel for="email_usuario" value="Email"/>
+                        <p:inputText id="email_usuario" value="#{usuarioRegBean.usuario.email}" required="true"
+                                     requiredMessage="Debe ingresar el email"/>
+                        <p:message for="email_usuario"/>
 
-                    <p:outputLabel for="nickname_usuario" value="Nickname"/>
-                    <p:inputText id="nickname_usuario" value="#{usuarioBean.usuario.nickname}" required="true"
-                                 requiredMessage="Debe ingresar el nickname"/>
-                    <p:message for="nickname_usuario"/>
+                        <p:outputLabel for="nickname_usuario" value="Nickname"/>
+                        <p:inputText id="nickname_usuario" value="#{usuarioRegBean.usuario.nickname}" required="true"
+                                     requiredMessage="Debe ingresar el nickname"/>
+                        <p:message for="nickname_usuario"/>
 
-                    <p:outputLabel for="ciudad_usuario" value="Ciudad: "/>
-                    <p:selectOneMenu id="ciudad_usuario" value="#{usuarioBean.usuario.ciudadUsuario}"
-                                     converter="#{ciudadConverter}" required="true"
-                                     requiredMessage="Debe seleccionar una ciudad">
-                        <f:selectItem itemLabel="Seleccione: " noSelectionOption="true"/>
-                        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.ciudades}"/>
-                    </p:selectOneMenu>
-                    <p:message for="ciudad_usuario"/>
+                        <p:outputLabel for="ciudad_usuario" value="Ciudad: "/>
+                        <p:selectOneMenu id="ciudad_usuario" value="#{usuarioRegBean.usuario.ciudadUsuario}"
+                                         converter="#{ciudadConverter}" required="true"
+                                         requiredMessage="Debe seleccionar una ciudad">
+                            <f:selectItem itemLabel="Seleccione: " noSelectionOption="true"/>
+                            <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioRegBean.ciudades}"/>
+                        </p:selectOneMenu>
+                        <p:message for="ciudad_usuario"/>
 
-                    <p:outputLabel for="contrasenia_usuario" value="Contraseña"/>
-                    <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.contrasenia}" required="true"
-                                requiredMessage="Debe ingresar una contraseña"/>
-                    <p:message for="contrasenia_usuario"/>
-                </h:panelGrid>
-                <p:commandButton styleClass="mt-4" value="Registrar Usuario" action="#{usuarioBean.registrarUsuario}"
-                                 update="@form"/>
-                <p:growl for="mensaje-usuario" showDetail="true"/>
-            </h:form>
+                        <p:outputLabel for="contrasenia_usuario" value="Contraseña"/>
+                        <p:password id="contrasenia_usuario" value="#{usuarioRegBean.usuario.contrasenia}" required="true"
+                                    requiredMessage="Debe ingresar una contraseña"/>
+                        <p:message for="contrasenia_usuario"/>
+                    </h:panelGrid>
+                    <p:commandButton styleClass="mt-4" value="Registrar Usuario"
+                                     action="#{usuarioRegBean.registrarUsuario}"
+                                     update="@form"/>
+                    <p:growl for="mensaje-usuario" showDetail="true"/>
+                </h:form>
         </p:panel>
     </ui:define>
 </ui:composition>

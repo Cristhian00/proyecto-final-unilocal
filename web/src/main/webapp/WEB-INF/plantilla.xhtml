@@ -88,6 +88,8 @@
                     </h:panelGrid>
                     <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesion}"
                                      icon="pi pi-sign-in" iconPos="left" styleClass="mt-4" update="@form"/>
+                    <p:commandButton value="Recuperar contraseña" action="#{seguridadBean.iniciarSesion}" style="margin-left: 30px"
+                                     icon="pi pi-key" iconPos="left" styleClass="mt-4" update="@form"/>
                     <p:growl for="mensaje-sesion" showDetail="true"/>
                 </h:form>
             </p:dialog>

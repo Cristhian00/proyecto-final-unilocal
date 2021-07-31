@@ -72,6 +72,7 @@ public class Comentario implements Serializable {
         this.calificacion = calificacion;
         this.usuarioComentario = usuarioComentario;
         this.lugarComentario = lugarComentario;
+        this.respuesta = "";
     }
 
     /**

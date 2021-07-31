@@ -1,15 +1,11 @@
 package co.edu.uniquindio.unilocal.bean;
 
-import co.edu.uniquindio.unilocal.entidades.Lugar;
-import co.edu.uniquindio.unilocal.entidades.Persona;
-import co.edu.uniquindio.unilocal.servicios.CiudadServicio;
-import co.edu.uniquindio.unilocal.servicios.LugarServicio;
-import co.edu.uniquindio.unilocal.servicios.UsuarioServicio;
 import co.edu.uniquindio.unilocal.entidades.Ciudad;
 import co.edu.uniquindio.unilocal.entidades.Usuario;
+import co.edu.uniquindio.unilocal.servicios.CiudadServicio;
+import co.edu.uniquindio.unilocal.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -21,11 +17,10 @@ import java.util.List;
 
 @Component
 @RequestScope
-public class UsuarioBean implements Serializable {
+public class UsuarioRegBean implements Serializable {
 
     private final UsuarioServicio usuServicio;
     private final CiudadServicio ciudadServicio;
-    private final LugarServicio lugarServicio;
 
     @Getter
     @Setter
@@ -33,55 +28,33 @@ public class UsuarioBean implements Serializable {
 
     @Getter
     @Setter
-    private Ciudad ciudad;
-
-    @Getter
-    @Setter
-    private Lugar lugar;
-
-    @Getter
-    @Setter
     private List<Ciudad> ciudades;
 
-    @Getter
-    @Setter
-    private List<Lugar> lugaresFavoritos;
-
-    @Getter
-    @Setter
-    private List<Lugar> lugaresPropios;
-
-    @Value(value = "#{seguridadBean.persona}")
-    private Persona personaLogin;
-
-    public UsuarioBean(UsuarioServicio usuServicio, CiudadServicio ciudadServicio, LugarServicio lugarServicio) {
+    public UsuarioRegBean(UsuarioServicio usuServicio, CiudadServicio ciudadServicio){
         this.usuServicio = usuServicio;
         this.ciudadServicio = ciudadServicio;
-        this.lugarServicio = lugarServicio;
     }
 
     @PostConstruct
-    public void inicializar() {
-        this.usuario = (Usuario) personaLogin;
+    public void inicializar(){
+        this.usuario = new Usuario();
         this.ciudades = ciudadServicio.listarCiudadesOrdenadas();
-        this.lugaresPropios = usuServicio.obtenerLugares(usuario.getCedula());
-        this.lugaresFavoritos = usuServicio.obtenerLugaresFavoritos(usuario.getCedula());
     }
 
-    public void modificarUsuario() {
+    public String registrarUsuario() {
 
         FacesMessage msg;
         try {
-            usuServicio.actualizarUsuario(usuario);
+            usuServicio.registraUsuario(usuario);
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-                    "Alerta", "Se actualizo con exito");
+                    "Alerta", "El registro fue exitoso");
             FacesContext.getCurrentInstance().addMessage("mensaje-usuario", msg);
+            return "/index.xhtml?faces-redirect=true";
         } catch (Exception e) {
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensaje-usuario", msg);
         }
+        return "";
     }
-
-
 }

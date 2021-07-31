@@ -37,10 +37,14 @@ public interface UsuarioRepo extends JpaRepository<Usuario, String> {
     @Query("select u from Usuario u")
     List<Usuario> obtenerUsuarios();
 
+    @Query("select l from Usuario u, IN(u.lugares) l where l.usuarioCreador.cedula = ?1")
+    List<Lugar> obtenerLugares(String cedula);
+
+    @Query("select f from Usuario u, IN(u.lugaresFavoritos) f where u.cedula = ?1")
+    List<Lugar> obtenerLugaresFavoritos(String cedula);
+
 
     //--------------------Metodos de pruebas no utilizados en el proyecto--------------------
-    //Obtiene la lista de usuarios de la base de datos
-    List<Usuario> findAllBy();
 
     //Obtiene la lista de usuarios de la base de datos pero paginables(si son muchos datos)
     @Query("select u from Usuario u")
@@ -63,9 +67,6 @@ public interface UsuarioRepo extends JpaRepository<Usuario, String> {
 
     //Obtiene un usuario por su numero de cedula o su nickname o su email
     Optional<Usuario> findByCedulaOrNicknameOrEmail(String cedula, String nickname, String email);
-
-    @Query("select f from Usuario u, IN(u.lugaresFavoritos) f where u.cedula = ?1")
-    List<Lugar> obtenerLugaresFavoritos(String cedula);
 
     @Query("select u.email, l from Usuario u left join u.lugares l")
     List<Object[]> obtenerLugaresPublicadosEEmail();

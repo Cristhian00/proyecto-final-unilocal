@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unilocal.servicios;
 
+import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.entidades.Usuario;
 import co.edu.uniquindio.unilocal.repositorios.UsuarioRepo;
 import org.springframework.stereotype.Service;
@@ -150,5 +151,15 @@ public class UsuarioServicioImp implements UsuarioServicio {
     @Override
     public List<Usuario> listaUsuarios() {
         return usuarioRepo.obtenerUsuarios();
+    }
+
+    @Override
+    public List<Lugar> obtenerLugares(String cedula) {
+        return usuarioRepo.obtenerLugares(cedula);
+    }
+
+    @Override
+    public List<Lugar> obtenerLugaresFavoritos(String cedula) {
+        return usuarioRepo.obtenerLugaresFavoritos(cedula);
     }
 }

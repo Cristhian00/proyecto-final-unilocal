@@ -14,47 +14,45 @@
     <ui:define name="title">Unilocal | Moderador</ui:define>
     <ui:define name="content">
 
-        <p:panel header="Moderador" style="text-align: center">
-            <div class="row" align="center">
-                <h:form>
-                    <h:panelGrid columns="3" cellpadding="5">
-                        <p:outputLabel for="nombre_moderador" value="Nombre completo"/>
-                        <p:inputText id="nombre_moderador" value="#{moderadorBean.moderador.nombre}"
-                                     required="true" requiredMessage="Debe ingresar el nombre completo"/>
-                        <p:message for="nombre_moderador"/>
+        <p:panel header="Moderador" style="width: 55%; margin-left: 25%">
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="nombre_moderador" value="Nombre completo"/>
+                    <p:inputText id="nombre_moderador" value="#{moderadorBean.moderador.nombre}"
+                                 required="true" requiredMessage="Debe ingresar el nombre completo"/>
+                    <p:message for="nombre_moderador"/>
 
-                        <p:outputLabel for="cedula_moderador" value="Cédula"/>
-                        <p:inputText id="cedula_moderador" value="#{moderadorBean.moderador.cedula}"
-                                     required="true" disabled="true"
-                                     requiredMessage="Debe ingresar un número de cédula"/>
-                        <p:message for="cedula_moderador"/>
+                    <p:outputLabel for="cedula_moderador" value="Cédula"/>
+                    <p:inputText id="cedula_moderador" value="#{moderadorBean.moderador.cedula}"
+                                 required="true" disabled="true"
+                                 requiredMessage="Debe ingresar un número de cédula"/>
+                    <p:message for="cedula_moderador"/>
 
-                        <p:outputLabel for="email_moderador" value="Email"/>
-                        <p:inputText id="email_moderador" value="#{moderadorBean.moderador.email}"
-                                     required="true"
-                                     requiredMessage="Debe ingresar el email"/>
-                        <p:message for="email_moderador"/>
+                    <p:outputLabel for="email_moderador" value="Email"/>
+                    <p:inputText id="email_moderador" value="#{moderadorBean.moderador.email}"
+                                 required="true"
+                                 requiredMessage="Debe ingresar el email"/>
+                    <p:message for="email_moderador"/>
 
-                        <p:outputLabel for="nickname_moderador" value="Nickname"/>
-                        <p:inputText id="nickname_moderador" value="#{moderadorBean.moderador.nickname}"
-                                     required="true"
-                                     requiredMessage="Debe ingresar el nickname"/>
-                        <p:message for="nickname_moderador"/>
+                    <p:outputLabel for="nickname_moderador" value="Nickname"/>
+                    <p:inputText id="nickname_moderador" value="#{moderadorBean.moderador.nickname}"
+                                 required="true"
+                                 requiredMessage="Debe ingresar el nickname"/>
+                    <p:message for="nickname_moderador"/>
 
-                        <p:outputLabel for="contrasenia_moderador" value="Contraseña"/>
-                        <p:password id="contrasenia_moderador"
-                                    value="#{moderadorBean.moderador.contrasenia}"
-                                    required="true"
-                                    requiredMessage="Debe ingresar una contraseña"/>
-                        <p:message for="contrasenia_moderador"/>
-                        <br/>
-                    </h:panelGrid>
-                    <p:commandButton value="Actualizar Datos" icon="user-edit" iconPos="righ"
-                                     action="#{moderadorBean.modificarModerador}"
-                                     update="@form"/>
-                    <p:growl for="mensaje-Moderador" showDetail="true"/>
-                </h:form>
-            </div>
+                    <p:outputLabel for="contrasenia_moderador" value="Contraseña"/>
+                    <p:password id="contrasenia_moderador"
+                                value="#{moderadorBean.moderador.contrasenia}"
+                                required="true"
+                                requiredMessage="Debe ingresar una contraseña"/>
+                    <p:message for="contrasenia_moderador"/>
+                    <br/>
+                </h:panelGrid>
+                <p:commandButton value="Actualizar Datos" icon="user-edit" iconPos="righ"
+                                 action="#{moderadorBean.modificarModerador}"
+                                 update="@form"/>
+                <p:growl for="mensaje-Moderador" showDetail="true"/>
+            </h:form>
         </p:panel>
 
         <div class="row" style="margin-top: 20px">
@@ -112,7 +110,7 @@
                                         </p:commandButton>
                                         <p:commandButton value="RECHAZAR" icon="pi pi-ban" iconPos="left"
                                                          style="background-color: #a52834" update="@form"
-                                                         action="#{moderadorBean.rechazarLugar(id)}">
+                                                         action="#{moderadorBean.rechazarLugar(lugar.id)}">
                                         </p:commandButton>
                                     </div>
                                 </p:rowExpansion>

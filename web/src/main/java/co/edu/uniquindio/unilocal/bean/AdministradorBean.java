@@ -91,4 +91,16 @@ public class AdministradorBean implements Serializable {
         return "";
     }
 
+    public int lugaresRev(String cedula){
+        return moderadorServicio.obtenerLugaresRevisados(cedula).size();
+    }
+
+    public int lugaresApro(String cedula){
+        return moderadorServicio.obtenerLugaresAprobados(cedula).size();
+    }
+
+    public int lugaresRecha(String cedula){
+        return moderadorServicio.obtenerLugaresRechazados(cedula).size();
+    }
+
 }
