@@ -44,6 +44,7 @@ public class LugarTest {
      * la longitud, la latitud y el estado de la aprobación para proceder
      * a guardarlo al repositorio correspondiente
      */
+    /*
     @Test
     public void regitrarLugarTest() {
 
@@ -90,12 +91,13 @@ public class LugarTest {
             e.printStackTrace();
         }
     }
-
+*/
     /**
      * Test encargado de comprobar la eliminación de un lugar
      * mediante la busqueda del mismo por el número de registro
      */
 
+    /*
     @Test
     public void eliminarLugarTest() {
 
@@ -146,13 +148,16 @@ public class LugarTest {
             e.printStackTrace();
         }
     }
+    /*
+     */
+
 
     /**
      * Test encargado de comprobar la actualización de datos de un lugar
      * en este caso la actualización del nombre, buscando el
      * lugar mediante numero de registro
      */
-
+/*
     @Test
     public void modificarLugarTest() {
 
@@ -204,6 +209,8 @@ public class LugarTest {
             e.printStackTrace();
         }
     }
+    */
+
 
     /**
      * Test encargado de mostrar que los lugares están registrados

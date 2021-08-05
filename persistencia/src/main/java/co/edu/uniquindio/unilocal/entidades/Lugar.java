@@ -138,6 +138,8 @@ public class Lugar implements Serializable {
         this.estado = estado;
         this.usuarioCreador = usuarioCreador;
         this.imagenes = new ArrayList<>();
+        this.horarios = new ArrayList<>();
+        this.comentarios = new ArrayList<>();
     }
 
     /**
@@ -171,13 +173,17 @@ public class Lugar implements Serializable {
         }
     }
 
-    public int calificacionPromedio() {
+    public Integer calificacionPromedio() {
 
-        int res = 0;
+        Integer res = 0;
 
         for (int i = 0; i < comentarios.size(); i++) {
             res += comentarios.get(i).getCalificacion();
         }
-        return comentarios.size() == 0 ? Math.round(res / comentarios.size()) : 0;
+        if(comentarios.size() == 0){
+            return 0;
+        } else{
+            return Math.round(res / comentarios.size());
+        }
     }
 }

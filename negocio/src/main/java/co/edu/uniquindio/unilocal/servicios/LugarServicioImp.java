@@ -1,11 +1,9 @@
 package co.edu.uniquindio.unilocal.servicios;
 
-import co.edu.uniquindio.unilocal.entidades.Lugar;
-import co.edu.uniquindio.unilocal.entidades.Comentario;
-import co.edu.uniquindio.unilocal.entidades.EstadoAprobacion;
-import co.edu.uniquindio.unilocal.entidades.Horario;
+import co.edu.uniquindio.unilocal.entidades.*;
 import co.edu.uniquindio.unilocal.repositorios.ComentarioRepo;
 import co.edu.uniquindio.unilocal.repositorios.LugarRepo;
+import co.edu.uniquindio.unilocal.repositorios.UsuarioRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -17,10 +15,12 @@ public class LugarServicioImp implements LugarServicio {
 
     private final LugarRepo lugarRepo;
     private final ComentarioRepo comentarioRepo;
+    private final UsuarioRepo usuarioRepo;
 
-    public LugarServicioImp(LugarRepo lugarRepo, ComentarioRepo comentarioRepo) {
+    public LugarServicioImp(LugarRepo lugarRepo, ComentarioRepo comentarioRepo, UsuarioRepo usuarioRepo) {
         this.lugarRepo = lugarRepo;
         this.comentarioRepo = comentarioRepo;
+        this.usuarioRepo = usuarioRepo;
     }
 
     public boolean idDisponible(int id) {
@@ -181,6 +181,38 @@ public class LugarServicioImp implements LugarServicio {
     @Override
     public List<Lugar> obtenerLugaresPendientes() {
         return lugarRepo.obtenerLugaresPendientes();
+    }
+
+    @Override
+    public boolean obtenerUsuarioFavorito(int id, String cedula) {
+
+        Optional<Usuario> usu = lugarRepo.obtenerUsuarioFavorito(id, cedula);
+        return (usu.isEmpty()) ? false : true;
+    }
+
+    @Override
+    public void agregarUsuarioFavorito(int idLugar, String cedula) {
+
+        Lugar l = lugarRepo.obtenerLugar(idLugar);
+        Usuario u = usuarioRepo.obtenerUsuarioCedula(cedula);
+
+        l.getUsuariosFavoritos().add(u);
+        lugarRepo.save(l);
+    }
+
+    @Override
+    public void eliminarUsuarioFavorito(int idLugar, String cedula) {
+
+        Lugar l = lugarRepo.obtenerLugar(idLugar);
+        Usuario u;
+
+        for (int i = 0; i<l.getUsuariosFavoritos().size(); i++){
+            u = l.getUsuariosFavoritos().get(i);
+            if(u.getCedula().equals(cedula)){
+                l.getUsuariosFavoritos().remove(i);
+            }
+        }
+        lugarRepo.save(l);
     }
 
 }

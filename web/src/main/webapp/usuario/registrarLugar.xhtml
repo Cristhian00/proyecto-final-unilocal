@@ -28,7 +28,7 @@
                 </div>
             </div>
             <p:panel header="Información y Horarios">
-                <h:form id="crear-lugar">
+                <h:form id="crear_lugar">
                     <div class="row">
                         <div class="col">
 
@@ -78,24 +78,7 @@
                         </div>
                         <div class="col">
                             <div class="row">
-                                <h1>Horarios</h1>
-                                <h:form>
-                                    <div class="card">
-                                        <p:dataTable var="horario" value="#{detalleLugarBean.horarios}">
-                                            <p:column headerText="Día">
-                                                <h:outputText value="#{horario.dia}"/>
-                                            </p:column>
 
-                                            <p:column headerText="Hora apertura">
-                                                <h:outputText value="#{horario.horaApertura}"/>
-                                            </p:column>
-
-                                            <p:column headerText="Hora cierre">
-                                                <h:outputText value="#{horario.horaCierre}"/>
-                                            </p:column>
-                                        </p:dataTable>
-                                    </div>
-                                </h:form>
                             </div>
                         </div>
                         <div align="center">

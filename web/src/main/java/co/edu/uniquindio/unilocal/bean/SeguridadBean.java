@@ -67,4 +67,8 @@ public class SeguridadBean implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index.xhtml?faces-redirect=true";
     }
+
+    public String recuperar(){
+        return "/recuperarContrasenia.xhtml?faces-redirect=true";
+    }
 }

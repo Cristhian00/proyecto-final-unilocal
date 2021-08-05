@@ -47,6 +47,6 @@ window.onload = function () {
 }
 
 function setLatLng(lat, lng) {
-    document.getElementById("crear-lugar:lat-lugar").value = lat;
-    document.getElementById("crear-lugar:lng-lugar").value = lng;
+    document.getElementById("crear_lugar:lat-lugar").value = lat;
+    document.getElementById("crear_lugar:lng-lugar").value = lng;
 }

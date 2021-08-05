@@ -1,10 +1,7 @@
 package co.edu.uniquindio.unilocal.bean;
 
-import co.edu.uniquindio.unilocal.entidades.Lugar;
+import co.edu.uniquindio.unilocal.entidades.*;
 import co.edu.uniquindio.unilocal.dto.MarkerDTO;
-import co.edu.uniquindio.unilocal.entidades.Comentario;
-import co.edu.uniquindio.unilocal.entidades.Horario;
-import co.edu.uniquindio.unilocal.entidades.Usuario;
 import co.edu.uniquindio.unilocal.servicios.LugarServicio;
 import com.google.gson.Gson;
 import lombok.Getter;
@@ -16,12 +13,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@RequestScope
+@ViewScoped
 public class DetalleLugarBean implements Serializable {
 
     @Autowired
@@ -29,6 +29,9 @@ public class DetalleLugarBean implements Serializable {
 
     @Value("#{param['lugar']}")
     private String idLugar;
+
+    @Value(value = "#{seguridadBean.persona}")
+    private Persona persona;
 
     @Getter
     @Setter
@@ -48,7 +51,7 @@ public class DetalleLugarBean implements Serializable {
 
     @Getter
     @Setter
-    private String favorito = "no_favorito.png";
+    private String favorito;
 
     @PostConstruct
     public void init() {
@@ -66,18 +69,27 @@ public class DetalleLugarBean implements Serializable {
                                 lugar.getDescripcion(), lugar.getLatitud(), lugar.getLongitud())) + ");");
 
             } catch (Exception e) {
-                e.printStackTrace();
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Alerta", e.getMessage());
+                FacesContext.getCurrentInstance().addMessage("mensaje_lugar", msg);
             }
         }
     }
 
-    public void cambiarImagen(){
+    public boolean esFavorito(){
+        return lugarServicio.obtenerUsuarioFavorito(lugar.getId(), persona.getCedula());
+    }
 
-        if(favorito.equals("favorito.png")){
-            favorito = "no_favorito.png";
-        } else{
-            favorito = "favorito.png";
+    public String cambiarFavorito() {
+
+        if(esFavorito()){
+            System.out.println("true favorito");
+            lugarServicio.agregarUsuarioFavorito(lugar.getId(), persona.getCedula());
+        } else {
+            System.out.println("false favorito");
+            lugarServicio.eliminarUsuarioFavorito(lugar.getId(), persona.getCedula());
         }
+        return "/detalleLugar.xhtml?faces-redirect=true&amp;lugar=" + lugar.getId();
     }
 
 }

@@ -22,7 +22,7 @@
 
     <ui:define name="content">
 
-        <p:panel header="Registrar nuevo lugar">
+        <p:panel header="Detalle lugar">
             <div class="row">
                 <div class="col">
 
@@ -33,10 +33,11 @@
                 </div>
 
                 <div class="col">
+
                     <div class="row">
                         <div class="col">
                             <h1>#{detalleLugarBean.lugar.nombre}</h1>
-                            <p:rating value="#{detalleLugarBean.lugar.id}" readonly="true"/>
+                            <p:rating value="#{detalleLugarBean.lugar.calificacionPromedio()}" readonly="true"/>
                             <br/>
                             <h4>
                                 <img src="/resources/img/marcador.png" alt="img"
@@ -48,19 +49,17 @@
                                      style="width: 30px; height: 30px"/>
                                 #{detalleLugarBean.lugar.tipoLugar.nombre}
                             </h4>
-
                         </div>
                         <div class="col">
-                            <h:commandButton action="#{detalleLugarBean.cambiarImagen()}"
-                                             image="/resources/img/#{detalleLugarBean.favorito}"
-                                             style="width: 30px; height: 30px; margin-left: 200px"/>
-                            <!--
-                            <button id="close" class="closing" onclick=""
-                                    style="background: none; border: none; margin-left: 200px">
-                                <img src="/resources/img/#{detalleLugarBean.favorito}" alt="Favorito"
-                                     style="width: 30px; height: 30px"/>
-                            </button>
-                            -->
+                            <p:commandButton icon="pi pi-heart" rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'
+                                             and detalleLugarBean.esFavorito() == false}"
+                                             action="#{detalleLugarBean.cambiarFavorito()}"
+                                             styleClass="rounded-button ui-button-help ui-button-outlined"/>
+                            <p:commandButton icon="pi pi-heart"
+                                             styleClass="rounded-button ui-button-help"
+                                             action="#{detalleLugarBean.cambiarFavorito()}"
+                                             rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'
+                                             and detalleLugarBean.esFavorito() == true}"/>
                         </div>
                     </div>
                     <div class="content">
@@ -73,6 +72,7 @@
 
                     </div>
                 </div>
+
             </div>
         </p:panel>
         <p:panel>
@@ -142,12 +142,14 @@
 
         <p:panel header="Comentarios" styleClass="mt-3">
             <div class="media border p-3">
-                <img src="img_avatar3.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;"/>
+                <img src="/resources/img/moderador.png" alt="John Doe" class="mr-3 mt-3 rounded-circle"
+                     style="width:60px;"/>
                 <div class="media-body">
                     <h4>John Doe <small><i>Posted on February 19, 2016</i></small></h4>
                     <p>Lorem ipsu....</p>
                     <div class="media p-3">
-                        <img src="img_avatar2.png" alt="Jane Doe" class="mr-3 mt-3 rounded-circle" style="width:45px;"/>
+                        <img src="/resources/img/moderador.png" alt="Jane Doe" class="mr-3 mt-3 rounded-circle"
+                             style="width:45px;"/>
                         <div class="media-body">
                             <h4>Jane Doe <small><i>Posted on February 20 2016</i></small></h4>
                             <p>Lorem ipsum...</p>
@@ -157,7 +159,27 @@
             </div>
 
             <p:dataList id="lista-c" value="#{detalleLugarBean.comentarios}" var="comentario"
-                        emptyMessage="No hay comentarios" type="">
+                        emptyMessage="No hay comentarios" type="comentario">
+
+                <div class="media border p-3">
+                    <img src="/resources/img/moderador.png" alt="#{comentario.usuarioComentario.nombre}"
+                         class="mr-3 mt-3 rounded-circle"
+                         style="width:60px;"/>
+                    <div class="media-body">
+                        <h4>#{comentario.usuarioComentario.nombre} <small>
+                            <i>Posted on #{comentario.fechaComentario}</i></small></h4>
+                        <p>#{comentario.mensaje}</p>
+                        <div class="media p-3">
+                            <img src="/resources/img/moderador.png"
+                                 alt="#{detalleLugarBean.lugar.usuarioCreador.nombre}" class="mr-3 mt-3 rounded-circle"
+                                 style="width:45px;"/>
+                            <div class="media-body">
+                                <h4>#{detalleLugarBean.lugar.usuarioCreador.nombre}</h4>
+                                <p>#{comentario.respuesta}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div>
                     <p>#{comentario.usuarioComentario.nombre}: #{comentario.mensaje}</p>
                 </div>

@@ -44,7 +44,7 @@ public class informacionPorDefecto implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-/*
+
         if (adminServicio.listaAdministradores().isEmpty()) {
             Administrador admin1 = new Administrador("1030677817", "Cristhian Ortiz",
                     "cortizm_1@uqvirtual.edu.co", "admin123", "admin1");
@@ -91,26 +91,6 @@ public class informacionPorDefecto implements CommandLineRunner {
             tipoServicio.registrarTipoLugar(tip6);
             tipoServicio.registrarTipoLugar(tip7);
             tipoServicio.registrarTipoLugar(tip8);
-        }
-
-        if (horServicio.listarHorario().isEmpty()) {
-            Horario hor1 = new Horario("Lunes a Jueves", "08:00", "18:00");
-            Horario hor2 = new Horario("Viernes a Domingo", "08:00", "18:00");
-            Horario hor3 = new Horario("Martes a Viernes", "16:00", "20:00");
-            Horario hor4 = new Horario("Sabado y Domingo", "15:00", "00:00");
-            Horario hor5 = new Horario("Miercoles a Viernes", "10:00", "20:00");
-            Horario hor6 = new Horario("Sabado y Domingo", "10:00", "22:00");
-            Horario hor7 = new Horario("Viernes y Sabado", "18:00", "03:00");
-            Horario hor8 = new Horario("Domingo", "18:00", "01:00");
-
-            horServicio.registrarHorario(hor1);
-            horServicio.registrarHorario(hor2);
-            horServicio.registrarHorario(hor3);
-            horServicio.registrarHorario(hor4);
-            horServicio.registrarHorario(hor5);
-            horServicio.registrarHorario(hor6);
-            horServicio.registrarHorario(hor7);
-            horServicio.registrarHorario(hor8);
         }
 
         if (deparServicio.listarDepartamento().isEmpty()) {
@@ -198,6 +178,13 @@ public class informacionPorDefecto implements CommandLineRunner {
             l1.setTelefono(new HashMap<>());
             lugServicio.registrarLugar(l1);
 
+            Horario hor1 = new Horario("Lunes a Jueves", "08:00", "18:00", l1);
+            Horario hor2 = new Horario("Viernes y Sabado", "18:00", "03:00", l1);
+            Horario hor3 = new Horario("Domingo", "18:00", "01:00", l1);
+            horServicio.registrarHorario(hor1);
+            horServicio.registrarHorario(hor2);
+            horServicio.registrarHorario(hor3);
+
             Lugar l2 = new Lugar("Caffeto", "Cafe-bar con buena música", tip2, ciu2,
                     new Date(), 4.52892F, -75.6775F, EstadoAprobacion.APROBADO, usu2);
             l2.setModerador(mod1);
@@ -212,8 +199,20 @@ public class informacionPorDefecto implements CommandLineRunner {
             l3.setHorarios(new ArrayList<>());
             l3.setTelefono(new HashMap<>());
             lugServicio.registrarLugar(l3);
+
         }
 
-*/
+        if(horServicio.listarHorario().isEmpty()){
+
+            Lugar l1 = lugServicio.obtenerLugar(4);
+
+            Horario hor1 = new Horario("Lunes a Jueves", "08:00", "18:00", l1);
+            Horario hor2 = new Horario("Viernes y Sabado", "18:00", "03:00", l1);
+            Horario hor3 = new Horario("Domingo", "18:00", "01:00", l1);
+            horServicio.registrarHorario(hor1);
+            horServicio.registrarHorario(hor2);
+            horServicio.registrarHorario(hor3);
+        }
+
     }
 }

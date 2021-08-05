@@ -25,4 +25,15 @@ public class PersonaServicioImp implements PersonaServicio{
         }
         return persona.get();
     }
+
+    @Override
+    public Persona recuperar(String cedula, String email) throws Exception {
+
+        Optional<Persona> persona = personaRepo.findByCedulaAndEmail(cedula, email);
+
+        if(persona.isEmpty()){
+            throw new Exception("Los datos de no son correctos o no pertenecen a un usuario registrado");
+        }
+        return persona.get();
+    }
 }

@@ -54,7 +54,7 @@ public class Horario implements Serializable {
 
     //Lugar que posee el horario
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(nullable = false)
     private Lugar lugarHorario;
 
     /**
@@ -64,10 +64,11 @@ public class Horario implements Serializable {
      * @param horaApertura, hora de inicio del horario
      * @param horaCierre,   hora de cierre del horario
      */
-    public Horario(String dia, String horaApertura, String horaCierre) {
+    public Horario(String dia, String horaApertura, String horaCierre, Lugar lugar) {
         this.dia = dia;
         this.horaApertura = horaApertura;
         this.horaCierre = horaCierre;
+        this.lugarHorario = lugar;
     }
 
     /**

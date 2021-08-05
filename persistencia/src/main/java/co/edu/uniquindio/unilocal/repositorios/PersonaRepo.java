@@ -12,4 +12,6 @@ public interface PersonaRepo extends JpaRepository<Persona, String> {
     Optional<Persona> findByNicknameAndContrasenia(String nickname, String contrasenia);
 
     Optional<Persona> findByEmailAndContrasenia(String email, String contrasenia);
+
+    Optional<Persona> findByCedulaAndEmail(String cedula, String email);
 }

@@ -22,6 +22,9 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
 
     Optional<Lugar> findByNombre(String nombre);
 
+    @Query("select u from Lugar l, IN(l.usuariosFavoritos) u where l.id = ?1 and u.cedula = ?2")
+    Optional<Usuario> obtenerUsuarioFavorito(int id, String cedula);
+
     @Query("select l from Lugar l where l.id = ?1")
     Lugar obtenerLugar(int id);
 
@@ -39,8 +42,6 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
     List<Lugar> buscarLugares(String nombre);
 
     Optional<Lugar> findByLatitudAndLongitud(Float latitud, Float longitud);
-
-    List<Lugar> findAll();
 
     Optional<Lugar> findById(int id);
 

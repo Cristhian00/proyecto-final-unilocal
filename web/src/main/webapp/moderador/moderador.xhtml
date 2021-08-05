@@ -153,7 +153,7 @@
                                             <img src="/uploads/#{lugar.imagenPrincipal}" alt="img"
                                                  style="width: 150px; height: 150px"/>
                                             <br/>
-                                            <p:rating value="#{lugar.id}" readonly="true"/>
+                                            <p:rating value="#{lugar.calificacionPromedio()}" readonly="true"/>
                                             <i class="pi pi-user"/><span
                                                 class="product-category">#{lugar.usuarioCreador.nombre}</span>
                                             <br/>

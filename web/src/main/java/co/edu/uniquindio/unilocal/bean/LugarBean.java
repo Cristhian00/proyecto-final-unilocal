@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -55,7 +57,6 @@ public class LugarBean implements Serializable {
     @Setter
     private List<String> imagenes;
 
-
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
 
@@ -74,7 +75,6 @@ public class LugarBean implements Serializable {
         this.imagenes = new ArrayList<>();
         this.ciudades = ciudadServicio.listarCiudades();
         this.tipos = tipoLugarServicio.listarTipoLugar();
-        this.horarios = new ArrayList<>();
     }
 
     public String registrarLugar() {
@@ -132,6 +132,94 @@ public class LugarBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage("mensaje_lugar", msg);
         }
         return null;
+    }
+
+    public void onRowEdit(RowEditEvent<Horario> event) {
+        FacesMessage msg = new FacesMessage("Horario Edited", String.valueOf(event.getObject().getCodigo()));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowCancel(RowEditEvent<Horario> event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject().getCodigo()));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+
+        if (newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+
+    public ArrayList<Horario> crearHorarios(){
+
+        ArrayList<Horario> horarios = new ArrayList<>();
+
+        Horario h1 = new Horario("LUNES","00:00","00:00",null);
+        Horario h2 = new Horario("MARTES","00:00","00:00",null);
+        Horario h3 = new Horario("MIERCOLES","00:00","00:00",null);
+        Horario h4 = new Horario("JUEVES","00:00","00:00",null);
+        Horario h5 = new Horario("VIERNES","00:00","00:00",null);
+        Horario h6 = new Horario("SABADO","00:00","00:00",null);
+        Horario h7 = new Horario("DOMINGO","00:00","00:00",null);
+
+        horarios.add(h1);
+        horarios.add(h2);
+        horarios.add(h3);
+        horarios.add(h4);
+        horarios.add(h5);
+        horarios.add(h6);
+        horarios.add(h7);
+
+        return horarios;
+    }
+
+    public String[] diasHorario(){
+
+        String[] dias = new String[7];
+        dias[0] = "Lunes";
+        dias[1] = "Martes";
+        dias[2] = "Miercoles";
+        dias[3] = "Jueves";
+        dias[4] = "Viernes";
+        dias[5] = "Sabado";
+        dias[6] = "Domingo";
+
+        return dias;
+    }
+
+    public String[] horaAperCierre(){
+
+        String[] horas = new String[24];
+        horas[0] = "00:00";
+        horas[1] = "01:00";
+        horas[2] = "02:00";
+        horas[3] = "03:00";
+        horas[4] = "04:00";
+        horas[5] = "05:00";
+        horas[6] = "06:00";
+        horas[7] = "07:00";
+        horas[8] = "08:00";
+        horas[9] = "09:00";
+        horas[10] = "10:00";
+        horas[11] = "11:00";
+        horas[12] = "12:00";
+        horas[13] = "13:00";
+        horas[14] = "14:00";
+        horas[15] = "15:00";
+        horas[16] = "16:00";
+        horas[17] = "17:00";
+        horas[18] = "18:00";
+        horas[19] = "19:00";
+        horas[20] = "20:00";
+        horas[21] = "21:00";
+        horas[22] = "22:00";
+        horas[23] = "23:00";
+
+        return horas;
     }
 
 }
