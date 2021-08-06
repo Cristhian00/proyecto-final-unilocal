@@ -40,7 +40,7 @@ public class UsuarioRestTest {
         tels.put("movil", "262626");
 
         Usuario usuario = new Usuario("123","Carlos","car@mail.com",
-                "123","carlos", ciudadServicio.obtenerCiudad(1));
+                "123","carlospp", ciudadServicio.obtenerCiudad(1));
         usuario.setTelefono(tels);
 
         mockMvc.perform(post("/api/usuario").contentType("application/json")

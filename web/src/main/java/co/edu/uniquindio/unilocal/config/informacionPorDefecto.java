@@ -202,7 +202,7 @@ public class informacionPorDefecto implements CommandLineRunner {
 
         }
 
-        if(horServicio.listarHorario().isEmpty()){
+        if (horServicio.listarHorario().isEmpty()) {
 
             Lugar l1 = lugServicio.obtenerLugar(4);
 
@@ -212,6 +212,18 @@ public class informacionPorDefecto implements CommandLineRunner {
             horServicio.registrarHorario(hor1);
             horServicio.registrarHorario(hor2);
             horServicio.registrarHorario(hor3);
+        }
+
+        if (comenservicio.listarComentarios().isEmpty()) {
+
+            Lugar l1 = lugServicio.obtenerLugar(4);
+            Usuario u1 = usuServicio.obtenerUsuario("1030677");
+            Usuario u2 = usuServicio.obtenerUsuario("1030678");
+
+            Comentario c1 = new Comentario("Un lugar melosky", 3, new Date(), u1, l1);
+            Comentario c2 = new Comentario("Que mala atención, no lo recomiendo", 3, new Date(), u2, l1);
+            comenservicio.registrarComentario(c1);
+            comenservicio.registrarComentario(c2);
         }
 
     }

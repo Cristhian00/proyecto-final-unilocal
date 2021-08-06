@@ -3,12 +3,14 @@ package co.edu.uniquindio.unilocal.bean;
 import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.entidades.Persona;
 import co.edu.uniquindio.unilocal.servicios.CiudadServicio;
+import co.edu.uniquindio.unilocal.servicios.ComentarioServicio;
 import co.edu.uniquindio.unilocal.servicios.LugarServicio;
 import co.edu.uniquindio.unilocal.servicios.UsuarioServicio;
 import co.edu.uniquindio.unilocal.entidades.Ciudad;
 import co.edu.uniquindio.unilocal.entidades.Usuario;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
@@ -83,5 +85,7 @@ public class UsuarioBean implements Serializable {
         }
     }
 
-
+    public String irAlDetalleCreador(Integer id){
+        return "/usuario/detalleLugarCreador.xhtml?faces-redirect=true&amp;lugar=" + id;
+    }
 }

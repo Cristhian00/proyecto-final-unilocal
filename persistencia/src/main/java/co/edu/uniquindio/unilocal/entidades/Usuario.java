@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +64,28 @@ public class Usuario extends Persona implements Serializable {
         super(cedula, nombre, email, contrasenia, nickname);
         this.ciudadUsuario = ciudadUsuario;
         this.telefono = new HashMap<>();
+        this.lugaresFavoritos = new ArrayList<>();
+    }
+
+    public void addLugarFavorito(Lugar l){
+        if(this.lugaresFavoritos == null){
+            this.lugaresFavoritos = new ArrayList<>();
+        }
+        if(l != null){
+            this.lugaresFavoritos.add(l);
+        }
+    }
+
+    public void removeLugarFavorito(Lugar l){
+        if(this.lugaresFavoritos == null){
+            this.lugaresFavoritos = new ArrayList<>();
+        } else if(l != null){
+            for(int i = 0; i < this.lugaresFavoritos.size(); i++){
+                if(this.lugaresFavoritos.get(i).getId() == l.getId()){
+                    this.lugaresFavoritos.remove(i);
+                }
+            }
+        }
     }
 
     /**

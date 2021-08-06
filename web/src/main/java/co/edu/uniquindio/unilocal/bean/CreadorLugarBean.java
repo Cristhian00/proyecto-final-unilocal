@@ -1,7 +1,8 @@
 package co.edu.uniquindio.unilocal.bean;
 
-import co.edu.uniquindio.unilocal.entidades.*;
 import co.edu.uniquindio.unilocal.dto.MarkerDTO;
+import co.edu.uniquindio.unilocal.entidades.*;
+import co.edu.uniquindio.unilocal.servicios.CiudadServicio;
 import co.edu.uniquindio.unilocal.servicios.ComentarioServicio;
 import co.edu.uniquindio.unilocal.servicios.LugarServicio;
 import co.edu.uniquindio.unilocal.servicios.UsuarioServicio;
@@ -9,30 +10,31 @@ import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.PrimeFaces;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Component
-@ViewScoped
-public class DetalleLugarBean implements Serializable {
+@RequestScope
+public class CreadorLugarBean {
 
-    @Autowired
-    private LugarServicio lugarServicio;
+    private final UsuarioServicio usuServicio;
+    private final CiudadServicio ciudadServicio;
+    private final LugarServicio lugarServicio;
+    private final ComentarioServicio comentarioServicio;
 
-    @Autowired
-    private UsuarioServicio usuarioServicio;
-
-    @Autowired
-    private ComentarioServicio comentarioServicio;
+    public CreadorLugarBean(UsuarioServicio usuServicio, CiudadServicio ciudadServicio, LugarServicio lugarServicio, ComentarioServicio comentarioServicio) {
+        this.usuServicio = usuServicio;
+        this.ciudadServicio = ciudadServicio;
+        this.lugarServicio = lugarServicio;
+        this.comentarioServicio = comentarioServicio;
+    }
 
     @Value("#{param['lugar']}")
     private String idLugar;
@@ -58,21 +60,14 @@ public class DetalleLugarBean implements Serializable {
 
     @Getter
     @Setter
-    private String favorito;
-
-    @Getter
-    @Setter
-    private String msjComentario;
-
-    @Getter
-    @Setter
-    private Integer raitingComentario;
+    private String msjRespuesta;
 
     @PostConstruct
     public void init() {
 
         if (idLugar != null && !"".equals(idLugar)) {
             try {
+
                 int id = Integer.parseInt(idLugar);
                 this.lugar = lugarServicio.obtenerLugar(id);
                 this.comentarios = lugarServicio.obtenerComentarios(id);
@@ -84,48 +79,29 @@ public class DetalleLugarBean implements Serializable {
                                 lugar.getDescripcion(), lugar.getLatitud(), lugar.getLongitud(),
                                 lugar.getImagenPrincipal(), lugar.calificacionPromedio())) + ");");
 
-            } catch (Exception e) {
+            } catch (Exception ex) {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Alerta", e.getMessage());
+                        "Alerta", ex.getMessage());
                 FacesContext.getCurrentInstance().addMessage("mensaje_lugar", msg);
             }
         }
     }
 
-    public boolean esFavorito() {
-        return lugarServicio.obtenerUsuarioFavorito(lugar.getId(), persona.getCedula());
-    }
-
-    public String cambiarFavorito() throws Exception {
-
-        Usuario u = usuarioServicio.obtenerUsuario(persona.getCedula());
-        Lugar l = lugarServicio.obtenerLugar(lugar.getId());
-
-        if (!esFavorito()) {
-            u.addLugarFavorito(l);
-            usuarioServicio.actualizarUsuario(u);
-        } else {
-            u.removeLugarFavorito(l);
-            usuarioServicio.actualizarUsuario(u);
-        }
-        return "/detalleLugar.xhtml?faces-redirect=true&amp;lugar=" + lugar.getId();
-    }
-
-    public String agregarComentario() {
+    public String responderComentario(int id){
 
         FacesMessage msg;
-
-        if (msjComentario != null && raitingComentario != null) {
+        System.out.println("entre responder comentario");
+        if (msjRespuesta != null) {
             try {
-                Usuario u = usuarioServicio.obtenerUsuario(persona.getCedula());
-                Lugar l = lugarServicio.obtenerLugar(lugar.getId());
-                Comentario c = new Comentario(msjComentario, raitingComentario, new Date(), u, l);
-
-                comentarioServicio.registrarComentario(c);
+                Comentario c = comentarioServicio.obtenerComentario(id);
+                c.setRespuesta(msjRespuesta);
+                comentarioServicio.modificarComentario(c);
+                System.out.println("Qué paso aquí");
                 msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "Alerta", "El comentario se ha realizado con exito");
+                        "Alerta", "Se ha contestado el comentario");
                 FacesContext.getCurrentInstance().addMessage("mensaje_lugar", msg);
-                return "/detalleLugar.xhtml?faces-redirect=true&amp;lugar=" + lugar.getId();
+
+                return "/usuario/detalleLugarCreador.xhtml?faces-redirect=true&amp;lugar=" + lugar.getId();
             } catch (Exception e) {
                 msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Alerta", e.getMessage());
@@ -134,5 +110,4 @@ public class DetalleLugarBean implements Serializable {
         }
         return "";
     }
-
 }

@@ -20,4 +20,8 @@ public interface UsuarioServicio {
     List<Lugar> obtenerLugares(String cedula);
 
     List<Lugar> obtenerLugaresFavoritos(String cedula);
+
+    void agregarUsuarioFavorito(int idLugar, String cedula);
+
+    void eliminarUsuarioFavorito(int idLugar, String cedula);
 }

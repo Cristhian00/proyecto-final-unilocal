@@ -7,8 +7,14 @@ function crearMapa(lugares) {
 
     for (let l of lugares) {
         markers.push(new mapboxgl.Marker().setLngLat([l.lng, l.lat]).setPopup(new mapboxgl.Popup()
-            .setHTML("<strong>" + l.nombre + "</strong><br>" + l.descripcion +
-                "<br><a href='/detalleLugar.xhtml?lugar=" + l.id + "'>Ver detalles</a>") ));
+            .setHTML("<p:card style='width: 25em'><f:facet name='header'>" +
+                "<img alt='' style='width: 180px; height: 160px' src='/uploads/" + l.imagen + "'/></f:facet>" +
+                "<br/><f:facet name='title'><strong>" + l.nombre + "</strong></f:facet>" +
+                "<f:facet name='raiting'><p:rating value='"+ l.raiting +"' readonly='true'/></f:facet>" +
+                "<p>" + l.descripcion + "</p>" +
+                "<f:facet name='footer'><a href='/detalleLugar.xhtml?lugar=" + l.id + "'>Ver detalles</a></f:facet>" +
+                "</p:card>"
+            )));
         bounds.extend([l.lng, l.lat]);
     }
     if (bounds.isEmpty()) {

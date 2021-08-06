@@ -2,6 +2,7 @@ package co.edu.uniquindio.unilocal.servicios;
 
 import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.entidades.Usuario;
+import co.edu.uniquindio.unilocal.repositorios.LugarRepo;
 import co.edu.uniquindio.unilocal.repositorios.UsuarioRepo;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class UsuarioServicioImp implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
+    private final LugarRepo lugarRepo;
 
-    public UsuarioServicioImp(UsuarioRepo usuarioRepo) {
+    public UsuarioServicioImp(UsuarioRepo usuarioRepo, LugarRepo lugarRepo) {
         this.usuarioRepo = usuarioRepo;
+        this.lugarRepo = lugarRepo;
     }
 
     public boolean emailDisponible(String email) {
@@ -161,5 +164,19 @@ public class UsuarioServicioImp implements UsuarioServicio {
     @Override
     public List<Lugar> obtenerLugaresFavoritos(String cedula) {
         return usuarioRepo.obtenerLugaresFavoritos(cedula);
+    }
+
+    @Override
+    public void agregarUsuarioFavorito(int idLugar, String cedula) {
+        Lugar l = lugarRepo.obtenerLugar(idLugar);
+        Usuario u = usuarioRepo.obtenerUsuarioCedula(cedula);
+
+        u.getLugaresFavoritos().add(l);
+        usuarioRepo.save(u);
+    }
+
+    @Override
+    public void eliminarUsuarioFavorito(int idLugar, String cedula) {
+
     }
 }

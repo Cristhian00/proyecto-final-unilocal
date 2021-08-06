@@ -190,29 +190,4 @@ public class LugarServicioImp implements LugarServicio {
         return (usu.isEmpty()) ? false : true;
     }
 
-    @Override
-    public void agregarUsuarioFavorito(int idLugar, String cedula) {
-
-        Lugar l = lugarRepo.obtenerLugar(idLugar);
-        Usuario u = usuarioRepo.obtenerUsuarioCedula(cedula);
-
-        l.getUsuariosFavoritos().add(u);
-        lugarRepo.save(l);
-    }
-
-    @Override
-    public void eliminarUsuarioFavorito(int idLugar, String cedula) {
-
-        Lugar l = lugarRepo.obtenerLugar(idLugar);
-        Usuario u;
-
-        for (int i = 0; i<l.getUsuariosFavoritos().size(); i++){
-            u = l.getUsuariosFavoritos().get(i);
-            if(u.getCedula().equals(cedula)){
-                l.getUsuariosFavoritos().remove(i);
-            }
-        }
-        lugarRepo.save(l);
-    }
-
 }

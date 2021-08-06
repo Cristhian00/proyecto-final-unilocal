@@ -38,7 +38,6 @@ public class Comentario implements Serializable {
     //puntuación dada
     @Column(name = "calificacion", nullable = false, precision = 1, scale = 1)
     @Positive(message = "La calificación debe ser positiva")
-    @NotBlank(message = "Debe seleccionar una calificación valida")
     private Integer calificacion;
 
     //Respuesta dada al comentario
@@ -48,7 +47,6 @@ public class Comentario implements Serializable {
     //Fecha en la que se realizo el comentario
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_comentario", nullable = false)
-    @NotBlank(message = "Debe ingresar la fecha en la que se realizo el comentario")
     private Date fechaComentario;
 
     //Usuario que realizo el comentario
@@ -67,10 +65,11 @@ public class Comentario implements Serializable {
      * @param mensaje,         mensaje realizado en el comentario
      * @param calificacion,    puntuación dada en el comentario
      */
-    public Comentario(String mensaje, @Positive Integer calificacion, Usuario usuarioComentario, Lugar lugarComentario) {
+    public Comentario(String mensaje, @Positive Integer calificacion, Date fecha, Usuario usuarioComentario, Lugar lugarComentario) {
         this.mensaje = mensaje;
         this.calificacion = calificacion;
         this.usuarioComentario = usuarioComentario;
+        this.fechaComentario = fecha;
         this.lugarComentario = lugarComentario;
         this.respuesta = "";
     }

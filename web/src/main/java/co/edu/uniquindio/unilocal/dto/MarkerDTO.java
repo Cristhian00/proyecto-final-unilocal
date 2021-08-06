@@ -12,10 +12,12 @@ import lombok.ToString;
 @ToString
 public class MarkerDTO {
 
-    private int id;
+    private Integer id;
     private String nombre;
     private String tipoLugar;
     private String descripcion;
-    private float lat, lng;
+    private Float lat, lng;
+    private String imagen;
+    private Integer raiting;
 
 }

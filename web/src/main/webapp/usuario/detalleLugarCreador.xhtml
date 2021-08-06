@@ -18,7 +18,7 @@
         <h:outputScript library="js" name="script-detalle.js"/>
     </ui:define>
 
-    <ui:define name="title">Unilocal | Detalle lugar</ui:define>
+    <ui:define name="title">Unilocal | Detalle lugar creador</ui:define>
 
     <ui:define name="content">
 
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col">
 
-                    <p:galleria value="#{detalleLugarBean.imagenes}" var="image" panelWidth="500" panelHeight="313"
+                    <p:galleria value="#{creadorLugarBean.imagenes}" var="image" panelWidth="500" panelHeight="313"
                                 showCaption="true" transitionInterval="10000">
                         <p:graphicImage url="/uploads/#{image}" height="315" width="500" title="#{image}"/>
                     </p:galleria>
@@ -36,30 +36,19 @@
 
                     <div class="row">
                         <div class="col">
-                            <h1>#{detalleLugarBean.lugar.nombre}</h1>
-                            <p:rating value="#{detalleLugarBean.lugar.calificacionPromedio()}" readonly="true"/>
+                            <h1>#{creadorLugarBean.lugar.nombre}</h1>
+                            <p:rating value="#{creadorLugarBean.lugar.calificacionPromedio()}" readonly="true"/>
                             <br/>
                             <h4>
                                 <img src="/resources/img/marcador.png" alt="img"
                                      style="width: 30px; height: 30px"/>
-                                #{detalleLugarBean.lugar.ciudadLugar.nombre}
+                                #{creadorLugarBean.lugar.ciudadLugar.nombre}
                             </h4>
                             <h4>
                                 <img src="/resources/img/categoria.png" alt="img"
                                      style="width: 30px; height: 30px"/>
-                                #{detalleLugarBean.lugar.tipoLugar.nombre}
+                                #{creadorLugarBean.lugar.tipoLugar.nombre}
                             </h4>
-                        </div>
-                        <div class="col">
-                            <p:commandButton icon="pi pi-heart" rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'
-                                             and detalleLugarBean.esFavorito() == false}" style="margin-left: 200px"
-                                             action="#{detalleLugarBean.cambiarFavorito()}"
-                                             styleClass="rounded-button ui-button-help ui-button-outlined"/>
-                            <p:commandButton icon="pi pi-heart"
-                                             styleClass="rounded-button ui-button-help" style="margin-left: 200px"
-                                             action="#{detalleLugarBean.cambiarFavorito()}"
-                                             rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'
-                                             and detalleLugarBean.esFavorito() == true}"/>
                         </div>
                     </div>
                     <div class="content">
@@ -67,34 +56,14 @@
                         <h5>
                             <img src="/resources/img/informacion.png" alt="img"
                                  style="width: 30px; height: 30px"/>
-                            #{detalleLugarBean.lugar.descripcion}
+                            #{creadorLugarBean.lugar.descripcion}
                         </h5>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
-                                   data-show-count="false">Tweet</a>
-                                <script async="true" src="https://platform.twitter.com/widgets.js"
-                                        charset="utf-8"></script>
-                            </div>
-                            <div class="col">
-                                <div id="fb-root"></div>
-                                <script async="true" defer="defer" crossorigin="anonymous"
-                                        src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&amp;version=v11.0"
-                                        nonce="eBRadHnA"></script>
-                                <div class="fb-share-button"
-                                     data-href="http://localhost:8080/detalleLugar.xhtml?lugar=4"
-                                     data-layout="button" data-size="small"><a target="_blank"
-                                                                               href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2FdetalleLugar.xhtml%3Flugar%3D4&amp;src=sdkpreparse"
-                                                                               class="fb-xfbml-parse-ignore">Compartir</a>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
+
             </div>
         </p:panel>
-
         <p:panel>
             <div class="row">
                 <div class="col">
@@ -140,7 +109,7 @@
                         <h1 align="center">Horarios</h1>
                         <h:form>
                             <div class="card">
-                                <p:dataTable var="horario" value="#{detalleLugarBean.horarios}">
+                                <p:dataTable var="horario" value="#{creadorLugarBean.horarios}">
                                     <p:column headerText="Día">
                                         <h:outputText value="#{horario.dia}"/>
                                     </p:column>
@@ -162,20 +131,8 @@
 
         <p:panel header="Comentarios" styleClass="mt-3">
 
-            <div class="card" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'}">
-                <h:form>
-                    <p:inputTextarea rows="5" cols="50" counter="display" maxlength="255" required="true"
-                                     placeholder="Escribir comentario" value="#{detalleLugarBean.msjComentario}"
-                                     counterTemplate="{0} characters remaining." autoResize="true"/>
-                    <h:outputText id="display" class="p-d-block"/>
-                    <p:rating value="#{detalleLugarBean.raitingComentario}"/>
-                    <p:commandButton action="#{detalleLugarBean.agregarComentario()}" value="Comentar"
-                                     update="@form"/>
-                </h:form>
-            </div>
-
             <br/>
-            <p:dataList id="lista-c" value="#{detalleLugarBean.comentarios}" var="comentario"
+            <p:dataList id="lista-c" value="#{creadorLugarBean.comentarios}" var="comentario"
                         emptyMessage="No hay comentarios">
                 <div class="media border p-3">
                     <img src="/resources/img/moderador.png" alt="#{comentario.usuarioComentario.nombre}"
@@ -187,15 +144,28 @@
                         <p:rating value="#{comentario.calificacion}" readonly="true"/>
                         <h5>#{comentario.mensaje}</h5>
 
+                        <div class="card" jsf:rendered="#{seguridadBean.autenticado and comentario.respuesta == ''}">
+                            <h:form>
+                                <p:inputTextarea rows="4" cols="40" counter="display" maxlength="255" required="true"
+                                                 placeholder="Escribir comentario" value="#{creadorLugarBean.msjRespuesta}"
+                                                 counterTemplate="{0} characters remaining." autoResize="true"/>
+                                <h:outputText id="display" class="p-d-block"/>
+
+                                <p:commandButton action="#{creadorLugarBean.responderComentario(comentario.id)}"
+                                                 value="Responder" update="@form"/>
+                            </h:form>
+                        </div>
+
                         <div class="media p-3" jsf:rendered="#{!comentario.respuesta == ''}">
                             <img src="/resources/img/moderador.png"
-                                 alt="#{detalleLugarBean.lugar.usuarioCreador.nombre}" class="mr-3 mt-3 rounded-circle"
+                                 alt="#{creadorLugarBean.lugar.usuarioCreador.nombre}" class="mr-3 mt-3 rounded-circle"
                                  style="width:45px;"/>
                             <div class="media-body">
-                                <h4>#{detalleLugarBean.lugar.usuarioCreador.nombre}</h4>
+                                <h4>#{creadorLugarBean.lugar.usuarioCreador.nombre}</h4>
                                 <p>#{comentario.respuesta}</p>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </p:dataList>

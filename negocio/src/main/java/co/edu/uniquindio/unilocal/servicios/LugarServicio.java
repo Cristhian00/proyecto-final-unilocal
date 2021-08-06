@@ -34,8 +34,4 @@ public interface LugarServicio {
 
     boolean obtenerUsuarioFavorito(int id, String cedula);
 
-    void agregarUsuarioFavorito(int idLugar, String cedula);
-
-    void eliminarUsuarioFavorito(int idLugar, String cedula);
-
 }

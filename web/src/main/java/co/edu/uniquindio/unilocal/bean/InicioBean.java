@@ -33,7 +33,7 @@ public class InicioBean implements Serializable {
         this.lugares = lugarServicio.listarLugar();
         PrimeFaces.current().executeScript("crearMapa(" + new Gson().toJson(this.lugares.stream()
                 .map(l -> new MarkerDTO(l.getId(), l.getNombre(), l.getTipoLugar().getNombre(),
-                        l.getDescripcion(), l.getLatitud(), l.getLongitud())).collect(Collectors.toList())) + ");");
+                        l.getDescripcion(), l.getLatitud(), l.getLongitud(), l.getImagenPrincipal(), l.calificacionPromedio())).collect(Collectors.toList())) + ");");
     }
 
     public String irADetalle(int id) {
