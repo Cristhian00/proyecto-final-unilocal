@@ -44,6 +44,15 @@
             // ADD YOUR ACCESS TOKEN FROM
             // https://account.mapbox.com
 
+            const valores = window.location.search;
+
+            const urlParams = new URLSearchParams(valores);
+
+            var lng = urlParams.get('lng');
+            var lat = urlParams.get('lat');
+
+            console.log("longitud = " + lng + "latitud = " + lat)
+
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition(position => {
 
@@ -65,14 +74,19 @@
                     map.addControl(new mapboxgl.NavigationControl());
 
                     let dir = new MapboxDirections({
-                        accessToken: mapboxgl.accessToken
+                        accessToken: mapboxgl.accessToken,
+                        unit: "metric"
+                    })
+
+                    map.on("load", function (t){
+                        dir.setOrigin([position.coords.longitude, position.coords.latitude])
+                        dir.setDestination([lng, lat])
                     })
 
                     map.addControl(dir, 'top-left');
 
                     dir.on("route", function (t){
-                        let route;
-                        console.log(route.distance)
+                        console.log(t.route[0].distance)
                         console.log(t);
                     })
                 })

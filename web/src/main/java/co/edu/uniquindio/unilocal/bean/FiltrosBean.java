@@ -23,30 +23,19 @@ public class FiltrosBean implements Serializable {
 
     @Getter
     @Setter
-    private String ciudad;
+    private Ciudad ciudadParam;
 
     @Getter
     @Setter
-    private String categoria;
+    private TipoLugar categoriaParam;
 
     @Getter
     @Setter
-    private String calificacion;
-
-    @Getter
-    @Setter
-    @Value("#{param['ciudad']}")
-    private String ciudadParam;
-
-    @Getter
-    @Setter
-    @Value("#{param['categoria']}")
-    private String categoriaParam;
-
-    @Getter
-    @Setter
-    @Value("#{param['calificacion']}")
     private String calificacionParam;
+
+    @Getter
+    @Setter
+    private String rangoParam;
 
     @Getter
     @Setter
@@ -59,6 +48,10 @@ public class FiltrosBean implements Serializable {
     @Getter
     @Setter
     private List<TipoLugar> tipos;
+
+    @Getter
+    @Setter
+    private List<String> rangos;
 
     @Getter
     @Setter
@@ -84,5 +77,18 @@ public class FiltrosBean implements Serializable {
         calificaciones.add("3 Estrellas");
         calificaciones.add("4 Estrellas");
         calificaciones.add("5 Estrellas");
+        this.rangos = new ArrayList<String>();
+        rangos.add("2 kilometros");
+        rangos.add("6 kilometros");
+        rangos.add("10 kilometros");
+    }
+
+    public void buscarPorRango(){
+        System.out.println("Entreeeeeeeee + " + rangoParam);
+        if(rangoParam != null){
+            System.out.println("Rango seleccionado = " + rangoParam);
+        } if (ciudadParam != null){
+            System.out.println("Rango seleccionado = " + ciudadParam.getNombre());
+        }
     }
 }

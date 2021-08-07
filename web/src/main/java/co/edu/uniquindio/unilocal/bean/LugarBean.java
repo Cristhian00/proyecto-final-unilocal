@@ -93,6 +93,8 @@ public class LugarBean implements Serializable {
                     msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Alerta", "El lugar se creó correctamente");
                     FacesContext.getCurrentInstance().addMessage("mensaje_lugar", msg);
+
+                    return "/usuario/usuario.xhtml?faces-redirect=true";
                 } else {
                     msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "Alerta", "Es necesario ubicar el lugar en el mapa y subir al menos una imagen");

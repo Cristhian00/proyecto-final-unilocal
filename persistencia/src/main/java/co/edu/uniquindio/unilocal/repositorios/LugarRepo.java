@@ -2,10 +2,7 @@ package co.edu.uniquindio.unilocal.repositorios;
 
 
 import co.edu.uniquindio.unilocal.dto.LugarComentariosDTO;
-import co.edu.uniquindio.unilocal.entidades.Horario;
-import co.edu.uniquindio.unilocal.entidades.Lugar;
-import co.edu.uniquindio.unilocal.entidades.Usuario;
-import co.edu.uniquindio.unilocal.entidades.Comentario;
+import co.edu.uniquindio.unilocal.entidades.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -40,6 +37,9 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
     //Lugares que esten aprobados por un moderador
     @Query("select l from Lugar l where l.nombre like concat('%', :nombre, '%') ")
     List<Lugar> buscarLugares(String nombre);
+
+    @Query("select l from Lugar l where l.estado = 'APROBADO'")
+    List<Lugar> listarLugaresAprobados();
 
     Optional<Lugar> findByLatitudAndLongitud(Float latitud, Float longitud);
 
@@ -81,8 +81,11 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer> {
     @Query("select  l from Lugar l join Ciudad c on l.ciudadLugar.id = c.id where c.nombre = ?1 ")
     List<Lugar> obtenerLugarPorCiudad(String nombre);
 
-    @Query("select  l from Lugar l where l.tipoLugar.nombre= ?1")
-    List<Lugar> obtenerLugarPorTipo(String tipo);
+    @Query("select l from Lugar l where l.tipoLugar.id = ?1")
+    List<Lugar> obtenerLugarPorTipo(int idTipo);
+
+    @Query("select l from Lugar l where l.estado = ?1")
+    List<Lugar> listarLugaresEstado(EstadoAprobacion estado);
 
     @Query("select l.nombre, l.descripcion, l.ciudadLugar.nombre, l.tipoLugar.nombre " +
             "from Lugar l where l.moderador.cedula = ?1 and l.estado = 'APROBADO' or  l.estado='RECHAZADO'")

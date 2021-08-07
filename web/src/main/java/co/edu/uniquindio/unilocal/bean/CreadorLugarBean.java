@@ -87,13 +87,12 @@ public class CreadorLugarBean {
         }
     }
 
-    public String responderComentario(int id){
-
+    public String responderComentario(){
         FacesMessage msg;
         System.out.println("entre responder comentario");
         if (msjRespuesta != null) {
             try {
-                Comentario c = comentarioServicio.obtenerComentario(id);
+                Comentario c = comentarioServicio.obtenerComentario(0);
                 c.setRespuesta(msjRespuesta);
                 comentarioServicio.modificarComentario(c);
                 System.out.println("Qué paso aquí");

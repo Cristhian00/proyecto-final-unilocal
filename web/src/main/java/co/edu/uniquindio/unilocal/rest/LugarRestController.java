@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unilocal.rest;
 
 import co.edu.uniquindio.unilocal.dto.Mensaje;
+import co.edu.uniquindio.unilocal.entidades.EstadoAprobacion;
 import co.edu.uniquindio.unilocal.entidades.Lugar;
 import co.edu.uniquindio.unilocal.servicios.LugarServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class LugarRestController {
         return lugarServicio.listarLugar();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> obtenerPorId(@PathVariable(name = "id") Integer id) {
         try {
             return ResponseEntity.status(201).body(lugarServicio.obtenerLugar(id));
@@ -42,12 +43,12 @@ public class LugarRestController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<Mensaje> actualizar(@RequestBody Lugar lugar) {
 
         try {
             lugarServicio.modificarLugar(lugar);
-            return ResponseEntity.status(201).body(new Mensaje("El lugar se actualizo correctamente"));
+            return ResponseEntity.status(200).body(new Mensaje("El lugar se actualizo correctamente"));
         } catch (Exception e) {
 
             return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
@@ -55,12 +56,12 @@ public class LugarRestController {
 
     }
 
-    @DeleteMapping("/{nombre}")
+    @DeleteMapping("/eliminar/{nombre}")
     public ResponseEntity<Mensaje> eliminar(@PathVariable(name = "nombre") String nombre) {
 
         try {
             lugarServicio.eliminarLugar(nombre);
-            return ResponseEntity.status(201).body(new Mensaje("El lugar se elimino correctamente"));
+            return ResponseEntity.status(200).body(new Mensaje("El lugar se elimino correctamente"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
         }
@@ -69,7 +70,34 @@ public class LugarRestController {
     @GetMapping("/{nombre}")
     public ResponseEntity<?> BuscarPorNombre(@PathVariable(name = "nombre") String nombre) {
         try {
-            return ResponseEntity.status(201).body(lugarServicio.buscarLugaresPorPalabra(nombre));
+            return ResponseEntity.status(200).body(lugarServicio.buscarLugaresPorPalabra(nombre));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
+        }
+
+    }
+
+    @GetMapping("/estado/{estado}")
+    public ResponseEntity<?> obtenerPorEstado (@PathVariable(name="estado") String estado){
+
+        EstadoAprobacion esta = EstadoAprobacion.PENDIENTE;
+        if (estado.equals("APROBADO")) {
+            esta = EstadoAprobacion.APROBADO;
+        } else if(estado.equals("RECHAZADO")){
+            esta = EstadoAprobacion.RECHAZADO;
+        }
+        try {
+            return  ResponseEntity.status(200).body(lugarServicio.listarLugaresEstado(esta));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
+        }
+
+    }
+
+    @GetMapping("/idTipo/{idTipo}")
+    public ResponseEntity<?> obtenerPorTipo (@PathVariable(name="idTipo") int idTipo){
+        try {
+            return  ResponseEntity.status(200).body(lugarServicio.listarLugaresTipo(idTipo));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
         }

@@ -76,13 +76,14 @@
                                 <script async="true" src="https://platform.twitter.com/widgets.js"
                                         charset="utf-8"></script>
                             </div>
+
                             <div class="col">
                                 <div id="fb-root"></div>
                                 <script async="true" defer="defer" crossorigin="anonymous"
                                         src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&amp;version=v11.0"
                                         nonce="eBRadHnA"></script>
                                 <div class="fb-share-button"
-                                     data-href="http://localhost:8080/detalleLugar.xhtml?lugar=4"
+                                     data-href="https://www.uniquindio.edu.co/"
                                      data-layout="button" data-size="small"><a target="_blank"
                                                                                href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2FdetalleLugar.xhtml%3Flugar%3D4&amp;src=sdkpreparse"
                                                                                class="fb-xfbml-parse-ignore">Compartir</a>
@@ -133,6 +134,10 @@
                 <div class="col">
                     <div id="mapa">
                         <div id="map"></div>
+                    </div>
+                    <div>
+                        <p:commandButton action="#{detalleLugarBean.irARuta()}"
+                                         value="Como llegar"/>
                     </div>
                 </div>
                 <div class="col">

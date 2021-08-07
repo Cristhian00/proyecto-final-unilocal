@@ -146,12 +146,11 @@
 
                         <div class="card" jsf:rendered="#{seguridadBean.autenticado and comentario.respuesta == ''}">
                             <h:form>
-                                <p:inputTextarea rows="4" cols="40" counter="display" maxlength="255" required="true"
+                                <p:inputTextarea rows="4" cols="40" maxlength="255" required="true"
                                                  placeholder="Escribir comentario" value="#{creadorLugarBean.msjRespuesta}"
-                                                 counterTemplate="{0} characters remaining." autoResize="true"/>
-                                <h:outputText id="display" class="p-d-block"/>
+                                                 autoResize="true"/>
 
-                                <p:commandButton action="#{creadorLugarBean.responderComentario(comentario.id)}"
+                                <p:commandButton action="#{creadorLugarBean.responderComentario}"
                                                  value="Responder" update="@form"/>
                             </h:form>
                         </div>

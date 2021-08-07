@@ -134,5 +134,9 @@ public class DetalleLugarBean implements Serializable {
         }
         return "";
     }
+    
+    public String irARuta(){
+        return "/rutaLugar.xhtml?faces-redirect=true&amp;lng=" + lugar.getLongitud() + "&lat=" + lugar.getLatitud();
+    }
 
 }

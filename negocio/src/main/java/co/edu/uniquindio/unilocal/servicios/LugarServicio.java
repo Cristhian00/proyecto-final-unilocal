@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unilocal.servicios;
 
-import co.edu.uniquindio.unilocal.entidades.Comentario;
-import co.edu.uniquindio.unilocal.entidades.Horario;
-import co.edu.uniquindio.unilocal.entidades.Lugar;
-import co.edu.uniquindio.unilocal.entidades.Usuario;
+import co.edu.uniquindio.unilocal.entidades.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +28,12 @@ public interface LugarServicio {
     List<Horario> obtenerHorarios(Integer idLugar);
 
     List<Lugar> obtenerLugaresPendientes();
+
+    List<Lugar> listarLugaresAprobados();
+
+    List<Lugar> listarLugaresTipo(int idTipo);
+
+    List<Lugar> listarLugaresEstado(EstadoAprobacion estado);
 
     boolean obtenerUsuarioFavorito(int id, String cedula);
 

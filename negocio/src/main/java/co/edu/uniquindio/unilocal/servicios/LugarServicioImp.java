@@ -101,11 +101,11 @@ public class LugarServicioImp implements LugarServicio {
         if (l.getLongitud() == 0.0d) {
             throw new Exception("Debe ingresar una longitud");
         }
-        if (!(lugar.getLatitud() == l.getLatitud() && lugar.getLongitud() == l.getLongitud())) {
+        /*if (!(lugar.getLatitud() == l.getLatitud() && lugar.getLongitud() == l.getLongitud())) {
             if (ubicacionDisponible(l.getLatitud(), l.getLongitud())) {
-                throw new Exception("Ya hay un lugar registrado con esa ubicción");
+                throw new Exception("Ya hay un lugar registrado con esa ubicación");
             }
-        }
+        }*/
         if (l.getDescripcion().isEmpty()) {
             throw new Exception("Debe ingresar una descrición");
         }
@@ -181,6 +181,21 @@ public class LugarServicioImp implements LugarServicio {
     @Override
     public List<Lugar> obtenerLugaresPendientes() {
         return lugarRepo.obtenerLugaresPendientes();
+    }
+
+    @Override
+    public List<Lugar> listarLugaresAprobados() {
+        return lugarRepo.listarLugaresAprobados();
+    }
+
+    @Override
+    public List<Lugar> listarLugaresTipo(int idTipo) {
+        return lugarRepo.obtenerLugarPorTipo(idTipo);
+    }
+
+    @Override
+    public List<Lugar> listarLugaresEstado(EstadoAprobacion estado) {
+        return lugarRepo.listarLugaresEstado(estado);
     }
 
     @Override
